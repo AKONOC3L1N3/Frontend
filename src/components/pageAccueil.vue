@@ -22,6 +22,11 @@
                 </li>
             </ul>
         </nav>
+        <div class="minibarre">
+<div>
+    <img src="" alt="">
+</div>
+        </div>
     </div>
 </template>
 <style>
