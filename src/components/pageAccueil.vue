@@ -10,11 +10,12 @@
                 <li>
                     <a href="O">Services</a>
                 </li>
-                <li>
-                    <a href="O">Login</a>
-                </li>
+                
                 <li>
                     <a href="O">Clients et avis</a>
+                </li>
+                <li>
+                    <a href="O">Login</a>
                 </li>
                 <li>
                     <a href="O">Get started</a>
@@ -28,18 +29,23 @@ ul{
     display: block;
     justify-content: space-between;
     list-style: none;
-    border: solid;
     width: 20rem;
     height: 32rem;
-
+   
 }
 a{
     text-decoration: none;
     font-size: 1.5rem;
     position: relative;
-    left: 23%;
+    left: 25%;
+    top: 25%;
     
 }
+nav{
+    width: 23rem;
+    position: relative;
+    top: 3rem;
+    }
  .imgs{
     height: 7rem;
     width: 7rem;
