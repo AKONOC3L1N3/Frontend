@@ -15,7 +15,6 @@ const routes =[
     {
         path: '/pageAccueil', component: pageAccueil
     },
-
     {
         path: '/Connexion', component: Connexion.vue
     },
