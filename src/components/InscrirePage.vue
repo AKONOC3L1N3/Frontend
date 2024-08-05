@@ -37,7 +37,7 @@
           
           <option value="+33">France (+33)</option>
           <option value="+1">États-Unis (+1)</option>
-          <
+          <option value="+237">Cameroun</option>
         </select>
   
         <button type="submit">Inscrire</button>
