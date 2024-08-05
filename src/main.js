@@ -3,7 +3,7 @@ import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import INSCRIRE from './components/InscrirePage.vue'
 import pageAccueil from './components/pageAccueil.vue'
-
+import Connexion from './components/ConnexionPage.vue'
 
 
 
@@ -14,6 +14,10 @@ const routes =[
    
     {
         path: '/pageAccueil', component: pageAccueil
+    },
+
+    {
+        path: '/Connexion', component: Connexion.vue
     },
 
 ]

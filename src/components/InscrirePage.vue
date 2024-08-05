@@ -92,8 +92,10 @@
     padding: 20px;
     max-width: 500px;
     width: 100%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 1, 1);
     text-align: center;
+    position: relative;
+    left: 25%;
   }
   .profile-section {
     margin-bottom: 20px;
