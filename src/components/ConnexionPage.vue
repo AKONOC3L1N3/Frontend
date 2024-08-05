@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div class="form-container">
-            <h2>Inscription</h2>
-            <form @submit.prevent="handleSubmit">
+            <h2>Se connecter</h2>
+            <form>
                 <div class="input_field">
                     <label for="email">Email :</label>
                     <input type="email" id="email" v-model="form.email">
@@ -12,9 +12,9 @@
                     <label for="password">Mot de passe :</label>
                     <input type="password" id="password" v-model="form.password" required>
                 </div>
-                <button type="submit">Inscrire</button>
+                <button @click="handleSubmit">Se connecter</button>
             </form>
-            <p>Vous avez deja un compte? <router-link to="/inscription">Se connecter</router-link></p>
+            <p>Vous avez deja un compte? <router-link to="/inscription">connection</router-link></p>
         </div>
     </div>
 </template>
@@ -43,9 +43,7 @@ export default {
             }
         },
         handleSubmit() {
-
-            this.$router.push('/connexion');
-
+            this.$router.push('/pageAccueil');
         }
     }
 };
