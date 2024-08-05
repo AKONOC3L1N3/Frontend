@@ -54,9 +54,9 @@ p{
     box-shadow: 0PX 0PX 10PX 10PX #8868;
     justify-content: center;
     align-items: center;
-    background: #5024;
+    background: grey;
     text-align: center;
-    height: 22rem;
+    height: 30rem;
     width: 20rem;
     margin-top: 10%;
 

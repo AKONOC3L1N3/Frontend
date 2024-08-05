@@ -9,11 +9,11 @@ import pageAccueil from './components/pageAccueil.vue'
 
 const routes =[
     {
-        path: '/InscrirePage', component: INSCRIRE
+        path: '/', component: INSCRIRE
     },
    
     {
-        path: '/', component: pageAccueil
+        path: '/pageAccueil', component: pageAccueil
     },
 
 ]

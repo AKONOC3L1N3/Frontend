@@ -21,13 +21,11 @@
                 </li>
             </ul>
         </nav>
-   
-        <p class="text1">Une seule plateforme pour <br> tous vos besoins </p>
     </div>
 </template>
 <style>
 ul{
-    display: flex;
+    display: block;
     justify-content: space-between;
     list-style: none;
 }
@@ -42,21 +40,11 @@ nav img{
     z-index: -1 ;
     height: 5rem;
 }
-
+li{
+    margin: 5%;
+}
 .body{
     width: 95%;
-}
-#auto{
-z-index: -1;
-
-}
-.text1{
-  color: white;
-  font-size: 2rem;
-  border: solid;
-  width: 23rem;
-  position: relative;
-  bottom: 20rem;  
 }
 
 </style>
