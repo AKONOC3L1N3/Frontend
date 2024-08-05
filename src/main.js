@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router';
-import INSCRIRE from './components/InscrirePage.vue'
+import inscription from './components/InscrirePage.vue'
 import pageAccueil from './components/pageAccueil.vue'
 import Connexion from './components/ConnexionPage.vue'
 
@@ -9,7 +9,7 @@ import Connexion from './components/ConnexionPage.vue'
 
 const routes =[
     {
-        path: '/', component: INSCRIRE
+        path: '/inscription', component: inscription
     },
    
     {
@@ -17,7 +17,7 @@ const routes =[
     },
 
     {
-        path: '/Connexion', component: Connexion.vue
+        path: '/', component: Connexion
     },
 
 ]
