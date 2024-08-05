@@ -44,7 +44,7 @@
         <select id="phone" v-model="form.phone" required>
           <option value="+33">France (+33)</option>
           <option value="+1">États-Unis (+1)</option>
-          <option value="+237">Cameroun</option>
+          <option value="+237">Cameroun(+237)</option>
         </select>
       </div>
       <button type="submit">Inscrire</button>
