@@ -1,9 +1,9 @@
 <template>
     <div class="body">
-       
+        <img src="..//assets/V.jpg" alt="logo" class="imgs">
         <nav>
             <ul>
-                <img src="..//assets/V.jpg" alt="logo">
+               
                 <li>
                     <a href="O">Contacts</a>
                 </li>
@@ -28,12 +28,19 @@ ul{
     display: block;
     justify-content: space-between;
     list-style: none;
+    border: solid;
+    width: 20rem;
+    height: 32rem;
+
 }
 a{
     text-decoration: none;
     font-size: 1.5rem;
+    position: relative;
+    left: 23%;
+    
 }
-nav img{
+ .imgs{
     height: 7rem;
     width: 7rem;
     border-radius: 100%;
@@ -42,6 +49,12 @@ nav img{
 }
 li{
     margin: 5%;
+   
+    box-shadow: 0px 0px 2Px 2px gainsboro;
+    width: 15rem;
+    height: 4rem;
+    position: relative;
+    right: 10%;
 }
 .body{
     width: 95%;
