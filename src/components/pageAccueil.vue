@@ -111,7 +111,7 @@ export default {
     font-weight: bold !important;
     transition: all 0.3s;
     font-size: 25px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
 
