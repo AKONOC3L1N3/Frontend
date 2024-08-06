@@ -14,7 +14,6 @@
                 </div>
                 <button @click="handleSubmit">Se connecter</button>
             </form>
-            <p>Vous avez deja un compte? <router-link to="/inscription">connection</router-link></p>
         </div>
     </div>
 </template>
