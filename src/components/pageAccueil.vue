@@ -50,10 +50,33 @@
         </div>
         <div class="main-content">
             <div class="in_container" v-if="currentPage === 'home'">
-                1
+              <div class="container1">
+            <div class="text">
+               <h>Nos véhicules</h>  <p> Nombre total: 50 <br>En panne: 15<br> En attente: 10 <br> En cours d'utilisation: 25 <br></p>
+              </div>
+              <img src="../assets/voiture.jpg" alt="">
+              <div class="container2"> 
+                    <div class="text1">
+               <h>Nos chauffeurs </h>  <p> Nombre total: 50 <br>En panne: 15<br> En attente: 10 <br> En course: 25 <br></p>
+              </div>
+              <img src="../assets/chauffeur.jpg" alt="">
+            </div>  
+                
+                <div class="container3">
+                    <h1>Nos services en cours </h1>  
+                    <div class="text2">
+                
+               <h2> Maintenance et vérification <br>des véhicules  </h2>
+                <h2> Suivi des itinéraires des <br> véhicules et des chauffeurs</h2>
+              <h2>Attribution de <br>nouveau véhicules </h2>
+             <h2> Validation d'une opportunité </h2>
+              </div>
+              
+            </div>  
+                </div>
             </div>
             <div class="in_container" v-if="currentPage === 'vehicle'">
-                2
+               2
             </div>
             <div class="in_container" v-if="currentPage === 'chauffeur'">
                 3
@@ -210,4 +233,102 @@ body {
     text-align: right;
 }
 @media (max-width: 768px) {}
-</style>
+
+.container1{
+    height:18rem ;
+    width: 42rem;
+    border-radius: 2%;
+    position: relative;
+    left: 2%;
+    top: 6%;
+    box-shadow: 0PX 0PX 5PX 5PX gray;
+
+    
+}
+.text{
+    font-size: 1.5rem;
+    height: 12rem;
+    width: 17rem;
+    position: relative;
+    top: 17%;
+    left: 2%;
+    margin: 1%;
+    
+}
+.container1 img{
+    height: 12rem;
+    width: 17rem;
+   position: relative;
+   bottom: 56%;
+   left: 50%;
+}
+.container1 h{
+    font-weight: bold;
+}
+
+.text1{
+    font-size: 1.5rem;
+    height: 12rem;
+    width: 17rem;
+    margin: 2%;
+    position: relative;
+  top: 15%;
+    
+}
+.container2 img{
+    height: 12rem;
+    width: 17rem;
+   position: relative;
+   bottom: 56%;
+   left: 50%;
+}
+.container2 h{
+    font-weight: bold;
+}
+.container2{
+    height:18rem ;
+    width: 42rem;
+    border-radius: 2%;
+    box-shadow: 0PX 0PX 5PX 5PX gray;
+    position: relative;
+    left: 126%;
+    bottom: 142%;
+}  
+
+.text2{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.container3 img{
+    height: 12rem;
+    width: 17rem;
+   position: relative;
+   bottom: 56%;
+   left: 50%;
+}
+.container3 h{
+    font-weight: bold;
+}
+.container3{
+    height:26rem ;
+    width: 82rem;
+    border-radius: 2%;
+    box-shadow: 0PX 0PX 5PX 5PX gray;
+    position: relative;
+    bottom: 142%;
+    margin: 8%;
+    bottom: 140%;
+    background-color: #092c52;
+    left: 8%;
+}
+.container3 h2{
+   color: rgb(221, 208, 208);
+   margin: 1%;
+}
+.container3 h1{
+   color: rgb(23, 145, 197);
+   margin: 5%;
+
+}
+</style>  
