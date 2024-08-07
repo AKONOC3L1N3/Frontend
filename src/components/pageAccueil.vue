@@ -50,30 +50,30 @@
         </div>
         <div class="main-content">
             <div class="in_container" v-if="currentPage === 'home'">
-              <div class="container1">
-            <div class="text">
-               <h>Nos véhicules</h>  <p> Nombre total: 50 <br>En panne: 15<br> En attente: 10 <br> En cours d'utilisation: 25 <br></p>
-              </div>
-              <img src="../assets/voiture.jpg" alt="">
-              <div class="container2"> 
-                    <div class="text1">
-               <h>Nos chauffeurs </h>  <p> Nombre total: 50 <br>En panne: 15<br> En attente: 10 <br> En course: 25 <br></p>
-              </div>
-              <img src="../assets/chauffeur.jpg" alt="">
-            </div>  
-                
-                <div class="container3">
-                    <h1>Nos services en cours </h1>  
-                    <div class="text2">
-                
-               <h2> Maintenance et vérification <br>des véhicules  </h2>
-                <h2> Suivi des itinéraires des <br> véhicules et des chauffeurs</h2>
-              <h2>Attribution de <br>nouveau véhicules </h2>
-             <h2> Validation d'une opportunité </h2>
-              </div>
-              
-            </div>  
+                <div class="container1">
+                    <div class="contain1">
+                    <img src="..//assets/icvoiture.png" alt="">
+                    <p><h4>25 véhicules disponibles actuellement</h4> </p>
                 </div>
+                <div class="contain2">
+                    <img src="..//assets/chaur.png" alt="">
+                    <p> <h4>20 chauffeurs disponibles</h4></p>
+                </div>
+                <div class="contain3">
+                    <img src="..//assets/maintenance.png" alt="">
+                    <p><h4>Service de maintenance <br> disponible</h4></p>
+                </div>
+                <div class="contain4">
+                    <img src="..//assets/aide.png" alt="">
+                    <p><h4>Besoin d'aide?</h4></p>
+                </div>
+            <div class="container2">
+                <div class="containe1">
+                    <h2></h2>
+                </div>
+            </div>
+
+            </div>
             </div>
             <div class="in_container" v-if="currentPage === 'vehicle'">
                2
@@ -235,100 +235,126 @@ body {
 @media (max-width: 768px) {}
 
 .container1{
-    height:18rem ;
-    width: 42rem;
-    border-radius: 2%;
-    position: relative;
-    left: 2%;
-    top: 6%;
-    box-shadow: 0PX 0PX 5PX 5PX gray;
-
-    
-}
-.text{
-    font-size: 1.5rem;
-    height: 12rem;
-    width: 17rem;
-    position: relative;
-    top: 17%;
-    left: 2%;
-    margin: 1%;
-    
-}
-.container1 img{
-    height: 12rem;
-    width: 17rem;
-   position: relative;
-   bottom: 56%;
-   left: 50%;
-}
-.container1 h{
-    font-weight: bold;
-}
-
-.text1{
-    font-size: 1.5rem;
-    height: 12rem;
-    width: 17rem;
-    margin: 2%;
-    position: relative;
-  top: 15%;
-    
-}
-.container2 img{
-    height: 12rem;
-    width: 17rem;
-   position: relative;
-   bottom: 56%;
-   left: 50%;
-}
-.container2 h{
-    font-weight: bold;
-}
-.container2{
-    height:18rem ;
-    width: 42rem;
-    border-radius: 2%;
-    box-shadow: 0PX 0PX 5PX 5PX gray;
-    position: relative;
-    left: 126%;
-    bottom: 142%;
-}  
-
-.text2{
     display: flex;
     justify-content: space-between;
-    
+    margin: 1%;
+    width: 98%;
 }
-.container3 img{
-    height: 12rem;
-    width: 17rem;
-   position: relative;
-   bottom: 56%;
-   left: 50%;
-}
-.container3 h{
-    font-weight: bold;
-}
-.container3{
-    height:26rem ;
-    width: 82rem;
-    border-radius: 2%;
-    box-shadow: 0PX 0PX 5PX 5PX gray;
-    position: relative;
-    bottom: 142%;
-    margin: 8%;
-    bottom: 140%;
-    background-color: #092c52;
-    left: 8%;
-}
-.container3 h2{
-   color: rgb(221, 208, 208);
-   margin: 1%;
-}
-.container3 h1{
-   color: rgb(23, 145, 197);
-   margin: 5%;
+.contain1{
 
+    border-radius: 5px;
+    width: 24.5% ;
+    background-color: #94cbe4;
+    height: 8rem;
+    position: relative;
+    top: 1rem;
+    box-shadow: 0PX 0PX 2PX 2PX grey;
+}
+.contain1 img{
+    width: 20%;
+    margin-top: 5%;
+}
+.contain1 p{
+    background-color: #abd9ef; 
+    height: 8rem;
+    width: 16.5rem;
+    position: relative;
+    bottom: 97%;
+    left: 30%;
+    font-size: 1.6rem;
+}
+.contain1 h4{
+    font-size: 1.5rem;
+    position: relative;
+    bottom: 180%;
+    left: 32%;
+}
+.contain2{
+
+border-radius: 5px;
+width: 24.5% ;
+background-color: #e94629;
+height: 8rem;
+position: relative;
+top: 1rem;
+box-shadow: 0PX 0PX 2PX 2PX grey;
+}
+
+.contain2 img{
+width: 20%;
+margin-top: 5%;
+}
+.contain2 p{
+background-color: #f69c8c; 
+height: 8rem;
+width: 17rem;
+position: relative;
+bottom: 97%;
+left: 28%;
+font-size: 1.6rem;
+}
+.contain2 h4{
+font-size: 1.5rem;
+position: relative;
+bottom: 180%;
+left: 30%;
+}
+
+.contain3{
+box-shadow: 0PX 0PX 2PX 2PX grey;
+border-radius: 5px;
+width: 23% ;
+background-color: #278a46;
+height: 8rem;
+position: relative;
+top: 1rem;
+}
+.contain3 img{
+width: 20%;
+margin-top: 5%;
+}
+.contain3 p{
+background-color: #8fedb0; 
+height: 8rem;
+width: 16rem;
+position: relative;
+bottom: 92%;
+left: 28%;
+font-size: 1.6rem;
+}
+.contain3 h4{
+font-size: 1.5rem;
+position: relative;
+bottom: 180%;
+left: 30%;
+}
+
+.contain4{
+box-shadow: 0PX 0PX 2PX 2PX grey;
+border-radius: 5px;
+width: 22% ;
+background-color: #f0f2f3;
+height: 8rem;
+position: relative;
+top: 1rem;
+}
+.contain4 img{
+width: 20%;
+margin-top: 5%;
+}
+.contain4 p{
+background-color: #d5dbde; 
+height: 8rem;
+width: 15rem;
+position: relative;
+bottom: 89%;
+left: 30%;
+font-size: 1.6rem;
+}
+.contain4 h4{
+font-size: 1.5rem;
+position: relative;
+bottom: 180%;
+left: 40%;
 }
 </style>  
