@@ -4,14 +4,30 @@ import { createRouter, createWebHistory } from 'vue-router';
 import inscription from './components/InscrirePage.vue'
 import pageAccueil from './components/pageAccueil.vue'
 import Connexion from './components/ConnexionPage.vue'
-
-
-
+import AjoutPage from './components/AjoutPage.vue'
+import UpdatePage from './components/UpdatePage.vue'
+import SupprimerPage from './components/SupprimerPage.vue'
+import AttribuerPage from './components/AttribuerPage.vue'
 const routes =[
     {
         path: '/inscription', component: inscription
     },
-   
+    {
+        path: '/AjoutPage',
+        component: AjoutPage
+    },
+    {
+        path: '/AttribuerPage',
+        component: AttribuerPage
+    },
+    {
+        path: '/SupprimerPage',
+        component: SupprimerPage
+    },
+    {
+        path: '/UpdatePage',
+        component: UpdatePage
+    },
     {
         path: '/pageAccueil', component: pageAccueil
     },

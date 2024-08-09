@@ -28,8 +28,8 @@
                     <i class="fas fa fa-arrow-right"></i>
                 </li>
                 <li :class="{ selected: currentPage === 'itineraire' }" @click="showPage('itineraire')">
-                    <i :style="{ color: currentPage === 'itineraire' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
-                        class="fas fa-chart-line"></i>
+                    <i :style="{ color: currentPage === 'itineraire' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }" 
+                        class="fas fa-chart-line"></i> 
                     <a :style="{ color: currentPage === 'itineraire' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Itineraires</a>
                     <i class="fas fa fa-arrow-right"></i>
                 </li>
@@ -53,30 +53,326 @@
                 <div class="container1">
                     <div class="contain1">
                     <img src="..//assets/icvoiture.png" alt="">
-                    <p><h4>25 véhicules disponibles actuellement</h4> </p>
+                    <div class="p1">
+                    <h4 >24 véhicules disponibles actuellement</h4>
+                </div>
                 </div>
                 <div class="contain2">
                     <img src="..//assets/chaur.png" alt="">
-                    <p> <h4>20 chauffeurs disponibles</h4></p>
+                    <div class="p2">
+                    <h4>20 chauffeurs disponibles</h4>
+                </div>
                 </div>
                 <div class="contain3">
                     <img src="..//assets/maintenance.png" alt="">
-                    <p><h4>Service de maintenance <br> disponible</h4></p>
+                    <div class="p3">
+                    <h4>service de maintenance <br> disponible</h4>
+                </div>
                 </div>
                 <div class="contain4">
                     <img src="..//assets/aide.png" alt="">
-                    <p><h4>Besoin d'aide?</h4></p>
+                    <div class="p4">
+                    <h4 >Besoin d'aide?</h4>
                 </div>
-            <div class="container2">
-                <div class="containe1">
-                    <h2></h2>
                 </div>
-            </div>
-
+                <div class="containes1">
+                    <div class="contais1">
+                    <h1>Listes des opportunités <br>Signalées ce mois</h1>
+                   <h3>DOUALA: Bonapriso:</h3> <span>Cinq chargements</span>
+                   <h3>KRIBI: Bonadikombo:</h3> <span>Huit dépôts</span>
+                   <h3>YAOUNDE: Essos:</h3> <span>Quatre chargements</span>
+                   <h3>YAOUNDE: Mokolo:</h3> <span>Quinze dépôts</span>
+                   <h3>Bertoua: Yadémé:</h3> <span>Sept chargements</span>
+                 
+                 
+                </div>
+                <div class="contais2">
+                    <h1>Listes des alertes de ce mois</h1>
+                   <h3>Maintenance:</h3> <span>Treize</span>
+                   <h3>Arrêts pour chargement:</h3><span>Trente un</span>
+                   <h3>Arrêts pour dépôts</h3> <span>Treize</span>
+                   <h3>Arrêts pour vérification</h3> <span>Quinze</span>
+                </div>
+                <div class="contais3">
+                    <h1>Prestances de services</h1>
+                   <h3>intégration d'API</h3> 
+                   <h3>Devenir un partenaire</h3> 
+                   <h3>Analyse des flottes de données:</h3> 
+                   <h3>Solutions pour les constructeurs automobiles</h3>
+                </div>
+                </div>
             </div>
             </div>
             <div class="in_container" v-if="currentPage === 'vehicle'">
-               2
+                <div class="tainer1">
+             
+             <p>Des véhicules sécurisés à votre service</p>
+            </div>
+            <div class="tainer2">
+                <table border="1">
+                <thead>
+                    <tr>
+                        <th>
+                            Noms
+                        </th>
+                        <th>
+                            Immatriculation
+                        </th>
+                        <th>
+                            State
+                        </th>
+                        <th>
+                            Model
+                        </th>
+                        <th>
+                            Tonnage
+                        </th>
+                        <th>
+                            FirstDayTakeOff
+                        </th>
+                        <th>
+                            Create at
+                        </th>
+                        <th>
+                            Update at
+                        </th>
+                        <th>
+                            Maintenance
+                        </th>
+                        <th>
+                            Marchandise
+                        </th>
+                        <th>
+                            Missions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Personnel
+                        </td>
+                        <td>
+                            CMR 1234AC
+                        </td>
+                        <td>
+                            Bon état
+                        </td>
+                        <td>
+                            Ford-max
+                        </td>
+                        <td>
+                            100kg
+                        </td>
+                        <td>
+                            2020/05/11
+                        </td>
+                        <td>
+                            2021/02/10
+                        </td>
+                        <td>
+                            2022/10/05
+                        </td>
+                        <td>
+                            Reparration des pneus
+                        </td>
+                        <td>
+                            Cartons de poissons
+                        </td>
+                        <td>
+                            Livraison
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Camion
+                        </td>
+                        <td>
+                            CMR 15DE6C
+                        </td>
+                        <td>
+                            Etat moyen
+                        </td>
+                        <td>
+                            Renault D-serie 210 
+                        </td>
+                        <td>
+                            5 tonnes
+                        </td>
+                        <td>
+                            2019/07/20
+                        </td>
+                        <td>
+                            2021/10/10
+                        </td>
+                        <td>
+                            2020/04/22
+                        </td>
+                        <td>
+                            Changer les vitres 
+                        </td>
+                        <td>
+                            ciment
+                        </td>
+                        <td>
+                           Chargement
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Camion
+                        </td>
+                        <td>
+                            CMR A05E6C
+                        </td>
+                        <td>
+                          Bon état
+                        </td>
+                        <td>
+                          Nissan L
+                        </td>
+                        <td>
+                            8 tonnes
+                        </td>
+                        <td>
+                            2015/03/22
+                        </td>
+                        <td>
+                            2019/07/15
+                        </td>
+                        <td>
+                            2020/05/15
+                        </td>
+                        <td>
+                           Changer la couleur
+                        </td>
+                        <td>
+                           Sable
+                        </td>
+                        <td>
+                          Dépôt
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Camion
+                        </td>
+                        <td>
+                            CMR 1DZ3I6C
+                        </td>
+                        <td>
+                            Bon moyen
+                        </td>
+                        <td>
+                            Renault D-serie 210 
+                        </td>
+                        <td>
+                            10 tonnes
+                        </td>
+                        <td>
+                            2018/07/02
+                        </td>
+                        <td>
+                            2020/10/10
+                        </td>
+                        <td>
+                            2022/06/22
+                        </td>
+                        <td>
+                            Aucune
+                        </td>
+                        <td>
+                           Sable
+                        </td>
+                        <td>
+                           Livraison
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Camion
+                        </td>
+                        <td>
+                            CMR 15DE6C
+                        </td>
+                        <td>
+                            Etat moyen
+                        </td>
+                        <td>
+                            Renault D-serie 210 
+                        </td>
+                        <td>
+                            5 tonnes
+                        </td>
+                        <td>
+                            2019/07/20
+                        </td>
+                        <td>
+                            2021/10/10
+                        </td>
+                        <td>
+                            2020/04/22
+                        </td>
+                        <td>
+                            Changer les vitres 
+                        </td>
+                        <td>
+                            ciment
+                        </td>
+                        <td>
+                           Chargement
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Camion
+                        </td>
+                        <td>
+                            CMR 1ADEB34
+                        </td>
+                        <td>
+                          Bon &tat
+                        </td>
+                        <td>
+                            Renault D-serie 210 
+                        </td>
+                        <td>
+                            10 tonnes
+                        </td>
+                        <td>
+                            2019/04/21
+                        </td>
+                        <td>
+                            2021/12/10
+                        </td>
+                        <td>
+                            2021/04/22
+                        </td>
+                        <td>
+                          aucune
+                        </td>
+                        <td>
+                           fer
+                        </td>
+                        <td>
+                         Dépôt
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="tainer3">
+            <div class="taine1">
+                <button @click="redirectToAjoutPage">AJOUTER</button>
+            </div>
+            <div class="taine2">
+                <button @click="redirectToUpdatePage">MODIFIER</button>
+            </div>
+            <div class="taine3">
+                <button @click="redirectToSupprimerPage">SUPPRIMER</button>
+            </div>
+            <button @click="redirectToAttribuerPage">ATTRIBUER</button>
+            </div>
             </div>
             <div class="in_container" v-if="currentPage === 'chauffeur'">
                 3
@@ -120,6 +416,18 @@ export default {
         showPage(page) {
             this.currentPage = page;
         },
+        redirectToAjoutPage() {
+this.$router.push('/AjoutPage');
+},
+redirectToUpdatePage() {
+this.$router.push('UpdatePage');
+},
+redirectToSupprimerPage() {
+this.$router.push('SupprimerPage');
+},
+redirectToAttribuerPage() {
+this.$router.push('AttribuerPage');
+}
     }
 };
 </script>
@@ -254,20 +562,20 @@ body {
     width: 20%;
     margin-top: 5%;
 }
-.contain1 p{
+.p1{
     background-color: #abd9ef; 
     height: 8rem;
     width: 16.5rem;
     position: relative;
-    bottom: 97%;
+    bottom: 102%;
     left: 30%;
     font-size: 1.6rem;
 }
-.contain1 h4{
+.p1 h4{
     font-size: 1.5rem;
     position: relative;
-    bottom: 180%;
-    left: 32%;
+    top: 30%;
+    left: 5%;
 }
 .contain2{
 
@@ -284,20 +592,20 @@ box-shadow: 0PX 0PX 2PX 2PX grey;
 width: 20%;
 margin-top: 5%;
 }
-.contain2 p{
+.p2{
 background-color: #f69c8c; 
 height: 8rem;
 width: 17rem;
 position: relative;
-bottom: 97%;
+bottom: 102%;
 left: 28%;
 font-size: 1.6rem;
 }
-.contain2 h4{
+.p2 h4{
 font-size: 1.5rem;
 position: relative;
-bottom: 180%;
-left: 30%;
+top: 35%;
+left: 3%;
 }
 
 .contain3{
@@ -313,23 +621,23 @@ top: 1rem;
 width: 20%;
 margin-top: 5%;
 }
-.contain3 p{
+.p3{
 background-color: #8fedb0; 
 height: 8rem;
 width: 16rem;
 position: relative;
-bottom: 92%;
+bottom: 97%;
 left: 28%;
 font-size: 1.6rem;
 }
-.contain3 h4{
+.p3 h4{
 font-size: 1.5rem;
 position: relative;
-bottom: 180%;
-left: 30%;
+top: 24%;
+left: 5%;
 }
 
-.contain4{
+.contain4 {
 box-shadow: 0PX 0PX 2PX 2PX grey;
 border-radius: 5px;
 width: 22% ;
@@ -342,19 +650,120 @@ top: 1rem;
 width: 20%;
 margin-top: 5%;
 }
-.contain4 p{
+.p4{
 background-color: #d5dbde; 
 height: 8rem;
 width: 15rem;
 position: relative;
-bottom: 89%;
+bottom: 94%;
 left: 30%;
 font-size: 1.6rem;
 }
-.contain4 h4{
+.p4 h4{
 font-size: 1.5rem;
 position: relative;
-bottom: 180%;
-left: 40%;
+top: 35%;
+left: 25%;
+}
+.containes1{
+    position: absolute;
+    margin-top: 12%;
+    display: flex;
+    justify-content: space-between
+   
+}
+.contais1{
+width: 31rem;
+margin: 0.1%;
+background-color: white;
+border-radius: 2%;
+box-shadow: 0PX 0PX 2PX 2PX white;
+}
+.contais1 h1{
+    position: relative;
+    left: 4%;
+    color: #5e96d2;
+    margin: 10%
+   
+}
+.contais1 h3{
+font-size: 1.8rem;
+position: relative;
+    left: 4%;
+    color: #031d36;
+    margin: 4.5%
+}
+.contais1 span{
+    font-size: 1.6rem;
+position: relative;
+    left: 4%;
+}
+.contais2{
+width:31rem;
+margin: 0.1%;
+background-color: white;
+border-radius: 2%;
+box-shadow: 0PX 0PX 2PX 2PX white;
+position: relative;
+left: 2%
+}
+.contais2 h1{
+    position: relative;
+    left: 4%;
+    color: #5e96d2;
+    margin: 10%
+   
+}
+.contais2 h3{
+font-size: 1.9rem;
+position: relative;
+    left: 4%;
+    color: #031d36;
+    margin: 4.5%
+}
+.contais2 span{
+    font-size: 1.8rem;
+position: relative;
+    left: 4%;
+}
+.contais3{
+width: 31rem;
+margin: 0.1%;
+background-color: white;
+border-radius: 2%;
+box-shadow: 0PX 0PX 2PX 2PX white;
+position: relative;
+left: 4%;
+
+}
+.contais3 h1{
+    position: relative;
+    left: 4%;
+    color: #5e96d2;
+    margin: 10%
+   
+}
+.contais3 h3{
+font-size: 1.8rem;
+position: relative;
+    left: 4%;
+    color: #031d36;
+    margin: 4.5%
+}
+
+.tainer1{
+    font-size: 2.5rem;
+    color: #031d36;
+    position: relative;
+    left: 30%;
+    margin: 2%;
+    top: 2%;
+
+}
+.tainer2{
+font-size: 1.5rem;
+margin: 1%;
+position: relative;
+top: 48%;
 }
 </style>  
