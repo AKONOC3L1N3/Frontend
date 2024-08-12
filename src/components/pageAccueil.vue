@@ -112,7 +112,24 @@
                 </div>
             </div>
             <div class="in_container" v-if="currentPage === 'vehicle'">
-               
+                <div class="tainer3">
+                    <div v-if="addVehicle" class="ajouterVehicle">
+                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red" ></i>
+                        <formVehicule />
+                    </div>
+                    <div class="taine1">
+                        <button @click="redirectToAjoutPage">AJOUTER</button>
+                    </div>
+                    <div class="taine2">
+                        <button @click="redirectToUpdatePage">MODIFIER</button>
+                    </div>
+                    <div class="taine3">
+                        <button @click="redirectToSupprimerPage">SUPPRIMER</button>
+                    </div>
+                    <div class="taine4">
+                        <button @click="redirectToAttribuerPage">ATTRIBUER</button>
+                    </div>
+                </div>
                 <div class="tainer2">
                     <table border="1">
                         <thead>
@@ -366,20 +383,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tainer3">
-                    <div class="taine1">
-                        <button @click="redirectToAjoutPage">AJOUTER</button>
-                    </div>
-                    <div class="taine2">
-                        <button @click="redirectToUpdatePage">MODIFIER</button>
-                    </div>
-                    <div class="taine3">
-                        <button @click="redirectToSupprimerPage">SUPPRIMER</button>
-                    </div>
-                    <div class="taine4">
-                        <button @click="redirectToAttribuerPage">ATTRIBUER</button>
-                    </div>
-                </div>
             </div>
             <div class="in_container" v-if="currentPage === 'chauffeur'">
                 3
@@ -403,20 +406,23 @@
 </template>
 
 <script>
-
-
+import formVehicule from './AjoutPage.vue'
 export default {
 
     components: {
+        formVehicule,
     },
     data() {
         return {
-
+            addVehicle: false,
             currentPage: 'home',
             selectedButton: 'button4',
         };
     },
     methods: {
+        closePage(){
+            this.addVehicle = false
+        },
         selectButton(button) {
             this.selectedButton = button;
         },
@@ -424,7 +430,7 @@ export default {
             this.currentPage = page;
         },
         redirectToAjoutPage() {
-            this.$router.push('/AjoutPage');
+            this.addVehicle = true;
         },
         redirectToUpdatePage() {
             this.$router.push('UpdatePage');
@@ -441,8 +447,33 @@ export default {
 
 <style scoped>
 @import url(https://fonts.googleapis.com/css2?family=Monda:wght@100;200;300;400;500;600;700&display=swap);
+table {
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table th {
+    background-color: #0B9777;
+    padding: 10px;
+    color: white;
+}
 
 
+.ajouterVehicle{
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    width: 100%;
+}
 
 .selected {
     color: white !important;
@@ -785,26 +816,16 @@ body {
 .tainer1 {
     font-size: 2.5rem;
     color: #031d36;
-    position: relative;
-    left: 30%;
-    margin: 2%;
-    top: 2%;
 
 }
 
 .tainer2 {
     font-size: 1.5rem;
-    margin: 1%;
-    position: relative;
-    top: 46%;
 }
 
 .tainer3 {
     display: flex;
     justify-content: space-between;
-    margin: 1%;
-    position: relative;
-    bottom: 5%;
 
 }
 

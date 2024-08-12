@@ -87,29 +87,26 @@
   
   <style scoped>
   .container{
-    background-color: #092c52;
-    height: 59.3rem;
+    height: 100vh;
   }
   .form-container {
-    max-width: 600px;
+    width: 35%;
     margin: 0 auto;
-    padding: 30px;
+    padding: 15px;
+    height: 80vh;
     background-color:white;
+    margin-top: 35px;
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    top: 12%;
   }
   
   .form-title {
     text-align: center;
-    margin-bottom: 20px;
     font-size: 24px;
     color: black;
   }
   
   .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
   label {
@@ -121,7 +118,7 @@
   
   input {
     width: 100%;
-    padding: 10px;
+    height: 30px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
