@@ -1,22 +1,15 @@
 <template>
   <div class="container">
-    <div class="form-container">
+    <div class="form-container"> 
+    <form>
     <h2>Inscription</h2>
-    <form @submit.prevent="handleSubmit">
-      <div class="profile-section">
-        <label for="profile">Profil :</label>
-        <input type="file" id="profile" @change="handleFileChange" accept="image/*">
-        <div v-if="profileImage">
-          <img :src="profileImage" alt="Photo de profil" class="profile-preview">
-        </div>
-      </div>
 
       <div class="input_field">
-        <label for="nom">Nom :</label>
+        <label for="name">Nom :</label>
         <input type="text" id="nom" v-model="form.nom" required>
       </div>
       <div class="input_field">
-        <label for="prenom">Prénom :</label>
+        <label for="surname">Prénom :</label>
         <input type="text" id="prenom" v-model="form.prenom" required>
       </div>
       <div class="input_field">
@@ -40,6 +33,10 @@
         <input type="date" id="dateOfBirth" v-model="form.dateOfBirth">
       </div>
       <div class="input_field">
+        <label for="role">Role :</label>
+        <input type="text" id="role" v-model="role">
+      </div>
+      <div class="input_field">
         <label for="phone">Numéro de téléphone :</label>
         <select id="phone" v-model="form.phone" required>
           <option value="+33">France (+33)</option>
@@ -55,40 +52,58 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  data() {
-    return {
-      profileImage: null,
-      form: {
-        nom: '',
-        prenom: '',
-        password: '',
-        email: '',
-        type: '',
-        dateOfBirth: '',
-        phone: '',
-        successMessage: '',
-        errorMessage: ''
-      }
-    };
-  },
-  methods: {
-
-    
-    handleFileChange(event) {
-      const file = event.target.files[0];
-      if (file) {
-        this.profileImage = URL.createObjectURL(file);
-      }
+    data() {
+        return {
+            Nom: '',
+            Surname: '',
+            email: '',
+           phone: '',
+            password: '',
+            type:'',
+            dateOfBirth:'',
+            role:'',
+            successMessage: '',
+            errorMessage: ''
+        };
     },
-    handleSubmit() {
-
-      this.$router.push('/connexion');
-
-    } 
-  }
-
-  
+    methods: {
+        async createAccount() {
+            try {
+                await axios.post('http://localhost:3001/users', {
+                    name: this.name,
+                    surname: this.surname,
+                    email: this.email,
+                    phone: this.phone,
+                    password: this.password,
+                    type: this.type,
+                    role: this.role,
+                    dateOfBirth: this.dateOfBirth,
+                    
+                });
+                this.successMessage = 'Inscription réussie !';
+                alert('Compte crée avec Success');
+                this.resetForm();
+            } catch (error) {
+                this.errorMessage = 'Échec de l\'inscription : ' + error.response.data.message;
+                alert('Echec lors de la création du compte')
+            }
+        },
+        resetForm() {
+            this.name = '';
+            this.name = '';
+            this.email = '';
+            this.phone = '';
+            this.password = '';
+            this.type = '';
+            this.role = '';
+            this.dateOfBirth = '';
+            this.successMessage = '';
+            this.errorMessage = '';
+        }
+    }
 };
 </script>
 

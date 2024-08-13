@@ -4,11 +4,6 @@
             <h2>Se connecter</h2>
             <form>
                 <div class="input_field">
-                    <label for="email">Email :</label>
-                    <input type="email" id="email" v-model="form.email">
-                </div>
-
-                <div class="input_field">
                     <label for="password">Mot de passe :</label>
                     <input type="password" id="password" v-model="form.password" required>
                 </div>
@@ -19,34 +14,56 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
-            profileImage: null,
-            form: {
-                nom: '',
-                prenom: '',
-                password: '',
-                email: '',
-                type: '',
-                dateOfBirth: '',
-                phone: ''
-            }
+            email: '',
+            password: '',
+            errorMessage: ''
         };
     },
     methods: {
-        handleFileChange(event) {
-            const file = event.target.files[0];
-            if (file) {
-                this.profileImage = URL.createObjectURL(file);
+        async login() {
+            try {
+                // Make a POST request to the /auth/login endpoint on the local server (http://localhost:3001)
+                const response = await axios.post('http://localhost:3001/auth/login', {
+                    email: this.email,
+                    password: this.password
+                });
+                const userData = response.data;
+                localStorage.setItem('userId', userData.user_id);  // Assurez-vous que 'user_id' est correct
+                localStorage.setItem('token', userData.access_token);
+                this.$router.push('/acceuilPage');
+                console.log(userData);
+                this.getUserInfo();
+
+            } catch (error) {
+                this.errorMessage = 'Échec de la connexion : ' + error.response.data.message;
+                alert('Echec de la connexion');
             }
         },
-        handleSubmit() {
-            this.$router.push('/pageAccueil');
+        async getUserInfo() {
+            try {
+                const token = localStorage.getItem('token');
+
+                const response = await axios.get('http://localhost:3001/users', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const userInfo = response.data;
+                console.log(userInfo);
+
+            } catch (error) {
+                console.error('Erreur lors de la récupération des informations de l\'utilisateur :', error);
+            }
         }
     }
 };
 </script>
+
 
 <style scoped>
 .container {
