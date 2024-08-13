@@ -55,40 +55,55 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  data() {
-    return {
-      profileImage: null,
-      form: {
-        nom: '',
-        prenom: '',
-        password: '',
-        email: '',
-        type: '',
-        dateOfBirth: '',
-        phone: '',
-        successMessage: '',
-        errorMessage: ''
-      }
-    };
-  },
-  methods: {
-
-    
-    handleFileChange(event) {
-      const file = event.target.files[0];
-      if (file) {
-        this.profileImage = URL.createObjectURL(file);
-      }
+    data() {
+        return {
+            Nom: '',
+            Surname: '',
+            email: '',
+           phone: '',
+            password: '',
+            type:'',
+            dateOfBirth:'',
+            successMessage: '',
+            errorMessage: ''
+        };
     },
-    handleSubmit() {
-
-      this.$router.push('/connexion');
-
-    } 
-  }
-
-  
+    methods: {
+        async createAccount() {
+            try {
+                await axios.post('http://localhost:3001/users', {
+                    name: this.name,
+                    surname: this.surname,
+                    email: this.email,
+                    phone: this.phone,
+                    password: this.password,
+                    type: this.type,
+                    dateOfBirth: this.dateOfBirth,
+                    
+                });
+                this.successMessage = 'Inscription réussie !';
+                alert('Compte crée avec Success');
+                this.resetForm();
+            } catch (error) {
+                this.errorMessage = 'Échec de l\'inscription : ' + error.response.data.message;
+                alert('Echec lors de la création du compte')
+            }
+        },
+        resetForm() {
+            this.name = '';
+            this.name = '';
+            this.email = '';
+            this.phone = '';
+            this.password = '';
+            this.type = '';
+            this.dateOfBirth = '';
+            this.successMessage = '';
+            this.errorMessage = '';
+        }
+    }
 };
 </script>
 
