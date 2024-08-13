@@ -1,22 +1,15 @@
 <template>
   <div class="container">
-    <div class="form-container">
+    <div class="form-container"> 
+    <form>
     <h2>Inscription</h2>
-    <form @submit.prevent="handleSubmit">
-      <div class="profile-section">
-        <label for="profile">Profil :</label>
-        <input type="file" id="profile" @change="handleFileChange" accept="image/*">
-        <div v-if="profileImage">
-          <img :src="profileImage" alt="Photo de profil" class="profile-preview">
-        </div>
-      </div>
 
       <div class="input_field">
-        <label for="nom">Nom :</label>
+        <label for="name">Nom :</label>
         <input type="text" id="nom" v-model="form.nom" required>
       </div>
       <div class="input_field">
-        <label for="prenom">Prénom :</label>
+        <label for="surname">Prénom :</label>
         <input type="text" id="prenom" v-model="form.prenom" required>
       </div>
       <div class="input_field">
@@ -38,6 +31,10 @@
       <div class="input_field">
         <label for="dateOfBirth">Date de naissance :</label>
         <input type="date" id="dateOfBirth" v-model="form.dateOfBirth">
+      </div>
+      <div class="input_field">
+        <label for="role">Role :</label>
+        <input type="text" id="role" v-model="role">
       </div>
       <div class="input_field">
         <label for="phone">Numéro de téléphone :</label>
@@ -67,6 +64,7 @@ export default {
             password: '',
             type:'',
             dateOfBirth:'',
+            role:'',
             successMessage: '',
             errorMessage: ''
         };
@@ -81,6 +79,7 @@ export default {
                     phone: this.phone,
                     password: this.password,
                     type: this.type,
+                    role: this.role,
                     dateOfBirth: this.dateOfBirth,
                     
                 });
@@ -99,6 +98,7 @@ export default {
             this.phone = '';
             this.password = '';
             this.type = '';
+            this.role = '';
             this.dateOfBirth = '';
             this.successMessage = '';
             this.errorMessage = '';
