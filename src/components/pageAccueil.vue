@@ -117,6 +117,14 @@
                         <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red" ></i>
                         <formVehicule />
                     </div>
+                    <div v-if="upvehicle" class="Modifiervehicle">
+                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red" ></i>
+                        <forVehicule />
+                </div>
+                <div  v-if="attvehicle" class="attribuervehicule">
+                    <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red" ></i> 
+                    <attrivehicle />
+                </div>
                     <div class="taine1">
                         <button @click="redirectToAjoutPage">AJOUTER</button>
                     </div>
@@ -131,257 +139,6 @@
                     </div>
                 </div>
                 <div class="tainer2">
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Noms
-                                </th>
-                                <th>
-                                    Immatriculation
-                                </th>
-                                <th>
-                                    State
-                                </th>
-                                <th>
-                                    Model
-                                </th>
-                                <th>
-                                    Tonnage
-                                </th>
-                                <th>
-                                    FirstDayTakeOff
-                                </th>
-                                <th>
-                                    Create at
-                                </th>
-                                <th>
-                                    Update at
-                                </th>
-                                <th>
-                                    Maintenance
-                                </th>
-                                <th>
-                                    Marchandise
-                                </th>
-                                <th>
-                                    Missions
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Personnel
-                                </td>
-                                <td>
-                                    CMR 1234AC
-                                </td>
-                                <td>
-                                    Bon état
-                                </td>
-                                <td>
-                                    Ford-max
-                                </td>
-                                <td>
-                                    100kg
-                                </td>
-                                <td>
-                                    2020/05/11
-                                </td>
-                                <td>
-                                    2021/02/10
-                                </td>
-                                <td>
-                                    2022/10/05
-                                </td>
-                                <td>
-                                    Reparration des pneus
-                                </td>
-                                <td>
-                                    Cartons de poissons
-                                </td>
-                                <td>
-                                    Livraison
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Camion
-                                </td>
-                                <td>
-                                    CMR 15DE6C
-                                </td>
-                                <td>
-                                    Etat moyen
-                                </td>
-                                <td>
-                                    Renault D-serie 210
-                                </td>
-                                <td>
-                                    5 tonnes
-                                </td>
-                                <td>
-                                    2019/07/20
-                                </td>
-                                <td>
-                                    2021/10/10
-                                </td>
-                                <td>
-                                    2020/04/22
-                                </td>
-                                <td>
-                                    Changer les vitres
-                                </td>
-                                <td>
-                                    ciment
-                                </td>
-                                <td>
-                                    Chargement
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Camion
-                                </td>
-                                <td>
-                                    CMR A05E6C
-                                </td>
-                                <td>
-                                    Bon état
-                                </td>
-                                <td>
-                                    Nissan L
-                                </td>
-                                <td>
-                                    8 tonnes
-                                </td>
-                                <td>
-                                    2015/03/22
-                                </td>
-                                <td>
-                                    2019/07/15
-                                </td>
-                                <td>
-                                    2020/05/15
-                                </td>
-                                <td>
-                                    Changer la couleur
-                                </td>
-                                <td>
-                                    Sable
-                                </td>
-                                <td>
-                                    Dépôt
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Camion
-                                </td>
-                                <td>
-                                    CMR 1DZ3I6C
-                                </td>
-                                <td>
-                                    Bon moyen
-                                </td>
-                                <td>
-                                    Renault D-serie 210
-                                </td>
-                                <td>
-                                    10 tonnes
-                                </td>
-                                <td>
-                                    2018/07/02
-                                </td>
-                                <td>
-                                    2020/10/10
-                                </td>
-                                <td>
-                                    2022/06/22
-                                </td>
-                                <td>
-                                    Aucune
-                                </td>
-                                <td>
-                                    Sable
-                                </td>
-                                <td>
-                                    Livraison
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Camion
-                                </td>
-                                <td>
-                                    CMR 15DE6C
-                                </td>
-                                <td>
-                                    Etat moyen
-                                </td>
-                                <td>
-                                    Renault D-serie 210
-                                </td>
-                                <td>
-                                    5 tonnes
-                                </td>
-                                <td>
-                                    2019/07/20
-                                </td>
-                                <td>
-                                    2021/10/10
-                                </td>
-                                <td>
-                                    2020/04/22
-                                </td>
-                                <td>
-                                    Changer les vitres
-                                </td>
-                                <td>
-                                    ciment
-                                </td>
-                                <td>
-                                    Chargement
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Camion
-                                </td>
-                                <td>
-                                    CMR 1ADEB34
-                                </td>
-                                <td>
-                                    Bon &tat
-                                </td>
-                                <td>
-                                    Renault D-serie 210
-                                </td>
-                                <td>
-                                    10 tonnes
-                                </td>
-                                <td>
-                                    2019/04/21
-                                </td>
-                                <td>
-                                    2021/12/10
-                                </td>
-                                <td>
-                                    2021/04/22
-                                </td>
-                                <td>
-                                    aucune
-                                </td>
-                                <td>
-                                    fer
-                                </td>
-                                <td>
-                                    Dépôt
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
             <div class="in_container" v-if="currentPage === 'chauffeur'">
@@ -407,21 +164,41 @@
 
 <script>
 import formVehicule from './AjoutPage.vue'
+import forVehicule from './UpdatePage.vue'
+import attrivehicle from './AttribuerPage.vue'
+
 export default {
 
     components: {
         formVehicule,
+        forVehicule, 
+        attrivehicle,
     },
     data() {
         return {
             addVehicle: false,
             currentPage: 'home',
             selectedButton: 'button4',
+            upvehicle: false,
+            attvehicle: false,
+
+            vehicle: [
+        { Type: '', 
+        Immatriculation: '',
+         State: '', 
+         Model: '', 
+        Tonnage: '', 
+    },
+         ]
         };
+
+
     },
     methods: {
         closePage(){
             this.addVehicle = false
+            this.upvehicle = false
+            this.attvehicle = false
         },
         selectButton(button) {
             this.selectedButton = button;
@@ -433,13 +210,14 @@ export default {
             this.addVehicle = true;
         },
         redirectToUpdatePage() {
-            this.$router.push('UpdatePage');
+            this.upvehicle = true;
         },
         redirectToSupprimerPage() {
-            this.$router.push('SupprimerPage');
+          
+        
         },
         redirectToAttribuerPage() {
-            this.$router.push('AttribuerPage');
+            this.attvehicle = true;
         }
     }
 };
@@ -470,6 +248,19 @@ table th {
 
 
 .ajouterVehicle{
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    width: 100%;
+}
+
+
+.attribuervehicule{
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    width: 100%;
+}
+
+.Modifiervehicle{
     background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
     width: 100%;
@@ -824,45 +615,55 @@ body {
 }
 
 .tainer3 {
-    display: flex;
-    justify-content: space-between;
+    display: inline-block;
+    margin: 0.2%;
 
 }
 
 .taine1 button {
     font-size: 1.4rem;
     height: 4rem;
-    width: 10rem;
+    width: 13rem;
     border-radius: 5px;
     background-color: rgb(133, 242, 248);
     border: none;
+    margin: 10%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
+    
 
 .taine2 button {
     font-size: 1.4rem;
     height: 4rem;
-    width: 10rem;
+    width: 13rem;
     border-radius: 5px;
     background-color: rgb(133, 242, 248);
     border: none;
+    margin: 10%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
+
 
 .taine3 button {
     font-size: 1.4rem;
     height: 4rem;
-    width: 10rem;
+    width: 13rem;
     border-radius: 5px;
     background-color: rgb(133, 242, 248);
     border: none;
+    margin: 10%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
 
 .taine4 button {
     font-size: 1.4rem;
     height: 4rem;
-    width: 10rem;
+    width: 13rem;
     border-radius: 5px;
     background-color: rgb(133, 242, 248);
     border: none;
+    margin: 10%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
 
 

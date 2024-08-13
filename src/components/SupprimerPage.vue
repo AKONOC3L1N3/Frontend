@@ -60,11 +60,13 @@
           headers: {
             'Content-Type': 'application/json',
           },
+        
         })
           .then(response => response.json())
           .then(data => {
             console.log('Success:', data);
             // Réinitialiser le formulaire ou naviguer après la suppression
+
           })
           .catch((error) => {
             console.error('Error:', error);
@@ -75,10 +77,6 @@
   </script>
   
   <style scoped>
-  .container {
-    background-color: #092c52;
-    height: 59.3rem;
-  }
   
   .form-container {
     max-width: 600px;

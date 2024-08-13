@@ -66,11 +66,15 @@ export default {
         email: '',
         type: '',
         dateOfBirth: '',
-        phone: ''
+        phone: '',
+        successMessage: '',
+        errorMessage: ''
       }
     };
   },
   methods: {
+
+    
     handleFileChange(event) {
       const file = event.target.files[0];
       if (file) {
@@ -81,8 +85,10 @@ export default {
 
       this.$router.push('/connexion');
 
-    }
+    } 
   }
+
+  
 };
 </script>
 

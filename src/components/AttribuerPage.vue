@@ -64,20 +64,32 @@ export default {
       },
       chauffeurs: [] // Liste des chauffeurs récupérés depuis la base de données
     };
+
   },
   methods: {
     handleSubmit() {
       // Logique pour soumettre le formulaire
       console.log('Form submitted:', this.form);
       // Rediriger ou effectuer une action après la soumission
-    }
+
+    },
   },
   mounted() {
     // Appel à une API pour obtenir les chauffeurs enregistrés
     fetch('/api/chauffeurs')
       .then(response => response.json())
       .then(data => {
+
         this.chauffeurs = data;
+        this.formData = {
+        type: '',
+        immatriculation: '',
+        model: '',
+        tonnage: '',
+        state: '',
+        date: '',
+        chauffeur: ''
+     };
       });
   }
 };
@@ -89,7 +101,6 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #092c52;
   margin: 0;
 }
 

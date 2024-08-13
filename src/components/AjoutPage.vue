@@ -29,7 +29,7 @@
         </div>
   
         <div class="form-group">
-          <label for="createAt">Date de création</label>
+          <label for="createAt">Date </label>
           <input type="date" id="createAt" v-model="formData.createAt" required />
         </div>
   
@@ -56,7 +56,7 @@
     },
     methods: {
       submitForm() {
-        // Remplacer l'URL par celle de votre API
+        
         fetch('https://votre-api-endpoint.com/ajouter', {
           method: 'POST',
           headers: {
@@ -67,7 +67,7 @@
           .then(response => response.json())
           .then(data => {
             console.log('Success:', data);
-            // Réinitialiser le formulaire après l'envoi
+    
             this.formData = {
               type: '',
               immatriculation: '',
