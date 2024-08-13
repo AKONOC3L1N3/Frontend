@@ -137,6 +137,26 @@
                     <div class="taine4">
                         <button @click="redirectToAttribuerPage">ATTRIBUER</button>
                     </div>
+                    <table>
+      <thead>
+        <tr>
+          <th @click="trierTableau(0)">TYPE</th>
+          <th @click="trierTableau(1)">TONNAGE</th>
+          <th @click="trierTableau(2)">MODEL</th>
+          <th @click="trierTableau(3)">MARQUE</th>
+          <th @click="trierTableau(4)">ETAT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, index) in tableauData" :key="index">
+          <td>{{ item.type }}</td>
+          <td>{{ item.tonnage }}</td>
+          <td>{{ item.model }}</td>
+          <td>{{ item.marque }}</td>
+          <td>{{ item.etat }}</td>
+        </tr>
+      </tbody>
+    </table>
                 </div>
                 <div class="tainer2">
                 </div>
@@ -181,6 +201,7 @@ export default {
             selectedButton: 'button4',
             upvehicle: false,
             attvehicle: false,
+            tableauData: [],
 
             vehicle: [
         { Type: '', 
@@ -219,6 +240,21 @@ export default {
         redirectToAttribuerPage() {
             this.attvehicle = true;
         }
+    },
+    trierTableau(colonne) {
+      const ordre = this.sortedOrder === 'asc' ? 'desc' : 'asc';
+      this.sortedOrder = ordre;
+
+      this.tableauData.sort((a, b) => {
+        const valA = Object.values(a)[colonne];
+        const valB = Object.values(b)[colonne];
+
+        if (ordre === 'asc') {
+          return valA.toString().localeCompare(valB.toString(), undefined, { numeric: true });
+        } else {
+          return valB.toString().localeCompare(valA.toString(), undefined, { numeric: true });
+        }
+      });
     }
 };
 </script>
@@ -615,17 +651,19 @@ body {
 }
 
 .tainer3 {
-    display: inline-block;
-    margin: 0.2%;
+    display: flex;
+    justify-content: space-between;
+    
 
 }
 
 .taine1 button {
     font-size: 1.4rem;
+    color: white;
     height: 4rem;
     width: 13rem;
     border-radius: 5px;
-    background-color: rgb(133, 242, 248);
+    background-color: rgb(9, 119, 125);
     border: none;
     margin: 10%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
@@ -636,8 +674,9 @@ body {
     font-size: 1.4rem;
     height: 4rem;
     width: 13rem;
+    color: white;
     border-radius: 5px;
-    background-color: rgb(133, 242, 248);
+    background-color: rgb(9, 119, 125);
     border: none;
     margin: 10%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
@@ -647,9 +686,10 @@ body {
 .taine3 button {
     font-size: 1.4rem;
     height: 4rem;
+    color: white;
     width: 13rem;
-    border-radius: 5px;
-    background-color: rgb(133, 242, 248);
+    border-radius: 5px; 
+    background-color: rgb(9, 119, 125);;
     border: none;
     margin: 10%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
@@ -658,13 +698,39 @@ body {
 .taine4 button {
     font-size: 1.4rem;
     height: 4rem;
+    color: white;
     width: 13rem;
     border-radius: 5px;
-    background-color: rgb(133, 242, 248);
+    background-color: rgb(9, 119, 125);
     border: none;
     margin: 10%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.4rem;
+  margin-top: 20%;
 
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+th {
+  cursor: pointer;
+  background-color: #f2f2f2;
+}
+th:hover {
+  background-color: #ddd;
+}
+.sorted-asc::after {
+  content: " ▲";
+}
+.sorted-desc::after {
+  content: " ▼";
+}
 
 </style>

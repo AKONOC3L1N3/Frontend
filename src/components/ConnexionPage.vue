@@ -2,12 +2,16 @@
     <div class="container">
         <div class="form-container">
             <h2>Se connecter</h2>
-            <form>
+            <form @submit.prevent="login">
+                <div class="input_field">
+                    <label for="email">Email :</label>
+                    <input type="password" id="password" v-model="email" required>
+                </div>
                 <div class="input_field">
                     <label for="password">Mot de passe :</label>
-                    <input type="password" id="password" v-model="form.password" required>
+                    <input type="password" id="password" v-model="password" required>
                 </div>
-                <button @click="handleSubmit">Se connecter</button>
+                <button type="submit">Se connecter</button>
             </form>
         </div>
     </div>
@@ -35,7 +39,7 @@ export default {
                 const userData = response.data;
                 localStorage.setItem('userId', userData.user_id);  // Assurez-vous que 'user_id' est correct
                 localStorage.setItem('token', userData.access_token);
-                this.$router.push('/acceuilPage');
+                this.$router.push('/pageAccueil');
                 console.log(userData);
                 this.getUserInfo();
 

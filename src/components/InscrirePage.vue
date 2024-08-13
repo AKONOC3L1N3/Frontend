@@ -1,28 +1,28 @@
 <template>
   <div class="container">
     <div class="form-container"> 
-    <form>
+      <form @submit.prevent="createAccount">
     <h2>Inscription</h2>
 
       <div class="input_field">
         <label for="name">Nom :</label>
-        <input type="text" id="nom" v-model="form.nom" required>
+        <input type="text" id="nom" v-model="name" required>
       </div>
       <div class="input_field">
         <label for="surname">Prénom :</label>
-        <input type="text" id="prenom" v-model="form.prenom" required>
+        <input type="text" id="prenom" v-model="surname" required>
       </div>
       <div class="input_field">
         <label for="password">Mot de passe :</label>
-        <input type="password" id="password" v-model="form.password" required>
+        <input type="password" id="password" v-model="password" required>
       </div>
       <div class="input_field">
         <label for="email">Email :</label>
-        <input type="email" id="email" v-model="form.email">
+        <input type="email" id="email" v-model="email">
       </div>
       <div class="input_field">
         <label for="type">Type :</label>
-        <select id="type" v-model="form.type" required>
+        <select id="type" v-model="type" required>
           <option value="SUPER ADMINISTRATEUR">SUPER ADMINISTRATEUR</option>
           <option value="ADMINISTRATEUR">ADMINISTRATEUR</option>
           <option value="CHAUFFEUR">CHAUFFEUR</option>
@@ -30,7 +30,7 @@
       </div>
       <div class="input_field">
         <label for="dateOfBirth">Date de naissance :</label>
-        <input type="date" id="dateOfBirth" v-model="form.dateOfBirth">
+        <input type="date" id="dateOfBirth" v-model="dateOfBirth">
       </div>
       <div class="input_field">
         <label for="role">Role :</label>
@@ -38,11 +38,7 @@
       </div>
       <div class="input_field">
         <label for="phone">Numéro de téléphone :</label>
-        <select id="phone" v-model="form.phone" required>
-          <option value="+33">France (+33)</option>
-          <option value="+1">États-Unis (+1)</option>
-          <option value="+237">Cameroun(+237)</option>
-        </select>
+        <input type="number" id="phone" v-model="phone">
       </div>
       <button type="submit">Inscrire</button>
     </form>
@@ -93,7 +89,7 @@ export default {
         },
         resetForm() {
             this.name = '';
-            this.name = '';
+            this.surname = '';
             this.email = '';
             this.phone = '';
             this.password = '';
