@@ -61,27 +61,19 @@
                 <div class="container1">
                     <div class="contain1">
                         <img src="..//assets/icvoiture.png" alt="">
-                        <div class="p1">
-                            <h4>24 véhicules disponibles actuellement</h4>
-                        </div>
+                            <h3 class="p1">24 véhicules disponibles actuellement</h3>
                     </div>
                     <div class="contain2">
                         <img src="..//assets/chaur.png" alt="">
-                        <div class="p2">
-                            <h4>20 chauffeurs disponibles</h4>
-                        </div>
+                            <h3 class="p2">20 chauffeurs disponibles</h3>
                     </div>
                     <div class="contain3">
                         <img src="..//assets/maintenance.png" alt="">
-                        <div class="p3">
-                            <h4>service de maintenance <br> disponible</h4>
-                        </div>
+                            <h3 class="p3">service de maintenance <br> disponible</h3>
                     </div>
                     <div class="contain4">
                         <img src="..//assets/aide.png" alt="">
-                        <div class="p4">
-                            <h4>Besoin d'aide?</h4>
-                        </div>
+                            <h3 class="p4">Besoin d'aide?</h3>
                     </div>
                     <div class="containes1">
                         <div class="contais1">
@@ -382,135 +374,91 @@ body {
 }
 
 .contain1 {
-
-    border-radius: 5px;
+    border-radius:10px;
+    margin-top: 15px;
     width: 24.5%;
-    background-color: #94cbe4;
-    height: 8rem;
-    position: relative;
-    top: 1rem;
-    box-shadow: 0PX 0PX 2PX 2PX grey;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
 }
 
 .contain1 img {
-    width: 20%;
-    margin-top: 5%;
+    width: 30%;
+    height: 120px;
 }
 
-.p1 {
-    background-color: #abd9ef;
-    height: 8rem;
-    width: 16.5rem;
-    position: relative;
-    bottom: 102%;
-    left: 30%;
-    font-size: 1.6rem;
-}
-
-.p1 h4 {
-    font-size: 1.5rem;
-    position: relative;
-    top: 30%;
-    left: 5%;
+.contain1 .p1 {
+    width: 65%;
+    padding: 19px 0;
+    font-size: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .contain2 {
-
-    border-radius: 5px;
+    border-radius:10px;
+    margin-top: 15px;
     width: 24.5%;
-    background-color: #e94629;
-    height: 8rem;
-    position: relative;
-    top: 1rem;
-    box-shadow: 0PX 0PX 2PX 2PX grey;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
 }
 
 .contain2 img {
-    width: 20%;
-    margin-top: 5%;
+    width: 30%;
+    height: 120px;
 }
 
 .p2 {
-    background-color: #f69c8c;
-    height: 8rem;
-    width: 17rem;
-    position: relative;
-    bottom: 102%;
-    left: 28%;
-    font-size: 1.6rem;
+    width: 65%;
+    padding: 19px 0;
+    font-size: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-
-.p2 h4 {
-    font-size: 1.5rem;
-    position: relative;
-    top: 35%;
-    left: 3%;
-}
-
 .contain3 {
-    box-shadow: 0PX 0PX 2PX 2PX grey;
-    border-radius: 5px;
-    width: 23%;
-    background-color: #278a46;
-    height: 8rem;
-    position: relative;
-    top: 1rem;
+    border-radius:10px;
+    margin-top: 15px;
+    width: 24.5%;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
 }
 
 .contain3 img {
-    width: 20%;
-    margin-top: 5%;
+    width: 30%;
+    height: 120px;
 }
 
 .p3 {
-    background-color: #8fedb0;
-    height: 8rem;
-    width: 16rem;
-    position: relative;
-    bottom: 97%;
-    left: 28%;
-    font-size: 1.6rem;
-}
-
-.p3 h4 {
-    font-size: 1.5rem;
-    position: relative;
-    top: 24%;
-    left: 5%;
+    width: 65%;
+    padding: 19px 0;
+    font-size: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .contain4 {
-    box-shadow: 0PX 0PX 2PX 2PX grey;
-    border-radius: 5px;
-    width: 22%;
-    background-color: #f0f2f3;
-    height: 8rem;
-    position: relative;
-    top: 1rem;
+    border-radius:10px;
+    margin-top: 15px;
+    width: 24.5%;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
 }
 
 .contain4 img {
-    width: 20%;
-    margin-top: 5%;
+    width: 30%;
+    height: 120px;
 }
 
 .p4 {
-    background-color: #d5dbde;
-    height: 8rem;
-    width: 15rem;
-    position: relative;
-    bottom: 94%;
-    left: 30%;
-    font-size: 1.6rem;
+    width: 65%;
+    padding: 19px 0;
+    font-size: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-
-.p4 h4 {
-    font-size: 1.5rem;
-    position: relative;
-    top: 35%;
-    left: 25%;
-}
-
 .containes1 {
     position: absolute;
     margin-top: 12%;
