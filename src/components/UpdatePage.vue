@@ -93,7 +93,7 @@
     width: 35%;
     margin: 0 auto;
     padding: 15px;
-    height: 80vh;
+    height: 57vh;
     background-color:white;
     margin-top: 35px;
     border-radius: 10px;

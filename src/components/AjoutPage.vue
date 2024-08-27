@@ -5,87 +5,94 @@
       <form @submit.prevent="submitForm">
         <div class="form-group">
           <label for="type">Type</label>
-          <input type="text" id="type" v-model="formData.type" required />
+          <input type="text" id="type" v-model="type" required />
         </div>
-  
+
         <div class="form-group">
-          <label for="immatriculation">Immatriculation</label>
-          <input type="text" id="immatriculation" v-model="formData.immatriculation" required />
+          <label for="name">Nom</label>
+          <input type="text" id="name" v-model="name" required />
         </div>
+        
+  
+        
   
         <div class="form-group">
           <label for="state">État</label>
-          <input type="text" id="state" v-model="formData.state" required />
+          <input type="text" id="state" v-model="state" required />
         </div>
   
         <div class="form-group">
           <label for="model">Modèle</label>
-          <input type="text" id="model" v-model="formData.model" required />
+          <input type="text" id="model" v-model="model" required />
         </div>
   
         <div class="form-group">
           <label for="tonnage">Tonnage</label>
-          <input type="number" id="tonnage" v-model="formData.tonnage" required />
+          <input type="number" id="tonnage" v-model="tonnage" required />
         </div>
   
         <div class="form-group">
-          <label for="createAt">Date </label>
-          <input type="date" id="createAt" v-model="formData.createAt" required />
+          <label for=" firstYearTakeoff">Date </label>
+          <input type="date" id=" firstYearTakeoff" v-model=" firstYearTakeoff" required />
         </div>
   
-        <button type="submit" class="submit-button">Ajouter</button>
+        <button @click="createAccount" class="submit-button">Ajouter</button>
       </form>
     </div>
     </div>
     
   </template>
   
+  
   <script>
+  import axios from 'axios';
+  
   export default {
-    data() {
-      return {
-        formData: {
-          type: '',
-          immatriculation: '',
-          state: '',
-          model: '',
-          tonnage: '',
-          createAt: '',
-        },
-      };
-    },
-    methods: {
-      submitForm() {
-        
-        fetch('https://votre-api-endpoint.com/ajouter', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(this.formData),
-        })
-          .then(response => response.json())
-          .then(data => {
-            console.log('Success:', data);
-    
-            this.formData = {
+      data() {
+          return {
+              name: '',
               type: '',
-              immatriculation: '',
+              tonnage: '',
+              firstYearTakeoff: '',
               state: '',
               model: '',
-              tonnage: '',
-              createAt: '',
-            };
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
+              successMessage: '',
+              errorMessage: ''
+          };
       },
-    },
+      methods: {
+          async createAccount() {
+              try {
+                  await axios.post('http://localhost:3001/vehicles', {
+                      name: this.name,
+                      type: this.type,
+                      state: this.state,
+                      model: this.model,
+                     tonnage: this.tonnage,
+                     firstYearTakeoff : new Date(this.  firstYearTakeoff)
+                  });
+                  this.successMessage = 'ajout réussie !';
+                  alert('véhicule ajouté avec succès');
+                  this.resetForm();
+              } catch (error) {
+                  this.errorMessage = 'Échec de l\'ajout : ' + error.response.data.message;
+                  alert('Echec lors de l\'ajout')
+              }
+          },
+          resetForm() {
+              this.name = '';
+              this.type = '';
+              this.state = '';
+              this.model = '';
+              this.tonnage = '';
+              this.  firstYearTakeoff= '';
+              this.successMessage = '';
+              this.errorMessage = '';
+          }
+      }
   };
   </script>
-  
-  <style scoped>
+  <style>
   .container{
     height: 100vh;
   }
@@ -93,10 +100,12 @@
     width: 35%;
     margin: 0 auto;
     padding: 15px;
-    height: 80vh;
+    height: 60vh;
     background-color:white;
     margin-top: 35px;
     border-radius: 10px;
+    position: relative;
+    top: 50px;
   }
   
   .form-title {

@@ -111,6 +111,10 @@ export default {
   background-color: white;
   border-radius: 8px;
   margin: auto;
+  height: 51rem;
+  position: relative;
+  margin-bottom: 100%;
+
 }
 
 label {

@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="form-container"> 
+  <div class="containere">
+    <div class="form-containere"> 
       <form @submit.prevent="createAccount">
     <h2>Inscription</h2>
 
@@ -23,22 +23,19 @@
       <div class="input_field">
         <label for="type">Type :</label>
         <select id="type" v-model="type" required>
-          <option value="SUPER ADMINISTRATEUR">SUPER ADMINISTRATEUR</option>
-          <option value="ADMINISTRATEUR">ADMINISTRATEUR</option>
+          <option value="SUPERADMIN">SUPER ADMINISTRATEUR</option>
+          <option value="ADMIN">ADMINISTRATEUR</option>
           <option value="CHAUFFEUR">CHAUFFEUR</option>
         </select>
       </div>
+      
       <div class="input_field">
-        <label for="dateOfBirth">Date de naissance :</label>
-        <input type="date" id="dateOfBirth" v-model="dateOfBirth">
+        <label for="roleid">Role :</label>
+        <input type="text" id="roleid" v-model="roleId">
       </div>
       <div class="input_field">
-        <label for="role">Role :</label>
-        <input type="text" id="role" v-model="role">
-      </div>
-      <div class="input_field">
-        <label for="phone">Numéro de téléphone :</label>
-        <input type="number" id="phone" v-model="phone">
+        <label for="avatarUrl">AvatarUrl :</label>
+        <input type="text" id="avatarUrl" v-model="avatarUrl">
       </div>
       <button type="submit">Inscrire</button>
     </form>
@@ -56,11 +53,10 @@ export default {
             Nom: '',
             Surname: '',
             email: '',
-           phone: '',
             password: '',
             type:'',
-            dateOfBirth:'',
-            role:'',
+            roleId:'',
+            avatarUrl:'',
             successMessage: '',
             errorMessage: ''
         };
@@ -72,11 +68,10 @@ export default {
                     name: this.name,
                     surname: this.surname,
                     email: this.email,
-                    phone: this.phone,
                     password: this.password,
                     type: this.type,
-                    role: this.role,
-                    dateOfBirth: this.dateOfBirth,
+                    roleId: this.roleId,
+                    avatarUrl: this.avatarUrl
                     
                 });
                 this.successMessage = 'Inscription réussie !';
@@ -91,10 +86,10 @@ export default {
             this.name = '';
             this.surname = '';
             this.email = '';
-            this.phone = '';
             this.password = '';
             this.type = '';
-            this.role = '';
+            this.roleId = '';
+            this.avatarUrl = '';
             this.dateOfBirth = '';
             this.successMessage = '';
             this.errorMessage = '';
@@ -104,7 +99,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.containere {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -113,7 +108,7 @@ export default {
   margin: 0;
 }
 
-.form-container {
+.form-containere {
   padding: 15px;
   max-width: 500px;
   width: 100%;

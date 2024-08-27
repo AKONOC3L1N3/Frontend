@@ -8,9 +8,18 @@ import AjoutPage from './components/AjoutPage.vue'
 import UpdatePage from './components/UpdatePage.vue'
 import SupprimerPage from './components/SupprimerPage.vue'
 import AttribuerPage from './components/AttribuerPage.vue'
+import AddPage from './components/AddPage.vue'
+import ModifierPage from './components/ModifierPage.vue'
+
 const routes =[
     {
         path: '/inscription', component: inscription
+    },
+    {
+        path: '/ModifierPage', component: ModifierPage
+    },
+    {
+        path: '/ AddPage ', component: AddPage 
     },
     {
         path: '/AjoutPage',

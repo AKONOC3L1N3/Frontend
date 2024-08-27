@@ -61,19 +61,19 @@
                 <div class="container1">
                     <div class="contain1">
                         <img src="..//assets/icvoiture.png" alt="">
-                            <h3 class="p1">24 véhicules disponibles actuellement</h3>
+                        <h3 class="p1">24 véhicules disponibles actuellement</h3>
                     </div>
                     <div class="contain2">
                         <img src="..//assets/chaur.png" alt="">
-                            <h3 class="p2">20 chauffeurs disponibles</h3>
+                        <h3 class="p2">20 chauffeurs disponibles</h3>
                     </div>
                     <div class="contain3">
                         <img src="..//assets/maintenance.png" alt="">
-                            <h3 class="p3">service de maintenance <br> disponible</h3>
+                        <h3 class="p3">service de maintenance <br> disponible</h3>
                     </div>
                     <div class="contain4">
                         <img src="..//assets/aide.png" alt="">
-                            <h3 class="p4">Besoin d'aide?</h3>
+                        <h3 class="p4">Besoin d'aide?</h3>
                     </div>
                     <div class="containes1">
                         <div class="contais1">
@@ -104,71 +104,334 @@
                 </div>
             </div>
             <div class="in_container" v-if="currentPage === 'vehicle'">
-                <div class="tainer3">
-                    <div v-if="addVehicle" class="ajouterVehicle">
-                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red" ></i>
+                <div v-if="addVehicle" class="ajouter">
+                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
                         <formVehicule />
                     </div>
-                    <div v-if="upvehicle" class="Modifiervehicle">
-                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red" ></i>
+                    <div v-if="upvehicle" class="Modifier">
+                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
                         <forVehicule />
-                </div>
-                <div  v-if="attvehicle" class="attribuervehicule">
-                    <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red" ></i> 
-                    <attrivehicle />
-                </div>
-                    <div class="taine1">
+                    </div>
+                    <div v-if="attvehicle" class="attribuer">
+                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
+                        <attrivehicle />
+                    </div>
+                <div class="tainer3">
+                    <div></div>
+                   <div class="trainContain">
+                    <div class="taine">
                         <button @click="redirectToAjoutPage">AJOUTER</button>
                     </div>
-                    <div class="taine2">
+                    <div class="taine">
                         <button @click="redirectToUpdatePage">MODIFIER</button>
                     </div>
-                    <div class="taine3">
+                    <div class="taine">
                         <button @click="redirectToSupprimerPage">SUPPRIMER</button>
                     </div>
-                    <div class="taine4">
+                    <div class="taine">
                         <button @click="redirectToAttribuerPage">ATTRIBUER</button>
                     </div>
-                    <table>
-      <thead>
-        <tr>
-          <th @click="trierTableau(0)">TYPE</th>
-          <th @click="trierTableau(1)">TONNAGE</th>
-          <th @click="trierTableau(2)">MODEL</th>
-          <th @click="trierTableau(3)">MARQUE</th>
-          <th @click="trierTableau(4)">ETAT</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in tableauData" :key="index">
-          <td>{{ item.type }}</td>
-          <td>{{ item.tonnage }}</td>
-          <td>{{ item.model }}</td>
-          <td>{{ item.marque }}</td>
-          <td>{{ item.etat }}</td>
-        </tr>
-      </tbody>
-    </table>
+                   </div>
+                    
                 </div>
                 <div class="tainer2">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th @click="trierTableau(0)">TYPE</th>
+                                <th @click="trierTableau(1)">TONNAGE</th>
+                                <th @click="trierTableau(2)">MODEL</th>
+                                <th @click="trierTableau(3)">MARQUE</th>
+                                <th @click="trierTableau(4)">ETAT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(item, index) in tableauData" :key="index">
+                                <td>{{ item.type }}</td>
+                                <td>{{ item.tonnage }}</td>
+                                <td>{{ item.model }}</td>
+                                <td>{{ item.marque }}</td>
+                                <td>{{ item.etat }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="in_container" v-if="currentPage === 'chauffeur'">
-                3
+                <div v-if="addDriver" class="ajouter">
+                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
+                        <formDriver />
+                    </div>
+                    <div v-if="ModDriver" class="Modifier">
+                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
+                        <forDriver />
+                    </div>
+        
+                <div class="tainer3">
+                    <div></div>
+                   <div class="trainContain">
+                    <div class="taine">
+                        <button @click="redirectToAddPage">AJOUTER</button>
+                    </div>
+                    <div class="taine">
+                        <button @click="redirectToModifierPage">MODIFIER</button>
+                    </div>
+                    <div class="taine">
+                        <button @click="redirectToDeletePage">SUPPRIMER</button>
+                    </div>
+
+                   </div>
+                    
+                </div>
+                <div class="tainer2">
+                    <table>
+                        <thead>
+                            <tr>
+                                 <th @click="trierTableau(0)">DrivingLicense</th>
+                                <th @click="trierTableau(1)">ImmatriculationNumber</th>
+                                <th @click="trierTableau(2)">DateOfBirth</th>
+                                <th @click="trierTableau(3)">Vehicle</th>
+                                <th @click="trierTableau(4)">Mission</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(item, index) in tabData" :key="index">
+                                <td>{{ item.DrivingLicense}}</td>
+                                <td>{{ item.ImmatriculationNumber}}</td>
+                                <td>{{ item.DateOfBirth}}</td>
+                                <td>{{ item.Vehicle}}</td>
+                                <td>{{ item.Mission }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="in_container" v-if="currentPage === 'services'">
-                4
+               
+              <div id="appi">
+    <header>
+      <h1>Présentation des Services</h1>
+      <p>Bienvenue dans l'application de gestion de flotte automobile. Explorez nos services :</p>
+    </header>
+
+    <div class="services-overview">
+      <div class="service-box">
+        <h2>Gestion des Véhicules</h2>
+        <p>Gérez l'ajout, la modification, et la suppression des véhicules de votre flotte.</p>
+      </div>
+      <div class="service-box">
+        <h2>Gestion des Chauffeurs</h2>
+        <p>Suivez les chauffeurs, attribuez des véhicules, et gérez leurs itinéraires.</p>
+      </div>
+      <div class="service-box">
+        <h2>Gestion des Itinéraires</h2>
+        <p>Planifiez et optimisez les itinéraires pour vos chauffeurs et véhicules.</p>
+      </div>
+    </div>
+
+    <div class="opportunity-section">
+      <h2>Opportunités</h2>
+      <p>Découvrez et signalez des opportunités pour optimiser la gestion de votre flotte.</p>
+      <button @click="showOpportunityForm">Signaler Opportunité</button>
+    </div>
+
+    <!-- Formulaire Pop-Up -->
+    <div v-if="isOpportunityFormVisible" class="popup-form">
+      <div class="form-container">
+        <h3>Signaler une Opportunité</h3>
+        <form @submit.prevent="submitOpportunity">
+          <label for="description">Description :</label>
+          <textarea id="description" v-model="opportunity.description" required></textarea>
+
+          <label for="address">Adresse :</label>
+          <input type="text" id="address" v-model="opportunity.address" required>
+
+          <label for="date">Date :</label>
+          <input type="date" id="date" v-model="opportunity.date" required>
+
+          <button type="submit">Soumettre</button>
+          <button type="button" @click="closeOpportunityForm">Annuler</button>
+        </form>
+      </div>
+    </div>
+  </div>
             </div>
             <div class="in_container" v-if="currentPage === 'itineraire'">
-                5
+                <div>
+                    <div class="ittinéraire">
+    <!-- Bouton pour ouvrir le formulaire pop-up -->
+    <button @click="showModal = true">Planifier un Itinéraire</button>
+</div>
+    <!-- Formulaire de planification en pop-up -->
+    <div v-if="showModal" class="modal-overlay" @click.self="closeModal">
+      <div class="modal-content">
+        <h2>Planification d'un Itinéraire</h2>
+        <form @submit.prevent="planRoute">
+          
+          <!-- Sélection du véhicule -->
+          <div class="form-group">
+            <label for="vehicle">Véhicule :</label>
+            <select v-model="selectedVehicle" required>
+              <option v-for="vehicle in vehicles" :key="vehicle.id" :value="vehicle.id">
+                {{ vehicle.model }} - {{ vehicle.registration }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Sélection du chauffeur -->
+          <div class="form-group">
+            <label for="driver">Chauffeur :</label>
+            <select v-model="selectedDriver" required>
+              <option v-for="driver in drivers" :key="driver.id" :value="driver.id">
+                {{ driver.first_name }} {{ driver.last_name }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Point de départ -->
+          <div class="form-group">
+            <label for="start_point">Point de Départ :</label>
+            <input type="text" v-model="startPoint" required />
+          </div>
+
+          <!-- Point d'arrivée -->
+          <div class="form-group">
+            <label for="end_point">Point d'Arrivée :</label>
+            <input type="text" v-model="endPoint" required />
+          </div>
+
+          <!-- Bouton de soumission -->
+          <button type="submit">Planifier l'Itinéraire</button>
+          <button type="button" @click="closeModal">Fermer</button>
+        </form>
+      </div>
+    </div>
+    
+  </div>
+  <div class="map-container">
+    <MapComponent :routes="routes" />
+  </div>
             </div>
 
             <div class="in_container" v-if="currentPage === 'maintenance'">
-                6
+                <div class="container">
+    <!-- Table for maintenance presentation -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>NOM</th>
+            <th>TYPE</th>
+            <th>DATE</th>
+            <th>VEHICULE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="maintenance in maintenances" :key="maintenance.id">
+            <td>{{ maintenance.nom }}</td>
+            <td>{{ maintenance.type }}</td>
+            <td>{{ maintenance.date }}</td>
+            <td>{{ maintenance.vehicule }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Buttons for Add, Edit, and Delete -->
+    <div class="buttons-container">
+      <button @click="showPopup('add')">AJOUTER</button>
+      <button @click="showPopup('edit')">MODIFIER</button>
+      <button @click="showPopup('delete')">SUPPRIMER</button>
+    </div>
+    
+    <!-- Pop-up Form for Adding/Editing -->
+    <div v-if="showForm && (actionType === 'add' || actionType === 'edit')" class="popup">
+      <div class="popup-content">
+        <span class="close" @click="closePopup">&times;</span>
+        <h3>{{ formTitle }}</h3>
+        <form @submit.prevent="handleSubmit">
+          <label for="nom">NOM</label>
+          <input type="text" id="nom" v-model="form.nom" required>
+          
+          <label for="type">TYPE</label>
+          <input type="text" id="type" v-model="form.type" required>
+          
+          <label for="date">DATE</label>
+          <input type="date" id="date" v-model="form.date" required>
+          
+          <label for="vehicule">VEHICULE</label>
+          <input type="text" id="vehicule" v-model="form.vehicule" required>
+          
+          <button type="submit">{{ formAction }}</button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Pop-up Form for Deleting -->
+    <div v-if="showForm && actionType === 'delete'" class="popup">
+      <div class="popup-content">
+        <span class="close" @click="closePopup">&times;</span>
+        <h3>Supprimer Maintenance</h3>
+        <form @submit.prevent="handleDelete">
+          <label for="delete-maintenance">Choisissez une maintenance à supprimer</label>
+          <select id="delete-maintenance" v-model="selectedMaintenance" required>
+            <option v-for="maintenance in maintenances" :key="maintenance.id" :value="maintenance.id">
+              {{ maintenance.nom }} - {{ maintenance.date }}
+            </option>
+          </select>
+          <button type="submit">Supprimer</button>
+        </form>
+      </div>
+    </div>
+  </div>
             </div>
 
             <div class="in_container" v-if="currentPage === 'parametre'">
-                7
+              <div class="settings-container">
+    <div class="box admin-management">
+      <h2>Gestion des Administrateurs</h2>
+      <button @click="showAddAdminForm = true" class="add-button">Ajouter un Admin</button>
+      <div class="icons">
+        <img src="@/assets/delete-icon.png" alt="Supprimer" @click="deleteAdmin" class="icon delete-icon">
+        <img src="@/assets/edit-icon.png" alt="Modifier" @click="editAdmin" class="icon edit-icon">
+      </div>
+      <!-- Formulaire pop-up pour ajouter un admin -->
+      <div v-if="showAddAdminForm" class="popup">
+        <div class="popup-contents">
+          <h3>Ajouter un Administrateur</h3>
+          <form @submit.prevent="addAdmin">
+            <label>Email</label>
+            <input v-model="newAdmin.email" type="email" required>
+            <label>Nom</label>
+            <input v-model="newAdmin.name" type="text" required>
+            <label>Type</label>
+            <input v-model="newAdmin.type" type="text" required>
+            <label>Mot de Passe</label>
+            <input v-model="newAdmin.password" type="password" required>
+            <label>Prénom</label>
+            <input v-model="newAdmin.surname" type="text" required>
+            <button type="submit">Ajouter</button>
+            <button type="button" @click="showAddAdminForm = false">Annuler</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="box mission-display">
+      <h2>Affichage des Missions de la Flotte</h2>
+      <!-- Contenu pour afficher les missions -->
+    </div>
+
+    <div class="box cargo-list">
+      <h2>Liste des Marchandises</h2>
+      <!-- Contenu pour afficher les marchandises -->
+    </div>
+
+    <div class="box incident-report">
+      <h2>Présentation des Incidents</h2>
+      <!-- Contenu pour afficher les incidents -->
+    </div>
+  </div>
             </div>
         </div>
     </div>
@@ -178,13 +441,18 @@
 import formVehicule from './AjoutPage.vue'
 import forVehicule from './UpdatePage.vue'
 import attrivehicle from './AttribuerPage.vue'
+import formDriver from './AddPage.vue'
+import forDriver from './ModifierPage.vue'
+import axios from 'axios'
 
 export default {
 
     components: {
         formVehicule,
-        forVehicule, 
+        forVehicule,
         attrivehicle,
+        formDriver,
+        forDriver,
     },
     data() {
         return {
@@ -194,25 +462,249 @@ export default {
             upvehicle: false,
             attvehicle: false,
             tableauData: [],
+            tabData: [],
+            addDriver: false,
+            ModDriver: false,
+            showModal: false,       // Contrôle de l'affichage du pop-up
+            vehicles: [],           // Liste des véhicules récupérés depuis l'API
+            drivers: [],            // Liste des chauffeurs récupérés depuis l'API
+            selectedVehicle: null,  // Véhicule sélectionné
+            selectedDriver: null,   // Chauffeur sélectionné
+            startPoint: '',         // Point de départ saisi
+           endPoint: '' , 
+
+isOpportunityFormVisible: false,
+      opportunity: {
+        description: '',
+        address: '',
+        date: '',
+      },
+
+           
+           showForm: false,
+      actionType: '',
+      formTitle: '',
+      formAction: '',
+      form: {
+        nom: '',
+        type: '',
+        date: '',
+        vehicule: ''
+      },
+      maintenances: [], // This will hold the list of maintenances
+      selectedMaintenance: '',
+        showAddAdminForm: false,
+      newAdmin: {
+        email: '',
+        name: '',
+        type: '',
+        password: '',
+        surname: ''
+      },
+      admins: [], // Liste des administrateurs
+      missions: [], // Liste des missions
+      cargos: [], // Liste des marchandises
+      incidents: [], // Liste des incidents
+      selectedAdmin: null, // Administrateur sélectionné pour modification ou suppression
+
+     
 
             vehicle: [
-        { Type: '', 
-        Immatriculation: '',
-         State: '', 
-         Model: '', 
-        Tonnage: '', 
-    },
-         ]
+                {
+                    Type: '',
+                    Immatriculation: '',
+                    State: '',
+                    Model: '',
+                    Tonnage: '',
+                },
+            ]
+
+            
         };
 
 
     },
     methods: {
-        closePage(){
+        closePage() {
             this.addVehicle = false
             this.upvehicle = false
             this.attvehicle = false
+            this.addDriver = false
+            this.ModDriver = false
+
         },
+
+        async fetchData() {
+      try {
+        const [adminsRes, missionsRes, cargosRes, incidentsRes] = await Promise.all([
+          axios.get('/api/admins'),
+          axios.get('/api/missions'),
+          axios.get('/api/cargos'),
+          axios.get('/api/incidents')
+        ]);
+        this.admins = adminsRes.data;
+        this.missions = missionsRes.data;
+        this.cargos = cargosRes.data;
+        this.incidents = incidentsRes.data;
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données:", error);
+      }
+    },
+    async addAdmin() {
+      try {
+        await axios.post('/api/admins', this.newAdmin);
+        this.newAdmin = { email: '', name: '', type: '', password: '', surname: '' };
+        this.showAddAdminForm = false;
+        this.fetchData(); // Recharger les données après ajout
+      } catch (error) {
+        console.error("Erreur lors de l'ajout de l'administrateur:", error);
+      }
+    },
+    async deleteAdmin() {
+      if (this.selectedAdmin) {
+        try {
+          await axios.delete(`/api/admins/${this.selectedAdmin.id}`);
+          this.selectedAdmin = null;
+          this.fetchData(); // Recharger les données après suppression
+        } catch (error) {
+          console.error("Erreur lors de la suppression de l'administrateur:", error);
+        }
+      }
+    },
+    async updateAdmin() {
+      if (this.selectedAdmin) {
+        try {
+          await axios.put(`/api/admins/${this.selectedAdmin.id}`, this.selectedAdmin);
+          this.selectedAdmin = null;
+          this.fetchData(); // Recharger les données après modification
+        } catch (error) {
+          console.error("Erreur lors de la mise à jour de l'administrateur:", error);
+        }
+      }
+    },
+    prepareToDeleteAdmin() {
+      // Préparer la suppression de l'administrateur (par exemple, en affichant un prompt de confirmation)
+    },
+    prepareToEditAdmin() {
+      // Préparer la modification de l'administrateur (par exemple, en affichant un formulaire de modification)
+    },
+    selectAdminForEdit(admin) {
+      this.selectedAdmin = { ...admin };
+      // Afficher le formulaire de modification si nécessaire
+    },
+    selectAdminForDelete(admin) {
+      this.selectedAdmin = admin;
+      // Afficher la confirmation de suppression si nécessaire
+    },
+
+
+        showOpportunityForm() {
+      this.isOpportunityFormVisible = true;
+    },
+    closeOpportunityForm() {
+      this.isOpportunityFormVisible = false;
+    },
+    submitOpportunity() {
+      // Logique pour soumettre l'opportunité
+      console.log('Opportunité soumise :', this.opportunity);
+      this.closeOpportunityForm();
+    },
+
+        showPopup(action) {
+      this.actionType = action;
+      if (action === 'add') {
+        this.formTitle = 'Ajouter Maintenance';
+        this.formAction = 'Ajouter';
+      } else if (action === 'edit') {
+        this.formTitle = 'Modifier Maintenance';
+        this.formAction = 'Modifier';
+      } else if (action === 'delete') {
+        this.formTitle = 'Supprimer Maintenance';
+      }
+      this.showForm = true;
+    },
+    closePopup() {
+      this.showForm = false;
+      this.resetForm();
+    },
+    resetForm() {
+      this.form = {
+        nom: '',
+        type: '',
+        date: '',
+        vehicule: ''
+      };
+      this.selectedMaintenance = null;
+    },
+    handleSubmit() {
+      if (this.actionType === 'add') {
+        console.log('Adding maintenance:', this.form);
+        // Add your logic to add a maintenance
+      } else if (this.actionType === 'edit') {
+        console.log('Editing maintenance:', this.form);
+        // Add your logic to edit a maintenance
+      }
+      this.closePopup();
+    },
+    handleDelete() {
+      if (this.selectedMaintenance) {
+        console.log('Deleting maintenance with ID:', this.selectedMaintenance);
+        // Add your logic to delete a maintenance
+      }
+      this.closePopup();
+    },
+        async fetchVehicles() {
+      try {
+        const response = await fetch('http://localhost:3000/api/vehicles');
+        this.vehicles = await response.json();
+      } catch (error) {
+        console.error('Erreur lors de la récupération des véhicules :', error);
+      }
+    },
+
+    async fetchDrivers() {
+      try {
+        const response = await fetch('http://localhost:3000/api/drivers');
+        this.drivers = await response.json();
+      } catch (error) {
+        console.error('Erreur lors de la récupération des chauffeurs :', error);
+      }
+    },
+
+    
+    async planRoute() {
+      try {
+        const response = await fetch('http://localhost:3000/api/plan-route', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            vehicle_id: this.selectedVehicle,
+            driver_id: this.selectedDriver,
+            start_point: this.startPoint,
+            end_point: this.endPoint
+          })
+
+        });
+
+        if (response.ok) {
+          alert('Itinéraire planifié avec succès !');
+          this.closeModal(); // Fermer le pop-up après la soumission
+        } else {
+          alert('Erreur lors de la planification.');
+        }
+      } catch (error) {
+        console.error('Erreur lors de la planification :', error);
+      }
+
+    },
+
+    // Méthode pour fermer le formulaire pop-up
+    closeModal() {
+      this.showModal = false;
+    },
+
         selectButton(button) {
             this.selectedButton = button;
         },
@@ -225,34 +717,50 @@ export default {
         redirectToUpdatePage() {
             this.upvehicle = true;
         },
+        redirectToAddPage() {
+            this.addDriver = true;
+        },
+        redirectToModifierPage() {
+            this.ModDriver = true;
+        },
         redirectToSupprimerPage() {
-          
-        
         },
         redirectToAttribuerPage() {
             this.attvehicle = true;
         }
     },
     trierTableau(colonne) {
-      const ordre = this.sortedOrder === 'asc' ? 'desc' : 'asc';
-      this.sortedOrder = ordre;
+        const ordre = this.sortedOrder === 'asc' ? 'desc' : 'asc';
+        this.sortedOrder = ordre;
 
-      this.tableauData.sort((a, b) => {
-        const valA = Object.values(a)[colonne];
-        const valB = Object.values(b)[colonne];
+        this.tableauData.sort((a, b) => {
+            const valA = Object.values(a)[colonne];
+            const valB = Object.values(b)[colonne];
 
-        if (ordre === 'asc') {
-          return valA.toString().localeCompare(valB.toString(), undefined, { numeric: true });
-        } else {
-          return valB.toString().localeCompare(valA.toString(), undefined, { numeric: true });
-        }
-      });
-    }
+            if (ordre === 'asc') {
+                return valA.toString().localeCompare(valB.toString(), undefined, { numeric: true });
+            } else {
+                return valB.toString().localeCompare(valA.toString(), undefined, { numeric: true });
+            }
+        });
+    },
+
+    mounted() {
+    this.fetchVehicles();
+    this.fetchDrivers();
+    this.fetchData(); 
+
+    this.maintenances = [
+      { id: '', nom: '', type: '', date: '', vehicule: '' },
+      
+    ];
+  }
 };
 </script>
 
 <style scoped>
 @import url(https://fonts.googleapis.com/css2?family=Monda:wght@100;200;300;400;500;600;700&display=swap);
+
 table {
     border-collapse: collapse;
     margin-top: 30px;
@@ -269,29 +777,34 @@ table tr:last-child td {
 }
 
 table th {
-    background-color: #0B9777;
+    background-color: green;
     padding: 10px;
     color: white;
 }
 
 
-.ajouterVehicle{
+.ajouter {
     background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
     width: 100%;
+    height: 100%;
+  
 }
 
 
-.attribuervehicule{
+.attribuer {
     background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
     width: 100%;
+    height: 100%;
+    
 }
 
-.Modifiervehicle{
+.Modifier {
     background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
     width: 100%;
+    height: 100%;
 }
 
 .selected {
@@ -410,7 +923,7 @@ body {
 }
 
 .contain1 {
-    border-radius:10px;
+    border-radius: 10px;
     margin-top: 15px;
     width: 24.5%;
     display: flex;
@@ -432,7 +945,7 @@ body {
 }
 
 .contain2 {
-    border-radius:10px;
+    border-radius: 10px;
     margin-top: 15px;
     width: 24.5%;
     display: flex;
@@ -452,8 +965,9 @@ body {
     font-size: 20px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 .contain3 {
-    border-radius:10px;
+    border-radius: 10px;
     margin-top: 15px;
     width: 24.5%;
     display: flex;
@@ -462,6 +976,74 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
 }
 
+
+button {
+  padding: 10px 20px;
+  background-color: #092c52;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #07314b;
+}
+
+/* Styles pour le pop-up (modal) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #092c52;
+  margin-bottom: 1em;
+}
+
+.form-group {
+  margin-bottom: 1.5em;
+  width: 40rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+ 
+}
+.ittinéraire button{
+   position: relative;
+   margin-top: 55%;
+   margin-left: 80%;
+}
+input,
+select {
+  width: 30rem;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
 .contain3 img {
     width: 30%;
     height: 120px;
@@ -475,7 +1057,7 @@ body {
 }
 
 .contain4 {
-    border-radius:10px;
+    border-radius: 10px;
     margin-top: 15px;
     width: 24.5%;
     display: flex;
@@ -495,11 +1077,13 @@ body {
     font-size: 20px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 .containes1 {
     position: absolute;
     margin-top: 12%;
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    
 }
 
 .contais1 {
@@ -513,7 +1097,7 @@ body {
 .contais1 h1 {
     position: relative;
     left: 4%;
-    color: #5e96d2;
+    color: green;
     margin: 10%
 }
 
@@ -544,7 +1128,7 @@ body {
 .contais2 h1 {
     position: relative;
     left: 4%;
-    color: #5e96d2;
+    color: green;
     margin: 10%
 }
 
@@ -576,7 +1160,7 @@ body {
 .contais3 h1 {
     position: relative;
     left: 4%;
-    color: #5e96d2;
+    color: green;
     margin: 10%
 }
 
@@ -601,84 +1185,340 @@ body {
 .tainer3 {
     display: flex;
     justify-content: space-between;
-    
-
+    width: 100%;
+    margin: auto;
+    border-radius: 10px; 
 }
-
-.taine1 button {
-    font-size: 1.4rem;
-    color: white;
-    height: 4rem;
-    width: 13rem;
+.trainContain{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+.taine button {
+    font-size: 1.2rem;
+    position: relative;
+    top: 10%;
+    height: 3rem;
+    background-color: transparent;
+    width: 9rem;
+    font-weight: bold;
     border-radius: 5px;
-    background-color: rgb(9, 119, 125);
-    border: none;
-    margin: 10%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
-}
-    
-
-.taine2 button {
-    font-size: 1.4rem;
-    height: 4rem;
-    width: 13rem;
     color: white;
-    border-radius: 5px;
-    background-color: rgb(9, 119, 125);
-    border: none;
-    margin: 10%;
+background-color: rgb(5, 5, 69);
+    border: radius;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
-
-
-.taine3 button {
-    font-size: 1.4rem;
-    height: 4rem;
+.taine button:hover {
+    cursor: pointer;
+    /* border:1px solid rgb(9, 119, 100); */
     color: white;
-    width: 13rem;
-    border-radius: 5px; 
-    background-color: rgb(9, 119, 125);;
-    border: none;
-    margin: 10%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
 
-.taine4 button {
+table {
+    width: 100%;
+    border-collapse: collapse;
     font-size: 1.4rem;
-    height: 4rem;
-    color: white;
-    width: 13rem;
-    border-radius: 5px;
-    background-color: rgb(9, 119, 125);
-    border: none;
-    margin: 10%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    margin-top: 20%;
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    cursor: pointer;
+    background-color: #f2f2f2;
+}
+
+th:hover {
+    background-color: #ddd;
+}
+
+.sorted-asc::after {
+    content: " ▲";
+}
+
+.sorted-desc::after {
+    content: " ▼";
+}
+
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container {
+  flex: 1;
+  padding: 20px;
+  
+  color: white;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 1.4rem;
-  margin-top: 20%;
-
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 th, td {
+  border: 1px solid #ffffff; /* White border for contrast */
   padding: 10px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-th {
-  cursor: pointer;
-  background-color: #f2f2f2;
-}
-th:hover {
-  background-color: #ddd;
-}
-.sorted-asc::after {
-  content: " ▲";
-}
-.sorted-desc::after {
-  content: " ▼";
 }
 
+.buttons-container {
+  padding: 10px;
+  text-align: center;
+position: relative;
+bottom: 90%;
+left: 33rem;
+
+}
+
+button {
+    font-size: 1.2rem;
+margin: 1%;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;;
+}
+
+button:hover {
+  color: white; /* Darker green on hover */
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 40rem;
+  height: 28rem;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#appi {
+  font-size: 1.4rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+  padding: 20px;
+  font-weight: bold;
+}
+
+header h1 {
+  color: #092c52;
+}
+
+.services-overview {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.service-box {
+  background-color: #f4f4f4;
+  padding: 15px;
+  border-radius: 8px;
+  width: 30%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.opportunity-section {
+  background-color: #e8f0fe;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.opportunity-section button {
+  background-color: #092c52;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+.opportunity-section button:hover {
+  background-color: #064080;
+}
+
+.popup-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width:  450PX;
+  width: 33rem;
+  height: 35rem;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form input, form textarea {
+  width: 28rem;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  background-color: #092c52;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+form button[type="button"] {
+  background-color: #e0e0e0;
+  color: #333;
+  margin-left: 10px;
+}
+
+form button:hover {
+  background-color: #064080;
+}
+
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.box {
+  width: 80%;
+  max-width: 1200px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.admin-management {
+  background-color: white;
+}
+
+.mission-display, .cargo-list, .incident-report {
+  background-color: #e0f7fa; /* Bleu clair */
+}
+
+.add-button {
+  background-color: #4CAF50; /* Vert */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #45a049;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-contents {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 30rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popup form label {
+  text-align: left;
+}
+
+.popup form input {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.delete-icon {
+  color: green;
+}
+
+.edit-icon {
+  color: green;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
 </style>

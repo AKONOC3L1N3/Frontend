@@ -1,11 +1,11 @@
 <template>
-    <div class="container">
-        <div class="form-container">
+    <div class="contain">
+        <div class="form-contain">
             <h2>Se connecter</h2>
             <form @submit.prevent="login">
                 <div class="input_field">
                     <label for="email">Email :</label>
-                    <input type="password" id="password" v-model="email" required>
+                    <input type="email" id="email" v-model="email" required>
                 </div>
                 <div class="input_field">
                     <label for="password">Mot de passe :</label>
@@ -70,7 +70,7 @@ export default {
 
 
 <style scoped>
-.container {
+.contain {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,7 +79,7 @@ export default {
     margin: 0;
 }
 
-.form-container {
+.form-contain {
     padding: 15px;
     max-width: 500px;
     width: 100%;
