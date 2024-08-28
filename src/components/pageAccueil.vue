@@ -145,7 +145,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="vehicle in vehicles" :key="vehicle.id">
+                          <tr v-for="vehicle in vehicles" :key="vehicle.vehicleId">
                               <td>{{ vehicle.name }}</td>
                                 <td>{{ vehicle.type }}</td>
                                 <td>{{ vehicle.tonnage }}</td>
@@ -583,24 +583,17 @@ isOpportunityFormVisible: false,
 
 
 
-    async deleteVehicle(vehicle) {
+    async deleteVehicle(vehicleId) {
       try {
-        // Envoie une requête DELETE pour supprimer le véhicule avec l'ID spécifié
-        await axios.delete(`http://localhost:3001/vehicles/${vehicle.id}`);
-
-        // Met à jour le tableau de véhicules en filtrant le véhicule supprimé
-        this.vehicles = this.vehicles.filter(v => v.id !== vehicle.id);
-        
-        // Affiche un message de succès
-        this.successMessage = 'Suppression réussie !';
-        alert('Véhicule supprimé avec succès');
+        await axios.delete(`http://localhost:3001/vehicles/${vehicleId}`);
+        this.vehicles = this.vehicles.filter(vehicle => vehicle.vehicleId !== vehicleId);
+        this.successMessage = 'Véhicule supprimé avec succès !';
+        alert(this.successMessage);
       } catch (error) {
-        // Affiche un message d'erreur si la suppression échoue
-        this.errorMessage = 'Échec de la suppression : ' + (error.response?.data?.message || error.message);
-        alert('Échec lors de la suppression');
+        this.errorMessage = 'Échec lors de la suppression : ' + (error.response?.data?.message || error.message);
+        alert(this.errorMessage);
       }
     },
-
 
     async updateAdmin() {
       if (this.selectedAdmin) {
