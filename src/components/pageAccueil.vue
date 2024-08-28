@@ -125,9 +125,7 @@
                     <div class="taine">
                         <button @click="redirectToUpdatePage">MODIFIER</button>
                     </div>
-                    <div class="taine">
-                        <button @click="redirectToSupprimerPage">SUPPRIMER</button>
-                    </div>
+                   
                     <div class="taine">
                         <button @click="redirectToAttribuerPage">ATTRIBUER</button>
                     </div>
@@ -138,20 +136,30 @@
                     <table>
                         <thead>
                             <tr>
-                                <th @click="trierTableau(0)">TYPE</th>
-                                <th @click="trierTableau(1)">TONNAGE</th>
-                                <th @click="trierTableau(2)">MODEL</th>
-                                <th @click="trierTableau(3)">MARQUE</th>
+                              <th @click="trierTableau(0)">NOM</th>
+                                <th @click="trierTableau(1)">TYPE</th>
+                                <th @click="trierTableau(2)">TONNAGE</th>
+                                <th @click="trierTableau(3)">MODEL</th>
                                 <th @click="trierTableau(4)">ETAT</th>
+                                <th @click="trierTableau(5)">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(item, index) in tableauData" :key="index">
-                                <td>{{ item.type }}</td>
-                                <td>{{ item.tonnage }}</td>
-                                <td>{{ item.model }}</td>
-                                <td>{{ item.marque }}</td>
-                                <td>{{ item.etat }}</td>
+                            <tr v-for="vehicle in vehicles" :key="vehicle.id">
+                              <td>{{ vehicle.name }}</td>
+                                <td>{{ vehicle.type }}</td>
+                                <td>{{ vehicle.tonnage }}</td>
+                                <td>{{ vehicle.model }}</td>
+                                <!-- <td>{{ vehicle.marque }}</td> -->
+                                <td>{{ vehicle.state }}</td>
+                                <td>
+            <img 
+              src="@/assets/delete-icon.png" 
+              alt="Delete" 
+              @click="deleteVehicle(vehicle.id, vehicles)" 
+              style="cursor: pointer;"  class="icone"
+            />
+          </td>
                             </tr>
                         </tbody>
                     </table>
@@ -188,19 +196,17 @@
                         <thead>
                             <tr>
                                  <th @click="trierTableau(0)">DrivingLicense</th>
-                                <th @click="trierTableau(1)">ImmatriculationNumber</th>
                                 <th @click="trierTableau(2)">DateOfBirth</th>
                                 <th @click="trierTableau(3)">Vehicle</th>
                                 <th @click="trierTableau(4)">Mission</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(item, index) in tabData" :key="index">
-                                <td>{{ item.DrivingLicense}}</td>
-                                <td>{{ item.ImmatriculationNumber}}</td>
-                                <td>{{ item.DateOfBirth}}</td>
-                                <td>{{ item.Vehicle}}</td>
-                                <td>{{ item.Mission }}</td>
+                            <tr v-for=" DriverProfils in DriverProfil" :key="DriverProfils">
+                                <td>{{ DriverProfils.DrivingLicense}}</td>
+                                <td>{{ DriverProfils.DateOfBirth}}</td>
+                                <td>{{ DriverProfils.Vehicle}}</td>
+                                <td>{{ DriverProfils.Mission }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -461,17 +467,20 @@ export default {
             selectedButton: 'button4',
             upvehicle: false,
             attvehicle: false,
-            tableauData: [],
-            tabData: [],
+            DriverProfil: [],
+            tableauData:[],
+            tabData:[],
             addDriver: false,
             ModDriver: false,
             showModal: false,       // Contrôle de l'affichage du pop-up
             vehicles: [],           // Liste des véhicules récupérés depuis l'API
-            drivers: [],            // Liste des chauffeurs récupérés depuis l'API
             selectedVehicle: null,  // Véhicule sélectionné
             selectedDriver: null,   // Chauffeur sélectionné
             startPoint: '',         // Point de départ saisi
            endPoint: '' , 
+
+           successMessage: '',
+            errorMessage: '',
 
 isOpportunityFormVisible: false,
       opportunity: {
@@ -509,15 +518,15 @@ isOpportunityFormVisible: false,
 
      
 
-            vehicle: [
-                {
-                    Type: '',
-                    Immatriculation: '',
-                    State: '',
-                    Model: '',
-                    Tonnage: '',
-                },
-            ]
+            // vehicles: [
+            //     {
+                    // Type: '',
+                    // Immatriculation: '',
+                    // State: '',
+                    // Model: '',
+                    // Tonnage: '',
+            //     },
+            // ]
 
             
         };
@@ -571,6 +580,28 @@ isOpportunityFormVisible: false,
         }
       }
     },
+
+
+
+    async deleteVehicle(vehicle) {
+      try {
+        // Envoie une requête DELETE pour supprimer le véhicule avec l'ID spécifié
+        await axios.delete(`http://localhost:3001/vehicles/${vehicle.id}`);
+
+        // Met à jour le tableau de véhicules en filtrant le véhicule supprimé
+        this.vehicles = this.vehicles.filter(v => v.id !== vehicle.id);
+        
+        // Affiche un message de succès
+        this.successMessage = 'Suppression réussie !';
+        alert('Véhicule supprimé avec succès');
+      } catch (error) {
+        // Affiche un message d'erreur si la suppression échoue
+        this.errorMessage = 'Échec de la suppression : ' + (error.response?.data?.message || error.message);
+        alert('Échec lors de la suppression');
+      }
+    },
+
+
     async updateAdmin() {
       if (this.selectedAdmin) {
         try {
@@ -582,6 +613,11 @@ isOpportunityFormVisible: false,
         }
       }
     },
+
+
+
+    
+    
     prepareToDeleteAdmin() {
       // Préparer la suppression de l'administrateur (par exemple, en affichant un prompt de confirmation)
     },
@@ -654,23 +690,39 @@ isOpportunityFormVisible: false,
       this.closePopup();
     },
         async fetchVehicles() {
-      try {
-        const response = await fetch('http://localhost:3000/api/vehicles');
-        this.vehicles = await response.json();
-      } catch (error) {
-        console.error('Erreur lors de la récupération des véhicules :', error);
-      }
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`http://localhost:3001/vehicles`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                this.vehicles = response.data;
+                console.log("Voici la liste des vehicles");
+                console.log(this.vehicles);
+            } catch (error) {
+                this.errorMessage = 'Erreur lors de la récupération des véhicules : ' + (error.response ? error.response.data.message : error.message);
+            }
     },
 
-    async fetchDrivers() {
-      try {
-        const response = await fetch('http://localhost:3000/api/drivers');
-        this.drivers = await response.json();
-      } catch (error) {
-        console.error('Erreur lors de la récupération des chauffeurs :', error);
-      }
+    async fetchDriverProfil() {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`http://localhost:3001/driverprofil`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                this.DriverProfil = response.data;
+                console.log("Voici la liste des chauffeurs");
+                console.log(this.DriverProfil);
+            } catch (error) {
+                this.errorMessage = 'Erreur lors de la récupération des chauffeurs : ' + (error.response ? error.response.data.message : error.message);
+            }
     },
 
+    
+    
     
     async planRoute() {
       try {
@@ -746,14 +798,17 @@ isOpportunityFormVisible: false,
     },
 
     mounted() {
+      
     this.fetchVehicles();
-    this.fetchDrivers();
+  
     this.fetchData(); 
+    this.fetchDriverProfil();
 
     this.maintenances = [
       { id: '', nom: '', type: '', date: '', vehicule: '' },
       
     ];
+
   }
 };
 </script>
@@ -1520,5 +1575,10 @@ form button:hover {
   display: flex;
   justify-content: center;
   gap: 10px;
+}
+.icone{
+  height: 2rem;
+  width: 2rem;
+  
 }
 </style>

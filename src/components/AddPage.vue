@@ -1,49 +1,33 @@
 
 
 <template>
-    <div class="container">
-    <div class="form-container">
+    <div class="contain">
+    <div class="form-contain">
       <h2 class="form-title">Ajouter un chauffeur</h2>
       <form @submit.prevent="submitForm">
-        <div class="form-group">
-          <label for="name">Nom</label>
-          <input type="text" id="name" v-model="name" required />
-        </div>
-        <div class="form-group">
-          <label for="surname">Prenom</label>
-          <input type="text" id="Surname" v-model="surname" required />
-        </div>
-        <div class="form-group">
-          <label for="type">DrivingLicense</label>
+       
+        <div class="form-grou">
+          <label for="DrivingLicense">DrivingLicense</label>
           <input type="text" id="DrivingLicense" v-model="DrivingLicense" required />
         </div>
   
-        <div class="form-group">
-          <label for="immatriculation">ImmatriculationNumber</label>
-          <input type="text" id="immatriculationNumber" v-model="ImmatriculationNumber" required />
-        </div>
   
-        <div class="form-group">
-          <label for="DateOfBirth">DateOfBirth</label>
+        <div class="form-grou">
+          <label for="DateOfBirth">Date de naissance</label>
           <input type="date" id="DateOfBirth" v-model="DateOfBirth" required />
         </div>
   
-        <div class="form-group">
-          <label for="model">DrivingLicenseRestoUrl</label>
+        <div class="form-grou">
+          <label for="DrivingLicenseRestoUrl">DrivingLicenseRecto</label>
           <input type="text" id="DrivingLicenseRestoUrl" v-model="DrivingLicenseRestoUrl" required />
         </div>
   
-        <div class="form-group">
-          <label for="DrivingLicenseRectoUrl">DrivingLicenseRectoUrl</label>
-          <input type="text" id="DrivingLicenseRectoUrl" v-model="DrivingLicenseRectoUrl" required />
+        <div class="form-grou">
+          <label for="DrivingLicenseVersoUrl">DrivingLicenseVerso</label>
+          <input type="text" id="DrivingLicenseVersoUrl" v-model="DrivingLicenseVersoUrl" required />
         </div>
   
-        <div class="form-group">
-          <label for="createAt">Date </label>
-          <input type="date" id="createAt" v-model="createAt" required />
-        </div>
-  
-        <button type="submit" class="submit-button">Ajouter</button>
+        <button @click="createAccount"   class="submit-button">Ajouter</button>
       </form>
     </div>
     </div>
@@ -51,66 +35,65 @@
   </template>
   
   <script>
+  import axios from 'axios';
+  
   export default {
-    data() {
-      return {
-        formData: {
-            Name: '',
-            surname:'',
-          DrivingLicense: '',
-          immatriculationNumber: '',
-          DateOfBirth: '',
-          DrivingLicenseRectoUrl: '',
-          DrivingLicenseVersoUrl: '',
-          createAt: '',
-        },
-      };
-    },
-    methods: {
-      submitForm() {
-        
-        fetch('https://votre-api-endpoint.com/ajouter', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(this.formData),
-        })
-          .then(response => response.json())
-          .then(data => {
-            console.log('Success:', data);
-    
-            this.formData = {
-                Name: '',
-                surname:'',
+      data() {
+          return {
               DrivingLicense: '',
-          immatriculationNumber: '',
-          DateOfBirth: '',
-          DrivingLicenseRectoUrl: '',
-          DrivingLicenseVersoUrl: '',
-          createAt: '',
-            };
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
+              DateOfBirth: '',
+              DrivingLicenseRectoUrl: '',
+             DrivingLicenseVersoUrl: '',
+              successMessage: '',
+              errorMessage: ''
+          };
       },
-    },
+      methods: {
+          async createAccount() {
+              try {
+                  await axios.post('http://localhost:3001/driverprofil', {
+                      DrivingLicense: this. DrivingLicense,
+                      DateOfBirth:  new Date(this.DateOfBirth),
+                      DrivingLicenseRectoUrl: this.DrivingLicenseRectoUrl,
+                     DrivingLicenseVersoUrl: this.DrivingLicenseVersoUrl,
+                    
+                  });
+                  this.successMessage = 'ajout réussie !';
+                  alert('chauffeur ajouté avec succès');
+                  this.resetForm();
+              } catch (error) {
+                  this.errorMessage = 'Échec de l\'ajout : ' + error.response.data.message;
+                  alert('Echec lors de l\'ajout')
+              }
+          },
+          
+          resetForm() {
+              this.DrivingLicense = '',
+              this.DateOfBirth = '';
+              this.DrivingLicenseRectoUrl = '';
+              this.DrivingLicenseVersoUrl = '';
+              this.successMessage = '';
+              this.errorMessage = '';
+          }
+      }
   };
   </script>
   
   <style scoped>
-  .container{
+  .contain{
     height: 100vh;
   }
-  .form-container {
+  .form-contain {
     width: 35%;
     margin: 0 auto;
     padding: 15px;
-    height: 80vh;
+    height: 62vh;
     background-color:white;
     margin-top: 35px;
     border-radius: 10px;
+    position: relative;
+    top: 50px;
+
   }
   
   .form-title {
@@ -119,7 +102,7 @@
     color: black;
   }
   
-  .form-group {
+  .form-grou {
     margin-bottom: 10px;
   }
   
