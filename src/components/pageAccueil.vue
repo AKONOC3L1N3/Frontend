@@ -199,6 +199,7 @@
                                 <th @click="trierTableau(2)">DateOfBirth</th>
                                 <th @click="trierTableau(3)">Vehicle</th>
                                 <th @click="trierTableau(4)">Mission</th>
+                                <th @click="trierTableau(5)">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -207,6 +208,14 @@
                                 <td>{{ DriverProfils.DateOfBirth}}</td>
                                 <td>{{ DriverProfils.Vehicle}}</td>
                                 <td>{{ DriverProfils.Mission }}</td>
+                                <td>
+                                <img 
+              src="@/assets/delete-icon.png" 
+              alt="Delete" 
+             @click="deleteDriver(driver.UserId)" 
+              style="cursor: pointer;"  class="icone"
+            />
+          </td>
                             </tr>
                         </tbody>
                     </table>
@@ -582,6 +591,18 @@ isOpportunityFormVisible: false,
     },
 
 
+    async deleteDriver(UserId) {
+  try {
+    await axios.delete(`http://localhost:3001/driverprofil/${UserId}`);
+    this.drivers = this.drivers.filter(driver => driver.UserId !== UserId);
+    this.successMessage = 'Chauffeur supprimé avec succès !';
+    alert(this.successMessage);
+  } catch (error) {
+    this.errorMessage = 'Échec lors de la suppression : ' + (error.response?.data?.message || error.message);
+    alert(this.errorMessage);
+  }
+},
+
 
     async deleteVehicle(vehicleId) {
       try {
@@ -595,6 +616,8 @@ isOpportunityFormVisible: false,
       }
     },
 
+
+   
     async updateAdmin() {
       if (this.selectedAdmin) {
         try {
