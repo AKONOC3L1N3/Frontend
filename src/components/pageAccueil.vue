@@ -176,7 +176,7 @@
                     </div>
         
                 <div class="tainer3">
-                    <div></div>
+                    
                    <div class="trainContain">
                     <div class="taine">
                         <button @click="redirectToAddPage">AJOUTER</button>
@@ -192,34 +192,34 @@
                     
                 </div>
                 <div class="tainer2">
-                    <table>
-                        <thead>
-                            <tr>
-                                 <th @click="trierTableau(0)">DrivingLicense</th>
-                                <th @click="trierTableau(2)">DateOfBirth</th>
-                                <th @click="trierTableau(3)">Vehicle</th>
-                                <th @click="trierTableau(4)">Mission</th>
-                                <th @click="trierTableau(5)">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for=" DriverProfils in DriverProfil" :key="DriverProfils">
-                                <td>{{ DriverProfils.DrivingLicense}}</td>
-                                <td>{{ DriverProfils.DateOfBirth}}</td>
-                                <td>{{ DriverProfils.Vehicle}}</td>
-                                <td>{{ DriverProfils.Mission }}</td>
-                                <td>
-                                <img 
+                  <table>
+      <thead>
+        <tr>
+          <th @click="trierTableau(0)">Driving License</th>
+          <th @click="trierTableau(2)">Date of Birth</th>
+          <th @click="trierTableau(3)">Vehicle</th>
+          <th @click="trierTableau(4)">Mission</th>
+          <th @click="trierTableau(5)">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="DriverProfils in DriverProfil" :key="DriverProfils.id">
+          <td>{{ DriverProfils.DrivingLicense }}</td>
+          <td>{{ new Date(DriverProfils.DateOfBirth).toLocaleDateString() }}</td>
+          <td>{{ DriverProfils.vehicles }}</td>
+          <td>{{ DriverProfils.Mission }}</td>
+          <td>
+            <img 
               src="@/assets/delete-icon.png" 
               alt="Delete" 
-             @click="deleteDriver(driver.UserId)" 
-              style="cursor: pointer;"  class="icone"
+              @click="deleteDriver(DriverProfils.id)" 
+              style="cursor: pointer;"  
+              class="icone"
             />
           </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        </tr>
+      </tbody>
+    </table>                </div>
             </div>
             <div class="in_container" v-if="currentPage === 'services'">
                
@@ -591,31 +591,45 @@ isOpportunityFormVisible: false,
     },
 
 
-    async deleteDriver(UserId) {
-  try {
-    await axios.delete(`http://localhost:3001/driverprofil/${UserId}`);
-    this.drivers = this.drivers.filter(driver => driver.UserId !== UserId);
-    this.successMessage = 'Chauffeur supprimé avec succès !';
-    alert(this.successMessage);
-  } catch (error) {
-    this.errorMessage = 'Échec lors de la suppression : ' + (error.response?.data?.message || error.message);
-    alert(this.errorMessage);
-  }
-},
-
-
-    async deleteVehicle(vehicleId) {
-      try {
-        await axios.delete(`http://localhost:3001/vehicles/${vehicleId}`);
-        this.vehicles = this.vehicles.filter(vehicle => vehicle.vehicleId !== vehicleId);
-        this.successMessage = 'Véhicule supprimé avec succès !';
-        alert(this.successMessage);
-      } catch (error) {
-        this.errorMessage = 'Échec lors de la suppression : ' + (error.response?.data?.message || error.message);
-        alert(this.errorMessage);
+    async deleteDriver(id) {
+      if (confirm("Êtes-vous sûr de vouloir supprimer ce chauffeur?")) {
+        try {
+          const response = await fetch(`http://localhost:3001/driverprofil/${id}`, {
+            method: "DELETE",
+          });
+          if (response.ok) {
+            // Filtrer le chauffeur supprimé de la liste
+            this.DriverProfil = this.DriverProfil.filter(driver => driver.id !== id);
+            alert("Le chauffeur a été supprimé avec succès.");
+          } else {
+            alert("Une erreur s'est produite lors de la suppression du chauffeur.");
+          }
+        } catch (error) {
+          console.error("Erreur lors de la suppression du chauffeur :", error);
+        }
       }
     },
 
+    async deleteVehicle(vehicleId) {
+  // Demander confirmation avant de supprimer le véhicule
+  if (confirm("Êtes-vous sûr de vouloir supprimer ce véhicule?")) {
+    try {
+      // Envoie la requête de suppression au backend
+      await axios.delete(`http://localhost:3001/vehicles/${vehicleId}`);
+      
+      // Met à jour la liste des véhicules après suppression
+      this.vehicles = this.vehicles.filter(vehicle => vehicle.vehicleId !== vehicleId);
+      
+      // Affiche un message de succès
+      this.successMessage = 'Véhicule supprimé avec succès !';
+      alert(this.successMessage);
+    } catch (error) {
+      // Affiche un message d'erreur en cas d'échec
+      this.errorMessage = 'Échec lors de la suppression : ' + (error.response?.data?.message || error.message);
+      alert(this.errorMessage);
+    }
+  }
+},
 
    
     async updateAdmin() {
