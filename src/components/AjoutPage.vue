@@ -73,6 +73,7 @@
                   });
                   this.successMessage = 'ajout réussie !';
                   alert('véhicule ajouté avec succès');
+                  window.location.reload();
                   this.resetForm();
               } catch (error) {
                   this.errorMessage = 'Échec de l\'ajout : ' + error.response.data.message;

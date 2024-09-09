@@ -5,6 +5,18 @@
     <div class="form-contain">
       <h2 class="form-title">Ajouter un chauffeur</h2>
       <form @submit.prevent="submitForm">
+        <div class="form-grou">
+          <label for="name">Nom</label>
+          <input type="text" id="name" v-model="name" required />
+        </div>
+        <div class="form-grou">
+          <label for="email">E-mail</label>
+          <input type="mail" id="email" v-model="email" required />
+        </div>
+        <div class="form-grou">
+          <label for="password">password</label>
+          <input type="text" id="password" v-model="password" required />
+        </div>
        
         <div class="form-grou">
           <label for="DrivingLicense">DrivingLicense</label>
@@ -44,6 +56,9 @@
               DateOfBirth: '',
               DrivingLicenseRectoUrl: '',
              DrivingLicenseVersoUrl: '',
+             name:'',
+             email:'',
+             password:'',
               successMessage: '',
               errorMessage: ''
           };
@@ -52,6 +67,9 @@
           async createAccount() {
               try {
                   await axios.post('http://localhost:3001/driverprofil', {
+                    name: this. name,
+                    email: this. email,
+                    password: this. password,
                       DrivingLicense: this. DrivingLicense,
                       DateOfBirth:  new Date(this.DateOfBirth),
                       DrivingLicenseRectoUrl: this.DrivingLicenseRectoUrl,
@@ -60,6 +78,7 @@
                   });
                   this.successMessage = 'ajout réussie !';
                   alert('chauffeur ajouté avec succès');
+                  window.location.reload();
                   this.resetForm();
               } catch (error) {
                   this.errorMessage = 'Échec de l\'ajout : ' + error.response.data.message;
@@ -68,6 +87,9 @@
           },
           
           resetForm() {
+            this.name = '',
+            this.email = '',
+            this.password = '',
               this.DrivingLicense = '',
               this.DateOfBirth = '';
               this.DrivingLicenseRectoUrl = '';

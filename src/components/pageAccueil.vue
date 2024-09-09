@@ -117,14 +117,12 @@
                         <attrivehicle />
                     </div>
                 <div class="tainer3">
-                    <div></div>
+                    
                    <div class="trainContain">
                     <div class="taine">
                         <button @click="redirectToAjoutPage">AJOUTER</button>
                     </div>
-                    <div class="taine">
-                        <button @click="redirectToUpdatePage">MODIFIER</button>
-                    </div>
+                  
                    
                     <div class="taine">
                         <button @click="redirectToAttribuerPage">ATTRIBUER</button>
@@ -158,6 +156,13 @@
               alt="Delete" 
               @click="deleteVehicle(vehicle.id, vehicles)" 
               style="cursor: pointer;"  class="icone"
+
+            />
+            <img 
+              src="@/assets/edit-icon.png" 
+              alt="edit" 
+              @click="editVehicle(vehicle.id, vehicles)" 
+              style="cursor: pointer;"  class="icone"
             />
           </td>
                             </tr>
@@ -181,9 +186,7 @@
                     <div class="taine">
                         <button @click="redirectToAddPage">AJOUTER</button>
                     </div>
-                    <div class="taine">
-                        <button @click="redirectToModifierPage">MODIFIER</button>
-                    </div>
+                    
                     <div class="taine">
                         <button @click="redirectToDeletePage">SUPPRIMER</button>
                     </div>
@@ -196,18 +199,20 @@
       <thead>
         <tr>
           <th @click="trierTableau(0)">Driving License</th>
-          <th @click="trierTableau(2)">Date of Birth</th>
-          <th @click="trierTableau(3)">Vehicle</th>
-          <th @click="trierTableau(4)">Mission</th>
+          <th @click="trierTableau(1)">Nom</th>
+          <th @click="trierTableau(2)">Email</th>
+          <th @click="trierTableau(3)">Date de naissance</th>
+          <th @click="trierTableau(4)">Vehicule</th>
           <th @click="trierTableau(5)">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="DriverProfils in DriverProfil" :key="DriverProfils.id">
           <td>{{ DriverProfils.DrivingLicense }}</td>
+          <td>{{ DriverProfils.name }}</td>
+          <td>{{ DriverProfils.email }}</td>
           <td>{{ new Date(DriverProfils.DateOfBirth).toLocaleDateString() }}</td>
-          <td>{{ DriverProfils.vehicles }}</td>
-          <td>{{ DriverProfils.Mission }}</td>
+          <td>{{ DriverProfils.vehicleId }}</td>
           <td>
             <img 
               src="@/assets/delete-icon.png" 
@@ -216,10 +221,18 @@
               style="cursor: pointer;"  
               class="icone"
             />
+            <img 
+              src="@/assets/edit-icon.png" 
+              alt="edit" 
+              @click="openEditModal(DriverProfils)" 
+              style="cursor: pointer;"  
+              class="icone"
+            />
           </td>
         </tr>
       </tbody>
-    </table>                </div>
+    </table>                
+  </div>
             </div>
             <div class="in_container" v-if="currentPage === 'services'">
                
@@ -1277,7 +1290,9 @@ select {
 .trainContain{
     width: 60%;
     display: flex;
-    justify-content: space-between;
+    
+   position: relative;
+   left: 1200px;
 }
 .taine button {
     font-size: 1.2rem;

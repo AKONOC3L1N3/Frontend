@@ -6,6 +6,7 @@ import pageAccueil from './components/pageAccueil.vue'
 import Connexion from './components/ConnexionPage.vue'
 import AjoutPage from './components/AjoutPage.vue'
 import UpdatePage from './components/UpdatePage.vue'
+import MapContainer from './components/MapContainer.vue';
 
 import AttribuerPage from './components/AttribuerPage.vue'
 import AddPage from './components/AddPage.vue'
@@ -14,6 +15,9 @@ import ModifierPage from './components/ModifierPage.vue'
 const routes =[
     {
         path: '/inscription', component: inscription
+    },
+    {
+        path: '/MapContainer', component: MapContainer
     },
     {
         path: '/ModifierPage', component: ModifierPage
@@ -54,7 +58,7 @@ app.mount('#app');
 
 
 
-const loader = document.querySelector('.loader');
-window.addEventListener('loader', () =>{
-    loader.classList.add('hover');
-})
+// const loader = document.querySelector('.loader');
+// window.addEventListener('loader', () =>{
+//     loader.classList.add('hover');
+// })
