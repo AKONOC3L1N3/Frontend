@@ -109,7 +109,7 @@
     width: 35%;
     margin: 0 auto;
     padding: 15px;
-    height: 62vh;
+    height: 70vh;
     background-color:white;
     margin-top: 35px;
     border-radius: 10px;

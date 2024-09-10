@@ -187,9 +187,7 @@
                         <button @click="redirectToAddPage">AJOUTER</button>
                     </div>
                     
-                    <div class="taine">
-                        <button @click="redirectToDeletePage">SUPPRIMER</button>
-                    </div>
+                    
 
                    </div>
                     
@@ -223,7 +221,7 @@
             />
             <img 
               src="@/assets/edit-icon.png" 
-              alt="edit" 
+              alt="Edit" 
               @click="openEditModal(DriverProfils)" 
               style="cursor: pointer;"  
               class="icone"
@@ -231,7 +229,33 @@
           </td>
         </tr>
       </tbody>
-    </table>                
+    </table>
+
+    <!-- Modal d'édition -->
+    <div v-if="isEditModalOpen" class="modali">
+      <div class="modal-content">
+        <span class="close" @click="closeEditModal">&times;</span>
+        <h2>Modifier le Profil</h2>
+        <form @submit.prevent="updateDriverProfil">
+          <label for="drivingLicense">Driving License:</label>
+          <input type="text" v-model="editForm.DrivingLicense" required />
+
+          <label for="name">Nom:</label>
+          <input type="text" v-model="editForm.name" required />
+
+          <label for="email">Email:</label>
+          <input type="email" v-model="editForm.email" required />
+
+          <label for="dateOfBirth">Date de Naissance:</label>
+          <input type="date" v-model="editForm.DateOfBirth" required />
+
+          <label for="vehicleId">Véhicule:</label>
+          <input type="text" v-model="editForm.vehicleId" required />
+
+          <button type="submit">Enregistrer</button>
+        </form>
+      </div>
+    </div>           
   </div>
             </div>
             <div class="in_container" v-if="currentPage === 'services'">
@@ -504,6 +528,16 @@ export default {
            successMessage: '',
             errorMessage: '',
 
+            isEditModalOpen: false,
+      editForm: {
+        DrivingLicense: '',
+        name: '',
+        email: '',
+        DateOfBirth: '',
+        vehicleId: '',
+      },
+      currentDriverId: null,
+
 isOpportunityFormVisible: false,
       opportunity: {
         description: '',
@@ -565,6 +599,42 @@ isOpportunityFormVisible: false,
 
         },
 
+
+        openEditModal(driverProfil) {
+      this.editForm = { ...driverProfil }; // Remplir le formulaire avec les données existantes
+      this.currentDriverId = driverProfil.id;
+      this.isEditModalOpen = true;
+    },
+    closeEditModal() {
+      this.isEditModalOpen = false;
+      this.editForm = {}; // Réinitialiser le formulaire
+    },
+    async updateDriverProfil() {
+            try {
+                const token = localStorage.getItem('token');
+                // console.log("Voici l'id de la tache:");
+                // console.log(this.movedItemId);
+                const response = await axios.patch(`http://localhost:3001/driverprofil/${this.currentDriverId}`, {
+                    // Les données de la tâche à mettre à jour
+                    DrivingLicense: this.editForm.DrivingLicense,
+                    name: this.editForm.name,
+                    email: this.editForm.email,
+                    vehicleId: this.editForm.vehicleId,
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                this.driverEdit = response.data;
+                this.closeEditModal();
+                console.log("Tache modifiée avec succès");
+                window.location.reload();
+
+            } catch (error) {
+                console.error('Erreur lors de la modification de la tâche :', error);
+            }
+        },
         async fetchData() {
       try {
         const [adminsRes, missionsRes, cargosRes, incidentsRes] = await Promise.all([
@@ -1626,4 +1696,77 @@ form button:hover {
   width: 2rem;
   
 }
+
+.modali {
+  display: flex; /* Utiliser flexbox pour centrer le modal */
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Position fixe pour couvrir l'écran */
+  z-index: 1000; /* S'assurer qu'il est au-dessus des autres éléments */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+}
+
+.modali-content {
+  background-color: white; /* Fond blanc pour le contenu du modal */
+  border-radius: 8px; /* Coins arrondis */
+  padding: 20px; /* Espacement interne */
+  width: 400px; /* Largeur du modal */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Ombre pour le modal */
+  position: relative; /* Position relative pour le bouton de fermeture */
+}
+
+.close {
+  position: absolute; /* Bouton de fermeture dans le coin supérieur droit */
+  top: 10px;
+  right: 10px;
+  cursor: pointer; /* Curseur pointer pour le bouton */
+  font-size: 20px; /* Taille du texte */
+}
+
+h2 {
+  margin: 0 0 20px; /* Marge pour le titre */
+}
+
+form {
+  display: flex;
+  flex-direction: column; /* Disposition verticale des champs */
+}
+
+label {
+  margin-bottom: 5px; /* Marge sous les labels */
+}
+
+input {
+  margin-bottom: 15px; /* Marge sous les champs de saisie */
+  padding: 10px; /* Espacement interne */
+  border: 1px solid #ccc; /* Bordure grise */
+  border-radius: 4px; /* Coins arrondis pour les champs */
+}
+
+button {
+  padding: 10px; /* Espacement interne */
+  background-color: #007bff; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte */
+  border: none; /* Pas de bordure */
+  border-radius: 4px; /* Coins arrondis */
+  cursor: pointer; /* Curseur pointer pour le bouton */
+}
+
+button:hover {
+  background-color: #0056b3; /* Couleur plus foncée au survol */
+}
+
+/* Styles responsives */
+@media (max-width: 500px) {
+  .modal-content {
+    width: 90%; /* Largeur du modal sur mobile */
+  }
+}
+
+
+
 </style>

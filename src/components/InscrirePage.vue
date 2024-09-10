@@ -23,20 +23,13 @@
       <div class="input_field">
         <label for="type">Type :</label>
         <select id="type" v-model="type" required>
-          <option value="SUPERADMIN">SUPER ADMINISTRATEUR</option>
+         
           <option value="ADMIN">ADMINISTRATEUR</option>
-          <option value="CHAUFFEUR">CHAUFFEUR</option>
+          
         </select>
       </div>
       
-      <div class="input_field">
-        <label for="roleid">Role :</label>
-        <input type="text" id="roleid" v-model="roleId">
-      </div>
-      <div class="input_field">
-        <label for="avatarUrl">AvatarUrl :</label>
-        <input type="text" id="avatarUrl" v-model="avatarUrl">
-      </div>
+      
       <button type="submit">Inscrire</button>
     </form>
     <p>Vous avez deja un compte? <router-link to="/">Se connecter</router-link></p>
@@ -55,8 +48,6 @@ export default {
             email: '',
             password: '',
             type:'',
-            roleId:'',
-            avatarUrl:'',
             successMessage: '',
             errorMessage: ''
         };
@@ -70,8 +61,7 @@ export default {
                     email: this.email,
                     password: this.password,
                     type: this.type,
-                    roleId: this.roleId,
-                    avatarUrl: this.avatarUrl
+                   
                     
                 });
                 this.successMessage = 'Inscription réussie !';
@@ -88,8 +78,6 @@ export default {
             this.email = '';
             this.password = '';
             this.type = '';
-            this.roleId = '';
-            this.avatarUrl = '';
             this.dateOfBirth = '';
             this.successMessage = '';
             this.errorMessage = '';
