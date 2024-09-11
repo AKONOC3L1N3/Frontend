@@ -1,492 +1,463 @@
 <template>
-    <div id="app" class="container">
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <h3>Dashboard</h3>
+  <div id="app" class="container">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h3>Dashboard <a @click="logout"><router-link class="menu" to="/"><i style="color: red; padding-left: 20px;"
+          class="fa fa-power-off"></i></router-link></a></h3>
+      </div>
+      <ul class="sidebar-nav">
+        <li :class="{ selected: currentPage === 'home' }" @click="showPage('home')">
+          <i :style="{ color: currentPage === 'home' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }" class="fas fa-home"></i>
+          <a :style="{ color: currentPage === 'home' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Acceuil</a>
+          <i class="fas fa fa-arrow-right"></i>
+        </li>
+        <li :class="{ selected: currentPage === 'vehicle' }" @click="showPage('vehicle')">
+          <i :style="{ color: currentPage === 'vehicle' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }" class="fas fa-car"></i>
+          <a :style="{ color: currentPage === 'vehicle' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Vehicles</a>
+          <i class="fas fa fa-arrow-right"></i>
+        </li>
+
+        <li :class="{ selected: currentPage === 'chauffeur' }" @click="showPage('chauffeur')">
+          <i :style="{ color: currentPage === 'chauffeur' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
+            class="fa fa-users"></i>
+          <a :style="{ color: currentPage === 'chauffeur' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Chauffeurs</a>
+          <i class="fas fa fa-arrow-right"></i>
+        </li>
+
+        <li :class="{ selected: currentPage === 'services' }" @click="showPage('services')">
+          <i :style="{ color: currentPage === 'services' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
+            class="fas fa-cogs"></i>
+          <a :style="{ color: currentPage === 'services' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Services</a>
+          <i class="fas fa fa-arrow-right"></i>
+        </li>
+        <li :class="{ selected: currentPage === 'itineraire' }" @click="showPage('itineraire')">
+          <i :style="{ color: currentPage === 'itineraire' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
+            class="fas fa-chart-line"></i>
+          <a :style="{ color: currentPage === 'itineraire' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Itineraires</a>
+          <i class="fas fa fa-arrow-right"></i>
+        </li>
+
+        <li :class="{ selected: currentPage === 'maintenance' }" @click="showPage('maintenance')">
+          <i :style="{ color: currentPage === 'maintenance' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
+            class="fas fa-wrench"></i>
+          <a :style="{ color: currentPage === 'maintenance' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Maintenances
+          </a>
+          <i class="fas fa fa-arrow-right"></i>
+        </li>
+        <li :class="{ selected: currentPage === 'parametre' }" @click="showPage('parametre')">
+          <i :style="{ color: currentPage === 'parametre' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }" class="fa fa-cog"></i>
+          <a :style="{ color: currentPage === 'parametre' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Parametres</a>
+          <i class="fas fa fa-arrow-right"></i>
+        </li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <div class="in_container" v-if="currentPage === 'home'">
+        <div class="container1">
+          <div class="contain1">
+            <img src="..//assets/icvoiture.png" alt="">
+            <h3 class="p1">24 véhicules disponibles actuellement</h3>
+          </div>
+          <div class="contain2">
+            <img src="..//assets/chaur.png" alt="">
+            <h3 class="p2">20 chauffeurs disponibles</h3>
+          </div>
+          <div class="contain3">
+            <img src="..//assets/maintenance.png" alt="">
+            <h3 class="p3">service de maintenance <br> disponible</h3>
+          </div>
+          <div class="contain4">
+            <img src="..//assets/aide.png" alt="">
+            <h3 class="p4">Besoin d'aide?</h3>
+          </div>
+          <div class="containes1">
+            <div class="contais1">
+              <h1>Listes des opportunités <br>Signalées ce mois</h1>
+              <h3>DOUALA: Bonapriso:</h3> <span>Cinq chargements</span>
+              <h3>KRIBI: Bonadikombo:</h3> <span>Huit dépôts</span>
+              <h3>YAOUNDE: Essos:</h3> <span>Quatre chargements</span>
+              <h3>YAOUNDE: Mokolo:</h3> <span>Quinze dépôts</span>
+              <h3>Bertoua: Yadémé:</h3> <span>Sept chargements</span>
+
+
             </div>
-            <ul class="sidebar-nav">
-                <li :class="{ selected: currentPage === 'home' }" @click="showPage('home')">
-                    <i :style="{ color: currentPage === 'home' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
-                        class="fas fa-home"></i>
-                    <a :style="{ color: currentPage === 'home' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Acceuil</a>
-                    <i class="fas fa fa-arrow-right"></i>
-                </li>
-                <li :class="{ selected: currentPage === 'vehicle' }" @click="showPage('vehicle')">
-                    <i :style="{ color: currentPage === 'vehicle' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
-                        class="fas fa-car"></i>
-                    <a :style="{ color: currentPage === 'vehicle' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Vehicles</a>
-                    <i class="fas fa fa-arrow-right"></i>
-                </li>
-
-                <li :class="{ selected: currentPage === 'chauffeur' }" @click="showPage('chauffeur')">
-                    <i :style="{ color: currentPage === 'chauffeur' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
-                        class="fa fa-users"></i>
-                    <a
-                        :style="{ color: currentPage === 'chauffeur' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Chauffeurs</a>
-                    <i class="fas fa fa-arrow-right"></i>
-                </li>
-
-                <li :class="{ selected: currentPage === 'services' }" @click="showPage('services')">
-                    <i :style="{ color: currentPage === 'services' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
-                        class="fas fa-cogs"></i>
-                    <a :style="{ color: currentPage === 'services' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Services</a>
-                    <i class="fas fa fa-arrow-right"></i>
-                </li>
-                <li :class="{ selected: currentPage === 'itineraire' }" @click="showPage('itineraire')">
-                    <i :style="{ color: currentPage === 'itineraire' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
-                        class="fas fa-chart-line"></i>
-                    <a
-                        :style="{ color: currentPage === 'itineraire' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Itineraires</a>
-                    <i class="fas fa fa-arrow-right"></i>
-                </li>
-
-                <li :class="{ selected: currentPage === 'maintenance' }" @click="showPage('maintenance')">
-                    <i :style="{ color: currentPage === 'maintenance' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
-                        class="fas fa-wrench"></i>
-                    <a :style="{ color: currentPage === 'maintenance' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Maintenances
-                    </a>
-                    <i class="fas fa fa-arrow-right"></i>
-                </li>
-                <li :class="{ selected: currentPage === 'parametre' }" @click="showPage('parametre')">
-                    <i :style="{ color: currentPage === 'parametre' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
-                        class="fa fa-cog"></i>
-                    <a
-                        :style="{ color: currentPage === 'parametre' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Parametres</a>
-                    <i class="fas fa fa-arrow-right"></i>
-                </li>
-            </ul>
+            <div class="contais2">
+              <h1>Listes des alertes de ce mois</h1>
+              <h3>Maintenance:</h3> <span>Treize</span>
+              <h3>Arrêts pour chargement:</h3><span>Trente un</span>
+              <h3>Arrêts pour dépôts</h3> <span>Treize</span>
+              <h3>Arrêts pour vérification</h3> <span>Quinze</span>
+            </div>
+            <div class="contais3">
+              <h1>Prestances de services</h1>
+              <h3>intégration d'API</h3>
+              <h3>Devenir un partenaire</h3>
+              <h3>Analyse des flottes de données:</h3>
+              <h3>Solutions pour les constructeurs automobiles</h3>
+            </div>
+          </div>
         </div>
-        <div class="main-content">
-            <div class="in_container" v-if="currentPage === 'home'">
-                <div class="container1">
-                    <div class="contain1">
-                        <img src="..//assets/icvoiture.png" alt="">
-                        <h3 class="p1">24 véhicules disponibles actuellement</h3>
-                    </div>
-                    <div class="contain2">
-                        <img src="..//assets/chaur.png" alt="">
-                        <h3 class="p2">20 chauffeurs disponibles</h3>
-                    </div>
-                    <div class="contain3">
-                        <img src="..//assets/maintenance.png" alt="">
-                        <h3 class="p3">service de maintenance <br> disponible</h3>
-                    </div>
-                    <div class="contain4">
-                        <img src="..//assets/aide.png" alt="">
-                        <h3 class="p4">Besoin d'aide?</h3>
-                    </div>
-                    <div class="containes1">
-                        <div class="contais1">
-                            <h1>Listes des opportunités <br>Signalées ce mois</h1>
-                            <h3>DOUALA: Bonapriso:</h3> <span>Cinq chargements</span>
-                            <h3>KRIBI: Bonadikombo:</h3> <span>Huit dépôts</span>
-                            <h3>YAOUNDE: Essos:</h3> <span>Quatre chargements</span>
-                            <h3>YAOUNDE: Mokolo:</h3> <span>Quinze dépôts</span>
-                            <h3>Bertoua: Yadémé:</h3> <span>Sept chargements</span>
-
-
-                        </div>
-                        <div class="contais2">
-                            <h1>Listes des alertes de ce mois</h1>
-                            <h3>Maintenance:</h3> <span>Treize</span>
-                            <h3>Arrêts pour chargement:</h3><span>Trente un</span>
-                            <h3>Arrêts pour dépôts</h3> <span>Treize</span>
-                            <h3>Arrêts pour vérification</h3> <span>Quinze</span>
-                        </div>
-                        <div class="contais3">
-                            <h1>Prestances de services</h1>
-                            <h3>intégration d'API</h3>
-                            <h3>Devenir un partenaire</h3>
-                            <h3>Analyse des flottes de données:</h3>
-                            <h3>Solutions pour les constructeurs automobiles</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="in_container" v-if="currentPage === 'vehicle'">
-                <div v-if="addVehicle" class="ajouter">
-                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
-                        <formVehicule />
-                    </div>
-                    <div v-if="upvehicle" class="Modifier">
-                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
-                        <forVehicule />
-                    </div>
-                    <div v-if="attvehicle" class="attribuer">
-                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
-                        <attrivehicle />
-                    </div>
-                <div class="tainer3">
-                    
-                   <div class="trainContain">
-                    <div class="taine">
-                        <button @click="redirectToAjoutPage">AJOUTER</button>
-                    </div>
-                  
-                   
-                    <div class="taine">
-                        <button @click="redirectToAttribuerPage">ATTRIBUER</button>
-                    </div>
-                   </div>
-                    
-                </div>
-                <div class="tainer2">
-                    <table>
-                        <thead>
-                            <tr>
-                              <th @click="trierTableau(0)">NOM</th>
-                                <th @click="trierTableau(1)">TYPE</th>
-                                <th @click="trierTableau(2)">TONNAGE</th>
-                                <th @click="trierTableau(3)">MODEL</th>
-                                <th @click="trierTableau(4)">ETAT</th>
-                                <th @click="trierTableau(5)">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          <tr v-for="vehicle in vehicles" :key="vehicle.vehicleId">
-                              <td>{{ vehicle.name }}</td>
-                                <td>{{ vehicle.type }}</td>
-                                <td>{{ vehicle.tonnage }}</td>
-                                <td>{{ vehicle.model }}</td>
-                                <!-- <td>{{ vehicle.marque }}</td> -->
-                                <td>{{ vehicle.state }}</td>
-                                <td>
-            <img 
-              src="@/assets/delete-icon.png" 
-              alt="Delete" 
-              @click="deleteVehicle(vehicle.id, vehicles)" 
-              style="cursor: pointer;"  class="icone"
-
-            />
-            <img 
-              src="@/assets/edit-icon.png" 
-              alt="edit" 
-              @click="editVehicle(vehicle.id, vehicles)" 
-              style="cursor: pointer;"  class="icone"
-            />
-          </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="in_container" v-if="currentPage === 'chauffeur'">
-                <div v-if="addDriver" class="ajouter">
-                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
-                        <formDriver />
-                    </div>
-                    <div v-if="ModDriver" class="Modifier">
-                        <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
-                        <forDriver />
-                    </div>
-        
-                <div class="tainer3">
-                    
-                   <div class="trainContain">
-                    <div class="taine">
-                        <button @click="redirectToAddPage">AJOUTER</button>
-                    </div>
-                    
-                    
-
-                   </div>
-                    
-                </div>
-                <div class="tainer2">
-                  <table>
-      <thead>
-        <tr>
-          <th @click="trierTableau(0)">Driving License</th>
-          <th @click="trierTableau(1)">Nom</th>
-          <th @click="trierTableau(2)">Email</th>
-          <th @click="trierTableau(3)">Date de naissance</th>
-          <th @click="trierTableau(4)">Vehicule</th>
-          <th @click="trierTableau(5)">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="DriverProfils in DriverProfil" :key="DriverProfils.id">
-          <td>{{ DriverProfils.DrivingLicense }}</td>
-          <td>{{ DriverProfils.name }}</td>
-          <td>{{ DriverProfils.email }}</td>
-          <td>{{ new Date(DriverProfils.DateOfBirth).toLocaleDateString() }}</td>
-          <td>{{ DriverProfils.vehicleId }}</td>
-          <td>
-            <img 
-              src="@/assets/delete-icon.png" 
-              alt="Delete" 
-              @click="deleteDriver(DriverProfils.id)" 
-              style="cursor: pointer;"  
-              class="icone"
-            />
-            <img 
-              src="@/assets/edit-icon.png" 
-              alt="Edit" 
-              @click="openEditModal(DriverProfils)" 
-              style="cursor: pointer;"  
-              class="icone"
-            />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- Modal d'édition -->
-    <div v-if="isEditModalOpen" class="modali">
-      <div class="modal-content">
-        <span class="close" @click="closeEditModal">&times;</span>
-        <h2>Modifier le Profil</h2>
-        <form @submit.prevent="updateDriverProfil">
-          <label for="drivingLicense">Driving License:</label>
-          <input type="text" v-model="editForm.DrivingLicense" required />
-
-          <label for="name">Nom:</label>
-          <input type="text" v-model="editForm.name" required />
-
-          <label for="email">Email:</label>
-          <input type="email" v-model="editForm.email" required />
-
-          <label for="dateOfBirth">Date de Naissance:</label>
-          <input type="date" v-model="editForm.DateOfBirth" required />
-
-          <label for="vehicleId">Véhicule:</label>
-          <input type="text" v-model="editForm.vehicleId" required />
-
-          <button type="submit">Enregistrer</button>
-        </form>
       </div>
-    </div>           
-  </div>
-            </div>
-            <div class="in_container" v-if="currentPage === 'services'">
-               
-              <div id="appi">
-    <header>
-      <h1>Présentation des Services</h1>
-      <p>Bienvenue dans l'application de gestion de flotte automobile. Explorez nos services :</p>
-    </header>
-
-    <div class="services-overview">
-      <div class="service-box">
-        <h2>Gestion des Véhicules</h2>
-        <p>Gérez l'ajout, la modification, et la suppression des véhicules de votre flotte.</p>
-      </div>
-      <div class="service-box">
-        <h2>Gestion des Chauffeurs</h2>
-        <p>Suivez les chauffeurs, attribuez des véhicules, et gérez leurs itinéraires.</p>
-      </div>
-      <div class="service-box">
-        <h2>Gestion des Itinéraires</h2>
-        <p>Planifiez et optimisez les itinéraires pour vos chauffeurs et véhicules.</p>
-      </div>
-    </div>
-
-    <div class="opportunity-section">
-      <h2>Opportunités</h2>
-      <p>Découvrez et signalez des opportunités pour optimiser la gestion de votre flotte.</p>
-      <button @click="showOpportunityForm">Signaler Opportunité</button>
-    </div>
-
-    <!-- Formulaire Pop-Up -->
-    <div v-if="isOpportunityFormVisible" class="popup-form">
-      <div class="form-container">
-        <h3>Signaler une Opportunité</h3>
-        <form @submit.prevent="submitOpportunity">
-          <label for="description">Description :</label>
-          <textarea id="description" v-model="opportunity.description" required></textarea>
-
-          <label for="address">Adresse :</label>
-          <input type="text" id="address" v-model="opportunity.address" required>
-
-          <label for="date">Date :</label>
-          <input type="date" id="date" v-model="opportunity.date" required>
-
-          <button type="submit">Soumettre</button>
-          <button type="button" @click="closeOpportunityForm">Annuler</button>
-        </form>
-      </div>
-    </div>
-  </div>
-            </div>
-            <div class="in_container" v-if="currentPage === 'itineraire'">
-                <div>
-                    <div class="ittinéraire">
-    <!-- Bouton pour ouvrir le formulaire pop-up -->
-    <button @click="showModal = true">Planifier un Itinéraire</button>
-</div>
-    <!-- Formulaire de planification en pop-up -->
-    <div v-if="showModal" class="modal-overlay" @click.self="closeModal">
-      <div class="modal-content">
-        <h2>Planification d'un Itinéraire</h2>
-        <form @submit.prevent="planRoute">
-          
-          <!-- Sélection du véhicule -->
-          <div class="form-group">
-            <label for="vehicle">Véhicule :</label>
-            <select v-model="selectedVehicle" required>
-              <option v-for="vehicle in vehicles" :key="vehicle.id" :value="vehicle.id">
-                {{ vehicle.model }} - {{ vehicle.registration }}
-              </option>
-            </select>
+      <div class="in_container" v-if="currentPage === 'vehicle'">
+        <div v-if="addVehicle" class="ajouter">
+          <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
+          <formVehicule />
+        </div>
+        <div v-if="upvehicle" class="Modifier">
+          <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
+          <forVehicule />
+        </div>
+        <div v-if="attvehicle" class="attribuer">
+          <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
+          <attrivehicle />
+        </div>
+        <div class="tainer3">
+          <div class="trainContain">
+              <div class="trainContainIn">
+                <button @click="redirectToAjoutPage">AJOUTER</button>
+              <button @click="redirectToAttribuerPage">ATTRIBUER</button>
+              </div>
           </div>
 
-          <!-- Sélection du chauffeur -->
-          <div class="form-group">
-            <label for="driver">Chauffeur :</label>
-            <select v-model="selectedDriver" required>
-              <option v-for="driver in drivers" :key="driver.id" :value="driver.id">
-                {{ driver.first_name }} {{ driver.last_name }}
-              </option>
-            </select>
-          </div>
-
-          <!-- Point de départ -->
-          <div class="form-group">
-            <label for="start_point">Point de Départ :</label>
-            <input type="text" v-model="startPoint" required />
-          </div>
-
-          <!-- Point d'arrivée -->
-          <div class="form-group">
-            <label for="end_point">Point d'Arrivée :</label>
-            <input type="text" v-model="endPoint" required />
-          </div>
-
-          <!-- Bouton de soumission -->
-          <button type="submit">Planifier l'Itinéraire</button>
-          <button type="button" @click="closeModal">Fermer</button>
-        </form>
+        </div>
+        <div class="tainer2">
+          <table>
+            <thead>
+              <tr>
+                <th @click="trierTableau(0)">NOM</th>
+                <th @click="trierTableau(1)">TYPE</th>
+                <th @click="trierTableau(2)">TONNAGE</th>
+                <th @click="trierTableau(3)">MODEL</th>
+                <th @click="trierTableau(4)">ETAT</th>
+                <th @click="trierTableau(5)">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="vehicle in vehicles" :key="vehicle.vehicleId">
+                <td>{{ vehicle.name }}</td>
+                <td>{{ vehicle.type }}</td>
+                <td>{{ vehicle.tonnage }}</td>
+                <td>{{ vehicle.model }}</td>
+                <!-- <td>{{ vehicle.marque }}</td> -->
+                <td>{{ vehicle.state }}</td>
+                <td>
+                  <img src="@/assets/delete-icon.png" alt="Delete" @click="deleteVehicle(vehicle.id, vehicles)"
+                    style="cursor: pointer;" class="icone" />
+                  <img src="@/assets/edit-icon.png" alt="edit" @click="editVehicle(vehicle.id, vehicles)"
+                    style="cursor: pointer;" class="icone" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    
-  </div>
-  <div class="map-container">
-    <MapComponent :routes="routes" />
-  </div>
+      <div class="in_container" v-if="currentPage === 'chauffeur'">
+        <div v-if="addDriver" class="ajouter">
+          <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
+          <formDriver />
+        </div>
+        <div v-if="ModDriver" class="Modifier">
+          <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
+          <forDriver />
+        </div>
+
+        <div class="tainer3">
+
+          <div class="trainContain">
+            <div class="taine">
+              <button @click="redirectToAddPage">AJOUTER</button>
             </div>
 
-            <div class="in_container" v-if="currentPage === 'maintenance'">
-                <div class="container">
-    <!-- Table for maintenance presentation -->
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>NOM</th>
-            <th>TYPE</th>
-            <th>DATE</th>
-            <th>VEHICULE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="maintenance in maintenances" :key="maintenance.id">
-            <td>{{ maintenance.nom }}</td>
-            <td>{{ maintenance.type }}</td>
-            <td>{{ maintenance.date }}</td>
-            <td>{{ maintenance.vehicule }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
-    <!-- Buttons for Add, Edit, and Delete -->
-    <div class="buttons-container">
-      <button @click="showPopup('add')">AJOUTER</button>
-      <button @click="showPopup('edit')">MODIFIER</button>
-      <button @click="showPopup('delete')">SUPPRIMER</button>
-    </div>
-    
-    <!-- Pop-up Form for Adding/Editing -->
-    <div v-if="showForm && (actionType === 'add' || actionType === 'edit')" class="popup">
-      <div class="popup-content">
-        <span class="close" @click="closePopup">&times;</span>
-        <h3>{{ formTitle }}</h3>
-        <form @submit.prevent="handleSubmit">
-          <label for="nom">NOM</label>
-          <input type="text" id="nom" v-model="form.nom" required>
-          
-          <label for="type">TYPE</label>
-          <input type="text" id="type" v-model="form.type" required>
-          
-          <label for="date">DATE</label>
-          <input type="date" id="date" v-model="form.date" required>
-          
-          <label for="vehicule">VEHICULE</label>
-          <input type="text" id="vehicule" v-model="form.vehicule" required>
-          
-          <button type="submit">{{ formAction }}</button>
-        </form>
-      </div>
-    </div>
-    
-    <!-- Pop-up Form for Deleting -->
-    <div v-if="showForm && actionType === 'delete'" class="popup">
-      <div class="popup-content">
-        <span class="close" @click="closePopup">&times;</span>
-        <h3>Supprimer Maintenance</h3>
-        <form @submit.prevent="handleDelete">
-          <label for="delete-maintenance">Choisissez une maintenance à supprimer</label>
-          <select id="delete-maintenance" v-model="selectedMaintenance" required>
-            <option v-for="maintenance in maintenances" :key="maintenance.id" :value="maintenance.id">
-              {{ maintenance.nom }} - {{ maintenance.date }}
-            </option>
-          </select>
-          <button type="submit">Supprimer</button>
-        </form>
-      </div>
-    </div>
-  </div>
-            </div>
 
-            <div class="in_container" v-if="currentPage === 'parametre'">
-              <div class="settings-container">
-    <div class="box admin-management">
-      <h2>Gestion des Administrateurs</h2>
-      <button @click="showAddAdminForm = true" class="add-button">Ajouter un Admin</button>
-      <div class="icons">
-        <img src="@/assets/delete-icon.png" alt="Supprimer" @click="deleteAdmin" class="icon delete-icon">
-        <img src="@/assets/edit-icon.png" alt="Modifier" @click="editAdmin" class="icon edit-icon">
+
+          </div>
+
+        </div>
+        <div class="tainer2">
+          <table>
+            <thead>
+              <tr>
+                <th @click="trierTableau(0)">Driving License</th>
+                <th @click="trierTableau(1)">Nom</th>
+                <th @click="trierTableau(2)">Email</th>
+                <th @click="trierTableau(3)">Date de naissance</th>
+                <th @click="trierTableau(4)">Vehicule</th>
+                <th @click="trierTableau(5)">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="DriverProfils in DriverProfil" :key="DriverProfils.id">
+                <td>{{ DriverProfils.DrivingLicense }}</td>
+                <td>{{ DriverProfils.name }}</td>
+                <td>{{ DriverProfils.email }}</td>
+                <td>{{ new Date(DriverProfils.DateOfBirth).toLocaleDateString() }}</td>
+                <td>{{ DriverProfils.vehicleId }}</td>
+                <td>
+                  <img src="@/assets/delete-icon.png" alt="Delete" @click="deleteDriver(DriverProfils.id)"
+                    style="cursor: pointer;" class="icone" />
+                  <img src="@/assets/edit-icon.png" alt="Edit" @click="openEditModal(DriverProfils)"
+                    style="cursor: pointer;" class="icone" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Modal d'édition -->
+          <div v-if="isEditModalOpen" class="modali">
+            <div class="modal-content">
+              <span class="close" @click="closeEditModal">&times;</span>
+              <h2>Modifier le Profil</h2>
+              <form @submit.prevent="updateDriverProfil">
+                <label for="drivingLicense">Driving License:</label>
+                <input type="text" v-model="editForm.DrivingLicense" required />
+
+                <label for="name">Nom:</label>
+                <input type="text" v-model="editForm.name" required />
+
+                <label for="email">Email:</label>
+                <input type="email" v-model="editForm.email" required />
+
+                <label for="dateOfBirth">Date de Naissance:</label>
+                <input type="date" v-model="editForm.DateOfBirth" required />
+
+                <label for="vehicleId">Véhicule:</label>
+                <input type="text" v-model="editForm.vehicleId" required />
+
+                <button type="submit">Enregistrer</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- Formulaire pop-up pour ajouter un admin -->
-      <div v-if="showAddAdminForm" class="popup">
-        <div class="popup-contents">
-          <h3>Ajouter un Administrateur</h3>
-          <form @submit.prevent="addAdmin">
-            <label>Email</label>
-            <input v-model="newAdmin.email" type="email" required>
-            <label>Nom</label>
-            <input v-model="newAdmin.name" type="text" required>
-            <label>Type</label>
-            <input v-model="newAdmin.type" type="text" required>
-            <label>Mot de Passe</label>
-            <input v-model="newAdmin.password" type="password" required>
-            <label>Prénom</label>
-            <input v-model="newAdmin.surname" type="text" required>
-            <button type="submit">Ajouter</button>
-            <button type="button" @click="showAddAdminForm = false">Annuler</button>
-          </form>
+      <div class="in_container" v-if="currentPage === 'services'">
+
+        <div id="appi">
+          <header>
+            <h1>Présentation des Services</h1>
+            <p>Bienvenue dans l'application de gestion de flotte automobile. Explorez nos services :</p>
+          </header>
+
+          <div class="services-overview">
+            <div class="service-box">
+              <h2>Gestion des Véhicules</h2>
+              <p>Gérez l'ajout, la modification, et la suppression des véhicules de votre flotte.</p>
+            </div>
+            <div class="service-box">
+              <h2>Gestion des Chauffeurs</h2>
+              <p>Suivez les chauffeurs, attribuez des véhicules, et gérez leurs itinéraires.</p>
+            </div>
+            <div class="service-box">
+              <h2>Gestion des Itinéraires</h2>
+              <p>Planifiez et optimisez les itinéraires pour vos chauffeurs et véhicules.</p>
+            </div>
+          </div>
+
+          <div class="opportunity-section">
+            <h2>Opportunités</h2>
+            <p>Découvrez et signalez des opportunités pour optimiser la gestion de votre flotte.</p>
+            <button @click="showOpportunityForm">Signaler Opportunité</button>
+          </div>
+
+          <!-- Formulaire Pop-Up -->
+          <div v-if="isOpportunityFormVisible" class="popup-form">
+            <div class="form-container">
+              <h3>Signaler une Opportunité</h3>
+              <form @submit.prevent="submitOpportunity">
+                <label for="description">Description :</label>
+                <textarea id="description" v-model="opportunity.description" required></textarea>
+
+                <label for="address">Adresse :</label>
+                <input type="text" id="address" v-model="opportunity.address" required>
+
+                <label for="date">Date :</label>
+                <input type="date" id="date" v-model="opportunity.date" required>
+
+                <button type="submit">Soumettre</button>
+                <button type="button" @click="closeOpportunityForm">Annuler</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="in_container" v-if="currentPage === 'itineraire'">
+        <div>
+          <div class="ittinéraire">
+            <!-- Bouton pour ouvrir le formulaire pop-up -->
+            <button @click="showModal = true">Planifier un Itinéraire</button>
+          </div>
+          <!-- Formulaire de planification en pop-up -->
+          <div v-if="showModal" class="modal-overlay" @click.self="closeModal">
+            <div class="modal-content">
+              <h2>Planification d'un Itinéraire</h2>
+              <form @submit.prevent="planRoute">
+
+                <!-- Sélection du véhicule -->
+                <div class="form-group">
+                  <label for="vehicle">Véhicule :</label>
+                  <select v-model="selectedVehicle" required>
+                    <option v-for="vehicle in vehicles" :key="vehicle.id" :value="vehicle.id">
+                      {{ vehicle.model }} - {{ vehicle.registration }}
+                    </option>
+                  </select>
+                </div>
+
+                <!-- Sélection du chauffeur -->
+                <div class="form-group">
+                  <label for="driver">Chauffeur :</label>
+                  <select v-model="selectedDriver" required>
+                    <option v-for="driver in drivers" :key="driver.id" :value="driver.id">
+                      {{ driver.first_name }} {{ driver.last_name }}
+                    </option>
+                  </select>
+                </div>
+
+                <!-- Point de départ -->
+                <div class="form-group">
+                  <label for="start_point">Point de Départ :</label>
+                  <input type="text" v-model="startPoint" required />
+                </div>
+
+                <!-- Point d'arrivée -->
+                <div class="form-group">
+                  <label for="end_point">Point d'Arrivée :</label>
+                  <input type="text" v-model="endPoint" required />
+                </div>
+
+                <!-- Bouton de soumission -->
+                <button type="submit">Planifier l'Itinéraire</button>
+                <button type="button" @click="closeModal">Fermer</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+        <div class="map-container">
+          <MapComponent :routes="routes" />
+        </div>
+      </div>
+
+      <div class="in_container" v-if="currentPage === 'maintenance'">
+        <div class="container">
+          <!-- Table for maintenance presentation -->
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>NOM</th>
+                  <th>TYPE</th>
+                  <th>DATE</th>
+                  <th>VEHICULE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="maintenance in maintenances" :key="maintenance.id">
+                  <td>{{ maintenance.nom }}</td>
+                  <td>{{ maintenance.type }}</td>
+                  <td>{{ maintenance.date }}</td>
+                  <td>{{ maintenance.vehicule }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Buttons for Add, Edit, and Delete -->
+          <div class="buttons-container">
+            <button @click="showPopup('add')">AJOUTER</button>
+            <button @click="showPopup('edit')">MODIFIER</button>
+            <button @click="showPopup('delete')">SUPPRIMER</button>
+          </div>
+
+          <!-- Pop-up Form for Adding/Editing -->
+          <div v-if="showForm && (actionType === 'add' || actionType === 'edit')" class="popup">
+            <div class="popup-content">
+              <span class="close" @click="closePopup">&times;</span>
+              <h3>{{ formTitle }}</h3>
+              <form @submit.prevent="handleSubmit">
+                <label for="nom">NOM</label>
+                <input type="text" id="nom" v-model="form.nom" required>
+
+                <label for="type">TYPE</label>
+                <input type="text" id="type" v-model="form.type" required>
+
+                <label for="date">DATE</label>
+                <input type="date" id="date" v-model="form.date" required>
+
+                <label for="vehicule">VEHICULE</label>
+                <input type="text" id="vehicule" v-model="form.vehicule" required>
+
+                <button type="submit">{{ formAction }}</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Pop-up Form for Deleting -->
+          <div v-if="showForm && actionType === 'delete'" class="popup">
+            <div class="popup-content">
+              <span class="close" @click="closePopup">&times;</span>
+              <h3>Supprimer Maintenance</h3>
+              <form @submit.prevent="handleDelete">
+                <label for="delete-maintenance">Choisissez une maintenance à supprimer</label>
+                <select id="delete-maintenance" v-model="selectedMaintenance" required>
+                  <option v-for="maintenance in maintenances" :key="maintenance.id" :value="maintenance.id">
+                    {{ maintenance.nom }} - {{ maintenance.date }}
+                  </option>
+                </select>
+                <button type="submit">Supprimer</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="in_container" v-if="currentPage === 'parametre'">
+        <div class="settings-container">
+          <div class="box admin-management">
+            <h2>Gestion des Administrateurs</h2>
+            <button @click="showAddAdminForm = true" class="add-button">Ajouter un Admin</button>
+            <div class="icons">
+              <img src="@/assets/delete-icon.png" alt="Supprimer" @click="deleteAdmin" class="icon delete-icon">
+              <img src="@/assets/edit-icon.png" alt="Modifier" @click="editAdmin" class="icon edit-icon">
+            </div>
+            <!-- Formulaire pop-up pour ajouter un admin -->
+            <div v-if="showAddAdminForm" class="popup">
+              <div class="popup-contents">
+                <h3>Ajouter un Administrateur</h3>
+                <form @submit.prevent="addAdmin">
+                  <label>Email</label>
+                  <input v-model="newAdmin.email" type="email" required>
+                  <label>Nom</label>
+                  <input v-model="newAdmin.name" type="text" required>
+                  <label>Type</label>
+                  <input v-model="newAdmin.type" type="text" required>
+                  <label>Mot de Passe</label>
+                  <input v-model="newAdmin.password" type="password" required>
+                  <label>Prénom</label>
+                  <input v-model="newAdmin.surname" type="text" required>
+                  <button type="submit">Ajouter</button>
+                  <button type="button" @click="showAddAdminForm = false">Annuler</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="box mission-display">
+            <h2>Affichage des Missions de la Flotte</h2>
+            <!-- Contenu pour afficher les missions -->
+          </div>
+
+          <div class="box cargo-list">
+            <h2>Liste des Marchandises</h2>
+            <!-- Contenu pour afficher les marchandises -->
+          </div>
+
+          <div class="box incident-report">
+            <h2>Présentation des Incidents</h2>
+            <!-- Contenu pour afficher les incidents -->
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="box mission-display">
-      <h2>Affichage des Missions de la Flotte</h2>
-      <!-- Contenu pour afficher les missions -->
-    </div>
-
-    <div class="box cargo-list">
-      <h2>Liste des Marchandises</h2>
-      <!-- Contenu pour afficher les marchandises -->
-    </div>
-
-    <div class="box incident-report">
-      <h2>Présentation des Incidents</h2>
-      <!-- Contenu pour afficher les incidents -->
-    </div>
   </div>
-            </div>
-        </div>
-    </div>
 </template>
 
 <script>
@@ -499,36 +470,36 @@ import axios from 'axios'
 
 export default {
 
-    components: {
-        formVehicule,
-        forVehicule,
-        attrivehicle,
-        formDriver,
-        forDriver,
-    },
-    data() {
-        return {
-            addVehicle: false,
-            currentPage: 'home',
-            selectedButton: 'button4',
-            upvehicle: false,
-            attvehicle: false,
-            DriverProfil: [],
-            tableauData:[],
-            tabData:[],
-            addDriver: false,
-            ModDriver: false,
-            showModal: false,       // Contrôle de l'affichage du pop-up
-            vehicles: [],           // Liste des véhicules récupérés depuis l'API
-            selectedVehicle: null,  // Véhicule sélectionné
-            selectedDriver: null,   // Chauffeur sélectionné
-            startPoint: '',         // Point de départ saisi
-           endPoint: '' , 
+  components: {
+    formVehicule,
+    forVehicule,
+    attrivehicle,
+    formDriver,
+    forDriver,
+  },
+  data() {
+    return {
+      addVehicle: false,
+      currentPage: 'vehicle',
+      selectedButton: 'button4',
+      upvehicle: false,
+      attvehicle: false,
+      DriverProfil: [],
+      tableauData: [],
+      tabData: [],
+      addDriver: false,
+      ModDriver: false,
+      showModal: false,       // Contrôle de l'affichage du pop-up
+      vehicles: [],           // Liste des véhicules récupérés depuis l'API
+      selectedVehicle: null,  // Véhicule sélectionné
+      selectedDriver: null,   // Chauffeur sélectionné
+      startPoint: '',         // Point de départ saisi
+      endPoint: '',
 
-           successMessage: '',
-            errorMessage: '',
+      successMessage: '',
+      errorMessage: '',
 
-            isEditModalOpen: false,
+      isEditModalOpen: false,
       editForm: {
         DrivingLicense: '',
         name: '',
@@ -538,15 +509,15 @@ export default {
       },
       currentDriverId: null,
 
-isOpportunityFormVisible: false,
+      isOpportunityFormVisible: false,
       opportunity: {
         description: '',
         address: '',
         date: '',
       },
 
-           
-           showForm: false,
+
+      showForm: false,
       actionType: '',
       formTitle: '',
       formAction: '',
@@ -558,7 +529,7 @@ isOpportunityFormVisible: false,
       },
       maintenances: [], // This will hold the list of maintenances
       selectedMaintenance: '',
-        showAddAdminForm: false,
+      showAddAdminForm: false,
       newAdmin: {
         email: '',
         name: '',
@@ -572,35 +543,41 @@ isOpportunityFormVisible: false,
       incidents: [], // Liste des incidents
       selectedAdmin: null, // Administrateur sélectionné pour modification ou suppression
 
-     
 
-            // vehicles: [
-            //     {
-                    // Type: '',
-                    // Immatriculation: '',
-                    // State: '',
-                    // Model: '',
-                    // Tonnage: '',
-            //     },
-            // ]
 
-            
-        };
+      // vehicles: [
+      //     {
+      // Type: '',
+      // Immatriculation: '',
+      // State: '',
+      // Model: '',
+      // Tonnage: '',
+      //     },
+      // ]
 
+
+    };
+
+
+  },
+  methods: {
+    closePage() {
+      this.addVehicle = false
+      this.upvehicle = false
+      this.attvehicle = false
+      this.addDriver = false
+      this.ModDriver = false
 
     },
-    methods: {
-        closePage() {
-            this.addVehicle = false
-            this.upvehicle = false
-            this.attvehicle = false
-            this.addDriver = false
-            this.ModDriver = false
+    
+    logout() {
+      localStorage.removeItem('userId')
+      localStorage.removeItem('isAuthentify')
+      this.$router.push('/');
+      window.location.reload();
+    },
 
-        },
-
-
-        openEditModal(driverProfil) {
+    openEditModal(driverProfil) {
       this.editForm = { ...driverProfil }; // Remplir le formulaire avec les données existantes
       this.currentDriverId = driverProfil.id;
       this.isEditModalOpen = true;
@@ -610,32 +587,32 @@ isOpportunityFormVisible: false,
       this.editForm = {}; // Réinitialiser le formulaire
     },
     async updateDriverProfil() {
-            try {
-                const token = localStorage.getItem('token');
-                // console.log("Voici l'id de la tache:");
-                // console.log(this.movedItemId);
-                const response = await axios.patch(`http://localhost:3001/driverprofil/${this.currentDriverId}`, {
-                    // Les données de la tâche à mettre à jour
-                    DrivingLicense: this.editForm.DrivingLicense,
-                    name: this.editForm.name,
-                    email: this.editForm.email,
-                    vehicleId: this.editForm.vehicleId,
-                }, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
+      try {
+        const token = localStorage.getItem('token');
+        // console.log("Voici l'id de la tache:");
+        // console.log(this.movedItemId);
+        const response = await axios.patch(`http://192.168.100.97:3001/driverprofil/${this.currentDriverId}`, {
+          // Les données de la tâche à mettre à jour
+          DrivingLicense: this.editForm.DrivingLicense,
+          name: this.editForm.name,
+          email: this.editForm.email,
+          vehicleId: this.editForm.vehicleId,
+        }, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
 
-                this.driverEdit = response.data;
-                this.closeEditModal();
-                console.log("Tache modifiée avec succès");
-                window.location.reload();
+        this.driverEdit = response.data;
+        this.closeEditModal();
+        console.log("Tache modifiée avec succès");
+        window.location.reload();
 
-            } catch (error) {
-                console.error('Erreur lors de la modification de la tâche :', error);
-            }
-        },
-        async fetchData() {
+      } catch (error) {
+        console.error('Erreur lors de la modification de la tâche :', error);
+      }
+    },
+    async fetchData() {
       try {
         const [adminsRes, missionsRes, cargosRes, incidentsRes] = await Promise.all([
           axios.get('/api/admins'),
@@ -677,7 +654,7 @@ isOpportunityFormVisible: false,
     async deleteDriver(id) {
       if (confirm("Êtes-vous sûr de vouloir supprimer ce chauffeur?")) {
         try {
-          const response = await fetch(`http://localhost:3001/driverprofil/${id}`, {
+          const response = await fetch(`http://192.168.100.97:3001/driverprofil/${id}`, {
             method: "DELETE",
           });
           if (response.ok) {
@@ -694,27 +671,27 @@ isOpportunityFormVisible: false,
     },
 
     async deleteVehicle(vehicleId) {
-  // Demander confirmation avant de supprimer le véhicule
-  if (confirm("Êtes-vous sûr de vouloir supprimer ce véhicule?")) {
-    try {
-      // Envoie la requête de suppression au backend
-      await axios.delete(`http://localhost:3001/vehicles/${vehicleId}`);
-      
-      // Met à jour la liste des véhicules après suppression
-      this.vehicles = this.vehicles.filter(vehicle => vehicle.vehicleId !== vehicleId);
-      
-      // Affiche un message de succès
-      this.successMessage = 'Véhicule supprimé avec succès !';
-      alert(this.successMessage);
-    } catch (error) {
-      // Affiche un message d'erreur en cas d'échec
-      this.errorMessage = 'Échec lors de la suppression : ' + (error.response?.data?.message || error.message);
-      alert(this.errorMessage);
-    }
-  }
-},
+      // Demander confirmation avant de supprimer le véhicule
+      if (confirm("Êtes-vous sûr de vouloir supprimer ce véhicule?")) {
+        try {
+          // Envoie la requête de suppression au backend
+          await axios.delete(`http://192.168.100.97:3001/vehicles/${vehicleId}`);
 
-   
+          // Met à jour la liste des véhicules après suppression
+          this.vehicles = this.vehicles.filter(vehicle => vehicle.vehicleId !== vehicleId);
+
+          // Affiche un message de succès
+          this.successMessage = 'Véhicule supprimé avec succès !';
+          alert(this.successMessage);
+        } catch (error) {
+          // Affiche un message d'erreur en cas d'échec
+          this.errorMessage = 'Échec lors de la suppression : ' + (error.response?.data?.message || error.message);
+          alert(this.errorMessage);
+        }
+      }
+    },
+
+
     async updateAdmin() {
       if (this.selectedAdmin) {
         try {
@@ -729,8 +706,8 @@ isOpportunityFormVisible: false,
 
 
 
-    
-    
+
+
     prepareToDeleteAdmin() {
       // Préparer la suppression de l'administrateur (par exemple, en affichant un prompt de confirmation)
     },
@@ -747,7 +724,7 @@ isOpportunityFormVisible: false,
     },
 
 
-        showOpportunityForm() {
+    showOpportunityForm() {
       this.isOpportunityFormVisible = true;
     },
     closeOpportunityForm() {
@@ -759,7 +736,7 @@ isOpportunityFormVisible: false,
       this.closeOpportunityForm();
     },
 
-        showPopup(action) {
+    showPopup(action) {
       this.actionType = action;
       if (action === 'add') {
         this.formTitle = 'Ajouter Maintenance';
@@ -802,44 +779,44 @@ isOpportunityFormVisible: false,
       }
       this.closePopup();
     },
-        async fetchVehicles() {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await axios.get(`http://localhost:3001/vehicles`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                this.vehicles = response.data;
-                console.log("Voici la liste des vehicles");
-                console.log(this.vehicles);
-            } catch (error) {
-                this.errorMessage = 'Erreur lors de la récupération des véhicules : ' + (error.response ? error.response.data.message : error.message);
-            }
+    async fetchVehicles() {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`http://192.168.100.97:3001/vehicles`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        this.vehicles = response.data;
+        console.log("Voici la liste des vehicles");
+        console.log(this.vehicles);
+      } catch (error) {
+        this.errorMessage = 'Erreur lors de la récupération des véhicules : ' + (error.response ? error.response.data.message : error.message);
+      }
     },
 
     async fetchDriverProfil() {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await axios.get(`http://localhost:3001/driverprofil`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                this.DriverProfil = response.data;
-                console.log("Voici la liste des chauffeurs");
-                console.log(this.DriverProfil);
-            } catch (error) {
-                this.errorMessage = 'Erreur lors de la récupération des chauffeurs : ' + (error.response ? error.response.data.message : error.message);
-            }
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`http://192.168.100.97:3001/driverprofil`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        this.DriverProfil = response.data;
+        console.log("Voici la liste des chauffeurs");
+        console.log(this.DriverProfil);
+      } catch (error) {
+        this.errorMessage = 'Erreur lors de la récupération des chauffeurs : ' + (error.response ? error.response.data.message : error.message);
+      }
     },
 
-    
-    
-    
+
+
+
     async planRoute() {
       try {
-        const response = await fetch('http://localhost:3000/api/plan-route', {
+        const response = await fetch('http://192.168.100.97:3000/api/plan-route', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -870,56 +847,56 @@ isOpportunityFormVisible: false,
       this.showModal = false;
     },
 
-        selectButton(button) {
-            this.selectedButton = button;
-        },
-        showPage(page) {
-            this.currentPage = page;
-        },
-        redirectToAjoutPage() {
-            this.addVehicle = true;
-        },
-        redirectToUpdatePage() {
-            this.upvehicle = true;
-        },
-        redirectToAddPage() {
-            this.addDriver = true;
-        },
-        redirectToModifierPage() {
-            this.ModDriver = true;
-        },
-        redirectToSupprimerPage() {
-        },
-        redirectToAttribuerPage() {
-            this.attvehicle = true;
-        }
+    selectButton(button) {
+      this.selectedButton = button;
     },
-    trierTableau(colonne) {
-        const ordre = this.sortedOrder === 'asc' ? 'desc' : 'asc';
-        this.sortedOrder = ordre;
-
-        this.tableauData.sort((a, b) => {
-            const valA = Object.values(a)[colonne];
-            const valB = Object.values(b)[colonne];
-
-            if (ordre === 'asc') {
-                return valA.toString().localeCompare(valB.toString(), undefined, { numeric: true });
-            } else {
-                return valB.toString().localeCompare(valA.toString(), undefined, { numeric: true });
-            }
-        });
+    showPage(page) {
+      this.currentPage = page;
     },
+    redirectToAjoutPage() {
+      this.addVehicle = true;
+    },
+    redirectToUpdatePage() {
+      this.upvehicle = true;
+    },
+    redirectToAddPage() {
+      this.addDriver = true;
+    },
+    redirectToModifierPage() {
+      this.ModDriver = true;
+    },
+    redirectToSupprimerPage() {
+    },
+    redirectToAttribuerPage() {
+      this.attvehicle = true;
+    }
+  },
+  trierTableau(colonne) {
+    const ordre = this.sortedOrder === 'asc' ? 'desc' : 'asc';
+    this.sortedOrder = ordre;
 
-    mounted() {
-      
+    this.tableauData.sort((a, b) => {
+      const valA = Object.values(a)[colonne];
+      const valB = Object.values(b)[colonne];
+
+      if (ordre === 'asc') {
+        return valA.toString().localeCompare(valB.toString(), undefined, { numeric: true });
+      } else {
+        return valB.toString().localeCompare(valA.toString(), undefined, { numeric: true });
+      }
+    });
+  },
+
+  mounted() {
+
     this.fetchVehicles();
-  
-    this.fetchData(); 
+
+    this.fetchData();
     this.fetchDriverProfil();
 
     this.maintenances = [
       { id: '', nom: '', type: '', date: '', vehicule: '' },
-      
+
     ];
 
   }
@@ -930,218 +907,222 @@ isOpportunityFormVisible: false,
 @import url(https://fonts.googleapis.com/css2?family=Monda:wght@100;200;300;400;500;600;700&display=swap);
 
 table {
-    border-collapse: collapse;
-    margin-top: 30px;
+  border-collapse: collapse;
+  margin-top: 30px;
 }
 
 table td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
 }
 
 table tr:last-child td {
-    border-bottom: none;
+  text-align: center;
 }
 
 table th {
-    background-color: green;
-    padding: 10px;
-    color: white;
+  background-color: white;
+  color: rgb(5, 5, 69)!important;
+  color: white;
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 25px;
+  font-weight: 700;
 }
 
 
 .ajouter {
-    background-color: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
 }
 
 
 .attribuer {
-    background-color: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
 }
 
 .Modifier {
-    background-color: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    width: 100%;
-    height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .selected {
-    color: white !important;
-    font-weight: bold !important;
-    transition: all 0.3s;
-    font-size: 25px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+  color: white !important;
+  font-weight: bold !important;
+  transition: all 0.3s;
+  font-size: 25px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
 /* Global Styles */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
 
 .container {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Sidebar Styles */
 .sidebar {
-    width: 15%;
-    height: 100%;
-    background-color: transparent;
-    color: #092c52;
-    position: fixed;
-    top: 0;
-    left: 0;
+  width: 15%;
+  height: 100%;
+  background-color: transparent;
+  color: #092c52;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .sidebar-header {
-    padding: 20px;
-    background-color: transparent;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 30px;
+  padding: 20px;
+  background-color: transparent;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 30px;
 }
 
 .sidebar-nav {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 
 .sidebar-nav li {
-    margin-top: 40px !important;
-    color: rgba(0, 0, 0, 1);
-    font-size: 22px;
-    display: flex;
-    justify-content: space-between;
-    width: 95%;
-    margin: auto;
-    text-align: left;
-    padding: 8px 0;
-    transition: all 0.3s;
+  margin-top: 40px !important;
+  color: rgba(0, 0, 0, 1);
+  font-size: 22px;
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  margin: auto;
+  text-align: left;
+  padding: 8px 0;
+  transition: all 0.3s;
 }
 
 .sidebar-nav li i {
-    padding: 0 15px;
-    width: 10%;
+  padding: 0 15px;
+  width: 10%;
 }
 
 .sidebar-nav li a {
-    color: rgba(0, 0, 0, 0.8);
-    text-decoration: none;
-    font-size: 23px;
-    padding: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    text-align: left;
-    width: 80%;
+  color: rgba(0, 0, 0, 0.8);
+  text-decoration: none;
+  font-size: 23px;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-align: left;
+  width: 80%;
 }
 
 .sidebar-nav li :hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .sidebar-nav li a:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* Main Content Styles */
 .main-content {
-    width: 85%;
-    margin-left: 15%;
-    height: 100%;
-    position: fixed;
-    padding: 10px;
+  width: 85%;
+  margin-left: 15%;
+  height: 100%;
+  position: fixed;
+  padding: 10px;
 }
 
 .in_container {
-    width: 97%;
-    margin: auto;
-    height: 97%;
-    border-radius: 10px;
-    background-color: #4444442c;
+  width: 97%;
+  margin: auto;
+  height: 97%;
+  border-radius: 10px;
+  background-color: #4444442c;
 }
 
 .fa-arrow-right {
-    color: #092c52;
-    align-items: end;
-    justify-content: end;
-    text-align: right;
+  color: #092c52;
+  align-items: end;
+  justify-content: end;
+  text-align: right;
 }
 
 @media (max-width: 768px) {}
 
 .container1 {
-    display: flex;
-    justify-content: space-between;
-    margin: 1%;
-    width: 98%;
+  display: flex;
+  justify-content: space-between;
+  margin: 1%;
+  width: 98%;
 }
 
 .contain1 {
-    border-radius: 10px;
-    margin-top: 15px;
-    width: 24.5%;
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
+  border-radius: 10px;
+  margin-top: 15px;
+  width: 24.5%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
 }
 
 .contain1 img {
-    width: 30%;
-    height: 120px;
+  width: 30%;
+  height: 120px;
 }
 
 .contain1 .p1 {
-    width: 65%;
-    padding: 19px 0;
-    font-size: 20px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  width: 65%;
+  padding: 19px 0;
+  font-size: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .contain2 {
-    border-radius: 10px;
-    margin-top: 15px;
-    width: 24.5%;
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
+  border-radius: 10px;
+  margin-top: 15px;
+  width: 24.5%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
 }
 
 .contain2 img {
-    width: 30%;
-    height: 120px;
+  width: 30%;
+  height: 120px;
 }
 
 .p2 {
-    width: 65%;
-    padding: 19px 0;
-    font-size: 20px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  width: 65%;
+  padding: 19px 0;
+  font-size: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .contain3 {
-    border-radius: 10px;
-    margin-top: 15px;
-    width: 24.5%;
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
+  border-radius: 10px;
+  margin-top: 15px;
+  width: 24.5%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
 }
 
 
@@ -1155,11 +1136,6 @@ button {
   margin: 5px;
   font-size: 16px;
 }
-
-button:hover {
-  background-color: #07314b;
-}
-
 /* Styles pour le pop-up (modal) */
 .modal-overlay {
   position: fixed;
@@ -1198,13 +1174,15 @@ label {
   display: block;
   margin-bottom: 0.5em;
   font-weight: bold;
- 
+
 }
-.ittinéraire button{
-   position: relative;
-   margin-top: 55%;
-   margin-left: 80%;
+
+.ittinéraire button {
+  position: relative;
+  margin-top: 55%;
+  margin-left: 80%;
 }
+
 input,
 select {
   width: 30rem;
@@ -1212,209 +1190,204 @@ select {
   border-radius: 4px;
   border: 1px solid #ccc;
 }
+
 .contain3 img {
-    width: 30%;
-    height: 120px;
+  width: 30%;
+  height: 120px;
 }
 
 .p3 {
-    width: 65%;
-    padding: 19px 0;
-    font-size: 20px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  width: 65%;
+  padding: 19px 0;
+  font-size: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .contain4 {
-    border-radius: 10px;
-    margin-top: 15px;
-    width: 24.5%;
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
+  border-radius: 10px;
+  margin-top: 15px;
+  width: 24.5%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
 }
 
 .contain4 img {
-    width: 30%;
-    height: 120px;
+  width: 30%;
+  height: 120px;
 }
 
 .p4 {
-    width: 65%;
-    padding: 19px 0;
-    font-size: 20px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  width: 65%;
+  padding: 19px 0;
+  font-size: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .containes1 {
-    position: absolute;
-    margin-top: 12%;
-    display: flex;
-    justify-content: space-between;
-    
+  position: absolute;
+  margin-top: 12%;
+  display: flex;
+  justify-content: space-between;
+
 }
 
 .contais1 {
-    width: 31rem;
-    margin: 0.1%;
-    background-color: white;
-    border-radius: 2%;
-    box-shadow: 0PX 0PX 2PX 2PX white;
+  width: 31rem;
+  margin: 0.1%;
+  background-color: white;
+  border-radius: 2%;
+  box-shadow: 0PX 0PX 2PX 2PX white;
 }
 
 .contais1 h1 {
-    position: relative;
-    left: 4%;
-    color: green;
-    margin: 10%
+  position: relative;
+  left: 4%;
+  color: green;
+  margin: 10%
 }
 
 .contais1 h3 {
-    font-size: 1.8rem;
-    position: relative;
-    left: 4%;
-    color: #031d36;
-    margin: 4.5%
+  font-size: 1.8rem;
+  position: relative;
+  left: 4%;
+  color: #031d36;
+  margin: 4.5%
 }
 
 .contais1 span {
-    font-size: 1.6rem;
-    position: relative;
-    left: 4%;
+  font-size: 1.6rem;
+  position: relative;
+  left: 4%;
 }
 
 .contais2 {
-    width: 31rem;
-    margin: 0.1%;
-    background-color: white;
-    border-radius: 2%;
-    box-shadow: 0PX 0PX 2PX 2PX white;
-    position: relative;
-    left: 2%
+  width: 31rem;
+  margin: 0.1%;
+  background-color: white;
+  border-radius: 2%;
+  box-shadow: 0PX 0PX 2PX 2PX white;
+  position: relative;
+  left: 2%
 }
 
 .contais2 h1 {
-    position: relative;
-    left: 4%;
-    color: green;
-    margin: 10%
+  position: relative;
+  left: 4%;
+  color: green;
+  margin: 10%
 }
 
 .contais2 h3 {
-    font-size: 1.9rem;
-    position: relative;
-    left: 4%;
-    color: #031d36;
-    margin: 4.5%
+  font-size: 1.9rem;
+  position: relative;
+  left: 4%;
+  color: #031d36;
+  margin: 4.5%
 }
 
 .contais2 span {
-    font-size: 1.8rem;
-    position: relative;
-    left: 4%;
+  font-size: 1.8rem;
+  position: relative;
+  left: 4%;
 }
 
 .contais3 {
-    width: 31rem;
-    margin: 0.1%;
-    background-color: white;
-    border-radius: 2%;
-    box-shadow: 0PX 0PX 2PX 2PX white;
-    position: relative;
-    left: 4%;
+  width: 31rem;
+  margin: 0.1%;
+  background-color: white;
+  border-radius: 2%;
+  box-shadow: 0PX 0PX 2PX 2PX white;
+  position: relative;
+  left: 4%;
 
 }
 
 .contais3 h1 {
-    position: relative;
-    left: 4%;
-    color: green;
-    margin: 10%
+  position: relative;
+  left: 4%;
+  color: green;
+  margin: 10%
 }
 
 .contais3 h3 {
-    font-size: 1.8rem;
-    position: relative;
-    left: 4%;
-    color: #031d36;
-    margin: 4.5%
+  font-size: 1.8rem;
+  position: relative;
+  left: 4%;
+  color: #031d36;
+  margin: 4.5%
 }
 
 .tainer1 {
-    font-size: 2.5rem;
-    color: #031d36;
+  font-size: 2.5rem;
+  color: #031d36;
 
 }
 
 .tainer2 {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .tainer3 {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin: auto;
-    border-radius: 10px; 
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  height: 8%;
+  margin: auto;
 }
-.trainContain{
-    width: 60%;
-    display: flex;
-    
-   position: relative;
-   left: 1200px;
+
+.trainContain {
+  width: 100%;
+  background-color: white;
+  height: 50%;
+  margin-top: 2.5%;
+  
 }
-.taine button {
-    font-size: 1.2rem;
-    position: relative;
-    top: 10%;
-    height: 3rem;
-    background-color: transparent;
-    width: 9rem;
-    font-weight: bold;
-    border-radius: 5px;
-    color: white;
-background-color: rgb(5, 5, 69);
-    border: radius;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+.trainContainIn{
+  display: flex;
+  width: 30%;
+  margin-left: 70%;
+  justify-content: space-between;
+  margin-top: 0.5%;
 }
-.taine button:hover {
-    cursor: pointer;
-    /* border:1px solid rgb(9, 119, 100); */
-    color: white;
+.trainContain button {
+  width: 40%;
+  font-size: 25px;
+  background-color: transparent;
+  font-weight: bold;
+  color: rgb(5, 5, 69);
+}
+
+.trainContainIn button:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 1.4rem;
-    margin-top: 20%;
-
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  width: 95%!important;
+  margin: auto;
+  font-size: 1.4rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 th,
 td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 th {
-    cursor: pointer;
-    background-color: #f2f2f2;
+  cursor: pointer;
+  background-color: #f2f2f2;
 }
-
-th:hover {
-    background-color: #ddd;
-}
-
 .sorted-asc::after {
-    content: " ▲";
+  content: " ▲";
 }
 
 .sorted-desc::after {
-    content: " ▼";
+  content: " ▼";
 }
 
 
@@ -1428,7 +1401,7 @@ th:hover {
 .table-container {
   flex: 1;
   padding: 20px;
-  
+
   color: white;
 }
 
@@ -1437,8 +1410,10 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
-  border: 1px solid #ffffff; /* White border for contrast */
+th,
+td {
+  border: 1px solid #ffffff;
+  /* White border for contrast */
   padding: 10px;
   text-align: left;
 }
@@ -1446,26 +1421,23 @@ th, td {
 .buttons-container {
   padding: 10px;
   text-align: center;
-position: relative;
-bottom: 90%;
-left: 33rem;
+  position: relative;
+  bottom: 90%;
+  left: 33rem;
 
 }
 
 button {
-    font-size: 1.2rem;
-margin: 1%;
+  font-size: 1.2rem;
+  margin: 1%;
   border: none;
   padding: 10px 20px;
   margin: 0 10px;
   cursor: pointer;
   border-radius: 5px;
   font-weight: bold;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;;
-}
-
-button:hover {
-  color: white; /* Darker green on hover */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+  ;
 }
 
 .popup {
@@ -1560,7 +1532,7 @@ header h1 {
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  width:  450PX;
+  width: 450PX;
   width: 33rem;
   height: 35rem;
 }
@@ -1570,7 +1542,8 @@ form label {
   margin-bottom: 5px;
 }
 
-form input, form textarea {
+form input,
+form textarea {
   width: 28rem;
   padding: 8px;
   margin-bottom: 10px;
@@ -1619,12 +1592,16 @@ form button:hover {
   background-color: white;
 }
 
-.mission-display, .cargo-list, .incident-report {
-  background-color: #e0f7fa; /* Bleu clair */
+.mission-display,
+.cargo-list,
+.incident-report {
+  background-color: #e0f7fa;
+  /* Bleu clair */
 }
 
 .add-button {
-  background-color: #4CAF50; /* Vert */
+  background-color: #4CAF50;
+  /* Vert */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -1691,82 +1668,104 @@ form button:hover {
   justify-content: center;
   gap: 10px;
 }
-.icone{
+
+.icone {
   height: 2rem;
   width: 2rem;
-  
+
 }
 
 .modali {
-  display: flex; /* Utiliser flexbox pour centrer le modal */
+  display: flex;
+  /* Utiliser flexbox pour centrer le modal */
   justify-content: center;
   align-items: center;
-  position: fixed; /* Position fixe pour couvrir l'écran */
-  z-index: 1000; /* S'assurer qu'il est au-dessus des autres éléments */
+  position: fixed;
+  /* Position fixe pour couvrir l'écran */
+  z-index: 1000;
+  /* S'assurer qu'il est au-dessus des autres éléments */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Fond semi-transparent */
 }
 
 .modali-content {
-  background-color: white; /* Fond blanc pour le contenu du modal */
-  border-radius: 8px; /* Coins arrondis */
-  padding: 20px; /* Espacement interne */
-  width: 400px; /* Largeur du modal */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Ombre pour le modal */
-  position: relative; /* Position relative pour le bouton de fermeture */
+  background-color: white;
+  /* Fond blanc pour le contenu du modal */
+  border-radius: 8px;
+  /* Coins arrondis */
+  padding: 20px;
+  /* Espacement interne */
+  width: 400px;
+  /* Largeur du modal */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  /* Ombre pour le modal */
+  position: relative;
+  /* Position relative pour le bouton de fermeture */
 }
 
 .close {
-  position: absolute; /* Bouton de fermeture dans le coin supérieur droit */
+  position: absolute;
+  /* Bouton de fermeture dans le coin supérieur droit */
   top: 10px;
   right: 10px;
-  cursor: pointer; /* Curseur pointer pour le bouton */
-  font-size: 20px; /* Taille du texte */
+  cursor: pointer;
+  /* Curseur pointer pour le bouton */
+  font-size: 20px;
+  /* Taille du texte */
 }
 
 h2 {
-  margin: 0 0 20px; /* Marge pour le titre */
+  margin: 0 0 20px;
+  /* Marge pour le titre */
 }
 
 form {
   display: flex;
-  flex-direction: column; /* Disposition verticale des champs */
+  flex-direction: column;
+  /* Disposition verticale des champs */
 }
 
 label {
-  margin-bottom: 5px; /* Marge sous les labels */
+  margin-bottom: 5px;
+  /* Marge sous les labels */
 }
 
 input {
-  margin-bottom: 15px; /* Marge sous les champs de saisie */
-  padding: 10px; /* Espacement interne */
-  border: 1px solid #ccc; /* Bordure grise */
-  border-radius: 4px; /* Coins arrondis pour les champs */
+  margin-bottom: 15px;
+  /* Marge sous les champs de saisie */
+  padding: 10px;
+  /* Espacement interne */
+  border: 1px solid #ccc;
+  /* Bordure grise */
+  border-radius: 4px;
+  /* Coins arrondis pour les champs */
 }
 
 button {
-  padding: 10px; /* Espacement interne */
-  background-color: #007bff; /* Couleur de fond du bouton */
-  color: white; /* Couleur du texte */
-  border: none; /* Pas de bordure */
-  border-radius: 4px; /* Coins arrondis */
-  cursor: pointer; /* Curseur pointer pour le bouton */
+  padding: 10px;
+  /* Espacement interne */
+  background-color: #007bff;
+  /* Couleur de fond du bouton */
+  color: white;
+  /* Couleur du texte */
+  border: none;
+  /* Pas de bordure */
+  border-radius: 4px;
+  /* Coins arrondis */
+  cursor: pointer;
+  /* Curseur pointer pour le bouton */
 }
 
-button:hover {
-  background-color: #0056b3; /* Couleur plus foncée au survol */
-}
 
 /* Styles responsives */
 @media (max-width: 500px) {
   .modal-content {
-    width: 90%; /* Largeur du modal sur mobile */
+    width: 90%;
+    /* Largeur du modal sur mobile */
   }
 }
-
-
-
 </style>

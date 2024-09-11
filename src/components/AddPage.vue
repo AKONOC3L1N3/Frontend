@@ -66,7 +66,7 @@
       methods: {
           async createAccount() {
               try {
-                  await axios.post('http://localhost:3001/driverprofil', {
+                  await axios.post('http://192.168.100.97:3001/driverprofil', {
                     name: this. name,
                     email: this. email,
                     password: this. password,

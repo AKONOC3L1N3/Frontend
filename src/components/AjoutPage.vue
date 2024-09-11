@@ -63,7 +63,7 @@
       methods: {
           async createAccount() {
               try {
-                  await axios.post('http://localhost:3001/vehicles', {
+                  await axios.post('http://192.168.100.97:3001/vehicles', {
                       name: this.name,
                       type: this.type,
                       state: this.state,

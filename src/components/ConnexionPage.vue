@@ -31,8 +31,8 @@ export default {
     methods: {
         async login() {
             try {
-                // Make a POST request to the /auth/login endpoint on the local server (http://localhost:3001)
-                const response = await axios.post('http://localhost:3001/auth/login', {
+                // Make a POST request to the /auth/login endpoint on the local server (http://192.168.100.97:3001)
+                const response = await axios.post('http://192.168.100.97:3001/auth/login', {
                     email: this.email,
                     password: this.password
                 });
@@ -52,7 +52,7 @@ export default {
             try {
                 const token = localStorage.getItem('token');
 
-                const response = await axios.get('http://localhost:3001/users', {
+                const response = await axios.get('http://192.168.100.97:3001/users', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
