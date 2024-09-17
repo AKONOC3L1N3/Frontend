@@ -48,6 +48,7 @@
   
   <script>
   import axios from 'axios';
+  import config from "@/config";
   
   export default {
       data() {
@@ -66,7 +67,7 @@
       methods: {
           async createAccount() {
               try {
-                  await axios.post('http://192.168.100.97:3001/driverprofil', {
+                  await axios.post(`${config.apiBaseUrl}/driverprofil`, {
                     name: this. name,
                     email: this. email,
                     password: this. password,

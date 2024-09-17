@@ -50,6 +50,8 @@
 
 
 <script>
+import config from "../config";
+
 export default {
   data() {
     return {
@@ -76,7 +78,7 @@ export default {
   },
   mounted() {
     // Appel à une API pour obtenir les chauffeurs enregistrés
-    fetch('/api/chauffeurs')
+    fetch(`${config.apiBaseUrl}/api/chauffeurs`)
       .then(response => response.json())
       .then(data => {
 

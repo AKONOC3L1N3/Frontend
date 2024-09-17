@@ -39,6 +39,7 @@
 
 <script>
 import axios from 'axios';
+import config from "../config";
 
 export default {
     data() {
@@ -55,7 +56,7 @@ export default {
     methods: {
         async createAccount() {
             try {
-                await axios.post('http://192.168.100.97:3001/users', {
+                await axios.post(`${config.apiBaseUrl}/users`, {
                     name: this.name,
                     surname: this.surname,
                     email: this.email,

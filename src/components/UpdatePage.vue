@@ -40,6 +40,8 @@
   </template>
   
   <script>
+  import config from "../config";
+
   export default {
     props: {
       vehicleData: {
@@ -55,7 +57,7 @@
     methods: {
       submitForm() {
         // Remplacer l'URL par celle de votre API
-        fetch(`https://votre-api-endpoint.com/modifier/${this.formData.id}`, {
+        fetch(`${config.apiBaseUrl}/modifier/${this.formData.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -66,8 +68,6 @@
           .then(data => {
             console.log('Success:', data);
             // Réinitialiser le formulaire ou naviguer après l'envoi
-
-            
             this.formData = {
               type: '',
               immatriculation: '',

@@ -19,6 +19,7 @@
 
 <script>
 import axios from 'axios';
+import config from "../config";
 
 export default {
     data() {
@@ -31,8 +32,8 @@ export default {
     methods: {
         async login() {
             try {
-                // Make a POST request to the /auth/login endpoint on the local server (http://192.168.100.97:3001)
-                const response = await axios.post('http://192.168.100.97:3001/auth/login', {
+                // Make a POST request to the /auth/login endpoint on the local server (${config.apiBaseUrl})
+                const response = await axios.post(`${config.apiBaseUrl}/auth/login`, {
                     email: this.email,
                     password: this.password
                 });
@@ -52,7 +53,7 @@ export default {
             try {
                 const token = localStorage.getItem('token');
 
-                const response = await axios.get('http://192.168.100.97:3001/users', {
+                const response = await axios.get(`${config.apiBaseUrl}/users`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

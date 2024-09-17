@@ -2,15 +2,16 @@
   <div id="app" class="container">
     <div class="sidebar">
       <div class="sidebar-header">
-        <h3>Dashboard <a @click="logout"><router-link class="menu" to="/"><i style="color: red; padding-left: 20px;"
-          class="fa fa-power-off"></i></router-link></a></h3>
+        <h3>Dashboard</h3>
       </div>
+
       <ul class="sidebar-nav">
         <li :class="{ selected: currentPage === 'home' }" @click="showPage('home')">
           <i :style="{ color: currentPage === 'home' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }" class="fas fa-home"></i>
           <a :style="{ color: currentPage === 'home' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Acceuil</a>
           <i class="fas fa fa-arrow-right"></i>
         </li>
+
         <li :class="{ selected: currentPage === 'vehicle' }" @click="showPage('vehicle')">
           <i :style="{ color: currentPage === 'vehicle' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }" class="fas fa-car"></i>
           <a :style="{ color: currentPage === 'vehicle' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Vehicles</a>
@@ -30,6 +31,7 @@
           <a :style="{ color: currentPage === 'services' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Services</a>
           <i class="fas fa fa-arrow-right"></i>
         </li>
+
         <li :class="{ selected: currentPage === 'itineraire' }" @click="showPage('itineraire')">
           <i :style="{ color: currentPage === 'itineraire' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }"
             class="fas fa-chart-line"></i>
@@ -44,60 +46,74 @@
           </a>
           <i class="fas fa fa-arrow-right"></i>
         </li>
-        <li :class="{ selected: currentPage === 'parametre' }" @click="showPage('parametre')">
+        
+        <!-- <li :class="{ selected: currentPage === 'parametre' }" @click="showPage('parametre')">
           <i :style="{ color: currentPage === 'parametre' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }" class="fa fa-cog"></i>
           <a :style="{ color: currentPage === 'parametre' ? '#202020c9' : 'rgba(0, 0, 0, 0.8)' }">Parametres</a>
           <i class="fas fa fa-arrow-right"></i>
-        </li>
+        </li> -->
       </ul>
+
+      <div class="logout">
+        <router-link class="menu" to="/" @click="logout">
+          <span>Deconexion</span>
+          <i style="color: red;" class="fa fa-power-off"></i>
+        </router-link>
+      </div>
     </div>
+
     <div class="main-content">
       <div class="in_container" v-if="currentPage === 'home'">
-        <div class="container1">
-          <div class="contain1">
+        <div class="top">
+          <div class="top-blocks">
             <img src="..//assets/icvoiture.png" alt="">
-            <h3 class="p1">24 véhicules disponibles actuellement</h3>
+            <span>24 véhicules disponibles actuellement</span>
           </div>
-          <div class="contain2">
+
+          <div class="top-blocks">
             <img src="..//assets/chaur.png" alt="">
-            <h3 class="p2">20 chauffeurs disponibles</h3>
+            <span>20 chauffeurs disponibles</span>
           </div>
-          <div class="contain3">
+
+          <div class="top-blocks">
             <img src="..//assets/maintenance.png" alt="">
-            <h3 class="p3">service de maintenance <br> disponible</h3>
+            <span>service de maintenance <br> disponible</span>
           </div>
-          <div class="contain4">
+          
+          <!-- <div class="top-blocks">
             <img src="..//assets/aide.png" alt="">
-            <h3 class="p4">Besoin d'aide?</h3>
+            <span>Besoin d'aide?</span>
+          </div> -->
+        </div>
+
+        <div class="bottom">
+          <div class="contais">
+            <h1>Listes des opportunités <br>Signalées ce mois</h1>
+            <h3>DOUALA: Bonapriso:</h3> <span>Cinq chargements</span>
+            <h3>KRIBI: Bonadikombo:</h3> <span>Huit dépôts</span>
+            <h3>YAOUNDE: Essos:</h3> <span>Quatre chargements</span>
+            <h3>YAOUNDE: Mokolo:</h3> <span>Quinze dépôts</span>
+            <h3>Bertoua: Yadémé:</h3> <span>Sept chargements</span>
           </div>
-          <div class="containes1">
-            <div class="contais1">
-              <h1>Listes des opportunités <br>Signalées ce mois</h1>
-              <h3>DOUALA: Bonapriso:</h3> <span>Cinq chargements</span>
-              <h3>KRIBI: Bonadikombo:</h3> <span>Huit dépôts</span>
-              <h3>YAOUNDE: Essos:</h3> <span>Quatre chargements</span>
-              <h3>YAOUNDE: Mokolo:</h3> <span>Quinze dépôts</span>
-              <h3>Bertoua: Yadémé:</h3> <span>Sept chargements</span>
 
+          <div class="contais">
+            <h1>Listes des alertes de ce mois</h1>
+            <h3>Maintenance:</h3> <span>Treize</span>
+            <h3>Arrêts pour chargement:</h3><span>Trente un</span>
+            <h3>Arrêts pour dépôts</h3> <span>Treize</span>
+            <h3>Arrêts pour vérification</h3> <span>Quinze</span>
+          </div>
 
-            </div>
-            <div class="contais2">
-              <h1>Listes des alertes de ce mois</h1>
-              <h3>Maintenance:</h3> <span>Treize</span>
-              <h3>Arrêts pour chargement:</h3><span>Trente un</span>
-              <h3>Arrêts pour dépôts</h3> <span>Treize</span>
-              <h3>Arrêts pour vérification</h3> <span>Quinze</span>
-            </div>
-            <div class="contais3">
-              <h1>Prestances de services</h1>
-              <h3>intégration d'API</h3>
-              <h3>Devenir un partenaire</h3>
-              <h3>Analyse des flottes de données:</h3>
-              <h3>Solutions pour les constructeurs automobiles</h3>
-            </div>
+          <div class="contais">
+            <h1>Prestances de services</h1>
+            <h3>intégration d'API</h3>
+            <h3>Devenir un partenaire</h3>
+            <h3>Analyse des flottes de données:</h3>
+            <h3>Solutions pour les constructeurs automobiles</h3>
           </div>
         </div>
       </div>
+
       <div class="in_container" v-if="currentPage === 'vehicle'">
         <div v-if="addVehicle" class="ajouter">
           <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
@@ -151,6 +167,7 @@
           </table>
         </div>
       </div>
+
       <div class="in_container" v-if="currentPage === 'chauffeur'">
         <div v-if="addDriver" class="ajouter">
           <i class="fas fa-window-close" @click="closePage" style="font-size: 20px; color: red"></i>
@@ -162,16 +179,11 @@
         </div>
 
         <div class="tainer3">
-
           <div class="trainContain">
             <div class="taine">
               <button @click="redirectToAddPage">AJOUTER</button>
             </div>
-
-
-
           </div>
-
         </div>
         <div class="tainer2">
           <table>
@@ -229,8 +241,8 @@
           </div>
         </div>
       </div>
-      <div class="in_container" v-if="currentPage === 'services'">
 
+      <div class="in_container" v-if="currentPage === 'services'">
         <div id="appi">
           <header>
             <h1>Présentation des Services</h1>
@@ -279,6 +291,7 @@
           </div>
         </div>
       </div>
+
       <div class="in_container" v-if="currentPage === 'itineraire'">
         <div>
           <div class="ittinéraire">
@@ -347,6 +360,7 @@
                   <th>TYPE</th>
                   <th>DATE</th>
                   <th>VEHICULE</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -361,11 +375,11 @@
           </div>
 
           <!-- Buttons for Add, Edit, and Delete -->
-          <div class="buttons-container">
+          <!-- <div class="buttons-container">
             <button @click="showPopup('add')">AJOUTER</button>
             <button @click="showPopup('edit')">MODIFIER</button>
             <button @click="showPopup('delete')">SUPPRIMER</button>
-          </div>
+          </div> -->
 
           <!-- Pop-up Form for Adding/Editing -->
           <div v-if="showForm && (actionType === 'add' || actionType === 'edit')" class="popup">
@@ -442,17 +456,14 @@
 
           <div class="box mission-display">
             <h2>Affichage des Missions de la Flotte</h2>
-            <!-- Contenu pour afficher les missions -->
           </div>
 
           <div class="box cargo-list">
             <h2>Liste des Marchandises</h2>
-            <!-- Contenu pour afficher les marchandises -->
           </div>
 
           <div class="box incident-report">
             <h2>Présentation des Incidents</h2>
-            <!-- Contenu pour afficher les incidents -->
           </div>
         </div>
       </div>
@@ -467,6 +478,7 @@ import attrivehicle from './AttribuerPage.vue'
 import formDriver from './AddPage.vue'
 import forDriver from './ModifierPage.vue'
 import axios from 'axios'
+import config from "../config";
 
 export default {
 
@@ -480,7 +492,7 @@ export default {
   data() {
     return {
       addVehicle: false,
-      currentPage: 'vehicle',
+      currentPage: 'home',
       selectedButton: 'button4',
       upvehicle: false,
       attvehicle: false,
@@ -543,19 +555,6 @@ export default {
       incidents: [], // Liste des incidents
       selectedAdmin: null, // Administrateur sélectionné pour modification ou suppression
 
-
-
-      // vehicles: [
-      //     {
-      // Type: '',
-      // Immatriculation: '',
-      // State: '',
-      // Model: '',
-      // Tonnage: '',
-      //     },
-      // ]
-
-
     };
 
 
@@ -591,7 +590,7 @@ export default {
         const token = localStorage.getItem('token');
         // console.log("Voici l'id de la tache:");
         // console.log(this.movedItemId);
-        const response = await axios.patch(`http://192.168.100.97:3001/driverprofil/${this.currentDriverId}`, {
+        const response = await axios.patch(`${config.apiBaseUrl}/driverprofil/${this.currentDriverId}`, {
           // Les données de la tâche à mettre à jour
           DrivingLicense: this.editForm.DrivingLicense,
           name: this.editForm.name,
@@ -654,7 +653,7 @@ export default {
     async deleteDriver(id) {
       if (confirm("Êtes-vous sûr de vouloir supprimer ce chauffeur?")) {
         try {
-          const response = await fetch(`http://192.168.100.97:3001/driverprofil/${id}`, {
+          const response = await fetch(`${config.apiBaseUrl}/driverprofil/${id}`, {
             method: "DELETE",
           });
           if (response.ok) {
@@ -675,7 +674,7 @@ export default {
       if (confirm("Êtes-vous sûr de vouloir supprimer ce véhicule?")) {
         try {
           // Envoie la requête de suppression au backend
-          await axios.delete(`http://192.168.100.97:3001/vehicles/${vehicleId}`);
+          await axios.delete(`${config.apiBaseUrl}/vehicles/${vehicleId}`);
 
           // Met à jour la liste des véhicules après suppression
           this.vehicles = this.vehicles.filter(vehicle => vehicle.vehicleId !== vehicleId);
@@ -704,10 +703,6 @@ export default {
       }
     },
 
-
-
-
-
     prepareToDeleteAdmin() {
       // Préparer la suppression de l'administrateur (par exemple, en affichant un prompt de confirmation)
     },
@@ -722,7 +717,6 @@ export default {
       this.selectedAdmin = admin;
       // Afficher la confirmation de suppression si nécessaire
     },
-
 
     showOpportunityForm() {
       this.isOpportunityFormVisible = true;
@@ -782,7 +776,7 @@ export default {
     async fetchVehicles() {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://192.168.100.97:3001/vehicles`, {
+        const response = await axios.get(`${config.apiBaseUrl}/vehicles`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -798,7 +792,7 @@ export default {
     async fetchDriverProfil() {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://192.168.100.97:3001/driverprofil`, {
+        const response = await axios.get(`${config.apiBaseUrl}/driverprofil`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -977,13 +971,15 @@ body {
   justify-content: space-between;
 }
 
-/* Sidebar Styles */
 .sidebar {
   width: 15%;
   height: 100%;
-  background-color: transparent;
+  background-color: white;
   color: #092c52;
   position: fixed;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-between; */
   top: 0;
   left: 0;
 }
@@ -1004,11 +1000,11 @@ body {
 
 .sidebar-nav li {
   margin-top: 40px !important;
-  color: rgba(0, 0, 0, 1);
-  font-size: 22px;
+  color: rgba(0, 0, 0, 1) ;
+  font-size: 1rem;
   display: flex;
   justify-content: space-between;
-  width: 95%;
+  /* width: 95%; */
   margin: auto;
   text-align: left;
   padding: 8px 0;
@@ -1017,17 +1013,17 @@ body {
 
 .sidebar-nav li i {
   padding: 0 15px;
-  width: 10%;
+  /* width: 10%; */
 }
 
 .sidebar-nav li a {
   color: rgba(0, 0, 0, 0.8);
   text-decoration: none;
-  font-size: 23px;
+  font-size: 1rem;
   padding: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   text-align: left;
-  width: 80%;
+  /* width: 80%; */
 }
 
 .sidebar-nav li :hover {
@@ -1038,21 +1034,36 @@ body {
   cursor: pointer;
 }
 
+.logout{
+  padding: 0 20px;
+  margin: 0;
+  width: 100%;
+}
+
+.logout a{
+  display: flex;
+  gap: 15px;
+  text-decoration: none;
+  color: #092c52;
+}
+
 /* Main Content Styles */
 .main-content {
-  width: 85%;
+  width: 83%;
   margin-left: 15%;
   height: 100%;
-  position: fixed;
   padding: 10px;
+  position: fixed;
+  background-color: #4444442c;
 }
 
 .in_container {
-  width: 97%;
-  margin: auto;
-  height: 97%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   border-radius: 10px;
-  background-color: #4444442c;
 }
 
 .fa-arrow-right {
@@ -1060,6 +1071,19 @@ body {
   align-items: end;
   justify-content: end;
   text-align: right;
+}
+
+.top{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.bottom{
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  justify-content: space-between;
 }
 
 @media (max-width: 768px) {}
@@ -1071,29 +1095,29 @@ body {
   width: 98%;
 }
 
-.contain1 {
+.top-blocks {
   border-radius: 10px;
   margin-top: 15px;
-  width: 24.5%;
   display: flex;
   justify-content: space-between;
   background-color: white;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  gap:16px;
 }
 
-.contain1 img {
+.top-blocks img {
   width: 30%;
   height: 120px;
 }
 
-.contain1 .p1 {
+.top-blocks span {
   width: 65%;
   padding: 19px 0;
   font-size: 20px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.contain2 {
+/* .contain2 {
   border-radius: 10px;
   margin-top: 15px;
   width: 24.5%;
@@ -1113,9 +1137,9 @@ body {
   padding: 19px 0;
   font-size: 20px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
+} */
 
-.contain3 {
+/* .contain3 {
   border-radius: 10px;
   margin-top: 15px;
   width: 24.5%;
@@ -1123,7 +1147,7 @@ body {
   justify-content: space-between;
   background-color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
-}
+} */
 
 
 button {
@@ -1191,7 +1215,7 @@ select {
   border: 1px solid #ccc;
 }
 
-.contain3 img {
+/* .contain3 img {
   width: 30%;
   height: 120px;
 }
@@ -1223,7 +1247,7 @@ select {
   padding: 19px 0;
   font-size: 20px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
+} */
 
 .containes1 {
   position: absolute;
@@ -1233,7 +1257,7 @@ select {
 
 }
 
-.contais1 {
+.contais {
   width: 31rem;
   margin: 0.1%;
   background-color: white;
@@ -1241,23 +1265,23 @@ select {
   box-shadow: 0PX 0PX 2PX 2PX white;
 }
 
-.contais1 h1 {
-  position: relative;
+.contais h1 {
+  /* position: relative; */
   left: 4%;
   color: green;
   margin: 10%
 }
 
-.contais1 h3 {
-  font-size: 1.8rem;
-  position: relative;
+.contais h3 {
+  font-size: 1rem;
+  /* position: relative; */
   left: 4%;
   color: #031d36;
   margin: 4.5%
 }
 
-.contais1 span {
-  font-size: 1.6rem;
+.contais span {
+  font-size: 1rem;
   position: relative;
   left: 4%;
 }
@@ -1768,4 +1792,5 @@ button {
     /* Largeur du modal sur mobile */
   }
 }
+
 </style>
