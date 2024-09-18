@@ -2,12 +2,13 @@
     <div class="h-full w-full">
         <div class="h-full w-full flex flex-col gap-2">
             <div class="flex gap-2 w-full justify-end">
-                <button @click="openAjoute" class="text-blue-900 p-2 bg-gray-100 rounded-xl hover:bg-gray-300">AJOUTER</button>
+                <button @click="openAjoute"
+                    class="text-blue-900 py-2 px-4 bg-gray-100 rounded-xl hover:bg-blue-900 hover:text-white">AJOUTER</button>
             </div>
-    
-            <div class="overflow-x-auto">
+
+            <div>
                 <table class="min-w-full divide-y divide-gray-200 text-left">
-                    <thead class="bg-gray-50 px-6 border ">
+                    <thead class="bg-gray-50 px-6 ">
                         <tr>
                             <th class="px-6 py-3 text-xs text-black uppercase tracking-wider">Driving License</th>
                             <th class="px-6 py-3 text-xs text-black uppercase tracking-wider">Nom</th>
@@ -17,58 +18,136 @@
                             <th class="px-6 py-3 text-xs text-black uppercase tracking-wider">Action</th>
                         </tr>
                     </thead>
-    
+
                     <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- <tr class="hover:bg-gray-50" v-for="DriverProfils in DriverProfil" :key="DriverProfils.id">
+                            <td class="px-6 py-4 whitespace-nowrap">{{ DriverProfil.DrivingLicense }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ DriverProfil.name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ DriverProfil.email }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ new
+                                Date(DriverProfils.DateOfBirth).toLocaleDateString() }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ DriverProfil.vehicleId }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap flex gap-2">
+                                <button class="w-9 h-9">
+                                    <img src="@/assets/edit-icon.png" alt="Modifier" @click="modifierDriver"
+                                        class="icon edit-icon w-full h-full hover:w-11 hover:h-11">
+                                </button>
+                                <button class="w-9 h-9 ">
+                                    <img src="@/assets/delete-icon.png" alt="Supprimer" @click="deleteDriver"
+                                        class="icon delete-icon w-full h-full hover:w-11 hover:h-11">
+                                </button>
+                            </td>
+                        </tr> -->
+
                         <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 whitespace-nowrap">qweqe</td>
-                            <td class="px-6 py-4 whitespace-nowrap">asds</td>
-                            <td class="px-6 py-4 whitespace-nowrap">zczxc</td>
-                            <td class="px-6 py-4 whitespace-nowrap">qweqe</td>
-                            <td class="px-6 py-4 whitespace-nowrap">7456</td>
-                            <td class="px-6 py-4 whitespace-nowrap">78979</td>
+                            <td class="px-6 py-4 whitespace-nowrap">asdad</td>
+                            <td class="px-6 py-4 whitespace-nowrap">asdad</td>
+                            <td class="px-6 py-4 whitespace-nowrap">asdad</td>
+                            <td class="px-6 py-4 whitespace-nowrap">asdad</td>
+                            <td class="px-6 py-4 whitespace-nowrap">asdad</td>
+                            <td class="px-6 py-4 whitespace-nowrap flex gap-2">
+                                <button class="w-9 h-9">
+                                    <img src="@/assets/edit-icon.png" alt="Modifier" @click="modifierDriver"
+                                        class="icon edit-icon w-full h-full hover:w-11 hover:h-11">
+                                </button>
+                                <button class="w-9 h-9 ">
+                                    <img src="@/assets/delete-icon.png" alt="Supprimer" @click="deleteDriver"
+                                        class="icon delete-icon w-full h-full hover:w-11 hover:h-11">
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    
-        <div class="contain" v-if="ajouteChaufeurModal">
-            <div class="form-contain">
-                <h2 class="form-title">Ajouter un chauffeur</h2>
-                <form @submit.prevent="submitForm">
-                    <div class="form-grou">
-                        <label for="name">Nom</label>
-                        <input type="text" id="name" v-model="name" required />
-                    </div>
-                    <div class="form-grou">
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" v-model="email" required />
-                    </div>
-                    <div class="form-grou">
-                        <label for="password">Password</label>
-                        <input type="text" id="password" v-model="password" required />
-                    </div>
-                    <div class="form-grou">
-                        <label for="DrivingLicense">Driving License</label>
-                        <input type="text" id="DrivingLicense" v-model="DrivingLicense" required />
-                    </div>
-                    <div class="form-grou">
-                        <label for="DateOfBirth">Date de naissance</label>
-                        <input type="date" id="DateOfBirth" v-model="DateOfBirth" required />
-                    </div>
-                    <div class="form-grou">
-                        <label for="DrivingLicenseRestoUrl">Driving License Recto</label>
-                        <input type="text" id="DrivingLicenseRestoUrl" v-model="DrivingLicenseRestoUrl" required />
-                    </div>
-                    <div class="form-grou">
-                        <label for="DrivingLicenseVersoUrl">Driving License Verso</label>
-                        <input type="text" id="DrivingLicenseVersoUrl" v-model="DrivingLicenseVersoUrl" required />
-                    </div>
-                    <div class="btns">
-                        <button @click="createAccount" class="button">Ajouter</button>
-                        <button @click="createAccount" class="button">Annule</button>
-                    </div>
-                </form>
+
+        <div>
+            <div class="contain" v-if="ajouteChaufeurModal">
+                <div class="form-contain">
+                    <h2 class="form-title">Ajouter un chauffeur</h2>
+                    <form @submit.prevent="submitForm">
+                        <div class="form-grou">
+                            <label for="name">Nom</label>
+                            <input type="text" id="name" v-model="name" required />
+                        </div>
+                        <div class="form-grou">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" v-model="email" required />
+                        </div>
+                        <div class="form-grou">
+                            <label for="password">Password</label>
+                            <input type="text" id="password" v-model="password" required />
+                        </div>
+                        <div class="form-grou">
+                            <label for="DrivingLicense">Driving License</label>
+                            <input type="text" id="DrivingLicense" v-model="DrivingLicense" required />
+                        </div>
+                        <div class="form-grou">
+                            <label for="DateOfBirth">Date de naissance</label>
+                            <input type="date" id="DateOfBirth" v-model="DateOfBirth" required />
+                        </div>
+                        <div class="form-grou">
+                            <label for="DrivingLicenseRestoUrl">Driving License Recto</label>
+                            <input type="text" id="DrivingLicenseRestoUrl" v-model="DrivingLicenseRestoUrl" required />
+                        </div>
+                        <div class="form-grou">
+                            <label for="DrivingLicenseVersoUrl">Driving License Verso</label>
+                            <input type="text" id="DrivingLicenseVersoUrl" v-model="DrivingLicenseVersoUrl" required />
+                        </div>
+                        <div class="btns">
+                            <button @click="createAccount" class="button btn1">Ajouter</button>
+                            <button @click="closeAjouteModal" class="button btn2">Annule</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div v-if="modifyChaufeurModal" class="contain">
+                <div class="form-contain">
+                    <h2 class="text-2xl font-semibold text-center">Modifier le Profil</h2>
+                    <form @submit.prevent="updateDriverProfil">
+                        <!-- <label for="drivingLicense">Driving License:</label>
+                        <input type="text" v-model="editForm.DrivingLicense" required />
+
+                        <label for="name">Nom:</label>
+                        <input type="text" v-model="editForm.name" required />
+
+                        <label for="email">Email:</label>
+                        <input type="email" v-model="editForm.email" required />
+
+                        <label for="dateOfBirth">Date de Naissance:</label>
+                        <input type="date" v-model="editForm.DateOfBirth" required />
+
+                        <label for="vehicleId">Véhicule:</label>
+                        <input type="text" v-model="editForm.vehicleId" required />
+
+                        <div class="btns">
+                            <button type="submit" class="button btn1">Sauvegarder</button>
+                            <button @click="closeModifyDriver" class="button btn2">Annule</button>
+                        </div> -->
+
+                        <label for="drivingLicense">Driving License:</label>
+                        <input type="text" required />
+
+                        <label for="name">Nom:</label>
+                        <input type="text" required />
+
+                        <label for="email">Email:</label>
+                        <input type="email" required />
+
+                        <label for="dateOfBirth">Date de Naissance:</label>
+                        <input type="date" required />
+
+                        <label for="vehicleId">Véhicule:</label>
+                        <input type="text" required />
+
+
+                        <div class="btns">
+                            <button type="submit" class="button btn1">Sauvegarder</button>
+                            <button @click="closeModifyDriver" class="button btn2">Annule</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -92,36 +171,55 @@ export default {
             errorMessage: '',
 
             ajouteChaufeurModal: false,
+            modifyChaufeurModal: false,
+            DriverProfil: [],
         };
     },
 
-    mounted () {
-        
+    mounted() {
+
     },
 
     methods: {
         openAjoute() {
             this.ajouteChaufeurModal = true;
         },
+        closeAjouteModal() {
+            this.ajouteChaufeurModal = false;
+            this.resetForm();
+        },
+
+        modifierDriver(driverProfil) {
+            this.modifyChaufeurModal = true;
+            this.DriverProfil = driverProfil;
+        },
+        closeModifyDriver() {
+            this.modifyChaufeurModal = false;
+        },
+
         async createAccount() {
             try {
-                await axios.post(`${config.apiBaseUrl}/driverprofil`, {
+                const chauffeurData = {
                     name: this.name,
                     email: this.email,
                     password: this.password,
                     DrivingLicense: this.DrivingLicense,
                     DateOfBirth: new Date(this.DateOfBirth),
-                    DrivingLicenseRectoUrl: this.DrivingLicenseRectoUrl,
+                    DrivingLicenseRectoUrl: this.DrivingLicenseRestoUrl,
                     DrivingLicenseVersoUrl: this.DrivingLicenseVersoUrl,
+                };
 
-                });
-                this.successMessage = 'ajout réussie !';
-                alert('chauffeur ajouté avec succès');
+                console.log("chauffeurData being sent to backend:", chauffeurData);
+
+                const response = await axios.post(`${config.apiBaseUrl}/driverprofil`, chauffeurData);
+                this.successMessage = response.data.message;
+                console.log("Chauffeur ajouté avec succès", response.data);
+                alert('Chauffeur ajouté avec succès');
                 window.location.reload();
                 this.resetForm();
             } catch (error) {
                 this.errorMessage = 'Échec de l\'ajout : ' + error.response.data.message;
-                alert('Echec lors de l\'ajout')
+                alert('Échec lors de l\'ajout');
             }
         },
 
@@ -135,7 +233,61 @@ export default {
             this.DrivingLicenseVersoUrl = '';
             this.successMessage = '';
             this.errorMessage = '';
-        }
+        },
+
+        async fetchDriverProfil() {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`${config.apiBaseUrl}/driverprofil`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                this.DriverProfil = response.data;
+                console.log("Voici la liste des chauffeurs");
+                console.log(this.DriverProfil);
+            } catch (error) {
+                this.errorMessage = 'Erreur lors de la récupération des chauffeurs : ' + (error.response ? error.response.data.message : error.message);
+            }
+        },
+
+        async updateDriverProfil() {
+            const editForm = {
+                DrivingLicense: this.editForm.DrivingLicense,
+                name: this.editForm.name,
+                email: this.editForm.email,
+                DateOfBirth: this.editForm.DateOfBirth,
+                vehicleId: this.editForm.vehicleId
+            };
+
+            try {
+                console.log('Updating driver profile with:', editForm);
+
+                const response = await axios.post('/api/updateDriverProfile', editForm);
+                console.log('Profile updated successfully:', response.data);
+            } catch (error) {
+                console.error('Error updating profile:', error);
+            }
+        },
+
+        async deleteDriver(id) {
+            if (confirm("Êtes-vous sûr de vouloir supprimer ce chauffeur?")) {
+                try {
+                    const response = await fetch(`${config.apiBaseUrl}/driverprofil/${id}`, {
+                        method: "DELETE",
+                    });
+                    if (response.ok) {
+                        // Filtrer le chauffeur supprimé de la liste
+                        this.DriverProfil = this.DriverProfil.filter(driver => driver.id !== id);
+                        alert("Le chauffeur a été supprimé avec succès.");
+                    } else {
+                        alert("Une erreur s'est produite lors de la suppression du chauffeur.");
+                    }
+                } catch (error) {
+                    console.error("Erreur lors de la suppression du chauffeur :", error);
+                }
+            }
+        },
     }
 };
 </script>
@@ -205,17 +357,17 @@ input:focus {
     transition: background-color 0.3s ease;
 }
 
-.btns{
+.btns {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
 }
 
-.btns  :hover {
+.btn1:hover {
     background-color: green;
 }
 
-.btns :last-child :hover {
+.btn2:hover {
     background-color: red;
 }
 

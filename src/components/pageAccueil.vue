@@ -154,7 +154,6 @@
                 <td>{{ vehicle.type }}</td>
                 <td>{{ vehicle.tonnage }}</td>
                 <td>{{ vehicle.model }}</td>
-                <!-- <td>{{ vehicle.marque }}</td> -->
                 <td>{{ vehicle.state }}</td>
                 <td>
                   <img src="@/assets/delete-icon.png" alt="Delete" @click="deleteVehicle(vehicle.id, vehicles)"
@@ -585,6 +584,7 @@ export default {
       this.isEditModalOpen = false;
       this.editForm = {}; // Réinitialiser le formulaire
     },
+
     async updateDriverProfil() {
       try {
         const token = localStorage.getItem('token');
@@ -611,6 +611,7 @@ export default {
         console.error('Erreur lors de la modification de la tâche :', error);
       }
     },
+
     async fetchData() {
       try {
         const [adminsRes, missionsRes, cargosRes, incidentsRes] = await Promise.all([
@@ -724,6 +725,7 @@ export default {
     closeOpportunityForm() {
       this.isOpportunityFormVisible = false;
     },
+
     submitOpportunity() {
       // Logique pour soumettre l'opportunité
       console.log('Opportunité soumise :', this.opportunity);

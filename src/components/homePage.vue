@@ -1,8 +1,20 @@
 <template>
-    <div class="flex w-full h-screen p-2 bg-white monda-font ">
-        <header class="h-full w-1/6 flex flex-col justify-between items-center">
-            <nav class="w-full py-5 flex flex-col gap-6">
-                <h2 class="text-3xl w-full text-center text-blue-950">Dashboard</h2>
+    <div class="flex flex-col md:flex-row w-full h-screen p-2 bg-white monda-font">
+        <div class="md:hidden p-4 flex">
+            <h2 class="text-3xl w-full text-center text-blue-950">Dashboard</h2>
+            <button @click="openMenu">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <nav
+            :class="['fixed', 'md:relative', 'inset-0', 'bg-white', 'z-50', 'transition-transform', 'duration-300', menuOpen ? 'translate-x-0' : '-translate-x-full', 'md:translate-x-0', 'h-full', 'md:w-1/6', 'flex', 'flex-col', 'justify-between', 'items-center']">
+            <div class="w-full py-5 flex flex-col gap-6">
+                <div class="flex px-4">
+                    <h2 class="text-3xl w-full text-center text-blue-950">Dashboard</h2>
+                    <button class="text-2xl md:hidden" @click="closeMenu">X</button>
+                </div>
+
                 <ul class="w-full flex flex-col gap-4">
                     <li>
                         <button @click="showPage('acceuil_Page')"
@@ -15,77 +27,72 @@
                             <i class="fas fa-arrow-right"></i>
                         </button>
                     </li>
-
                     <li>
                         <button @click="showPage('vehicule_page')"
-                        :class="{ 'bg-gray-200 shadow-lg': currentPage === 'vehicule_page' }"
-                            class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200 ">
-                            <div class=" flex gap-3 items-center">
+                            :class="{ 'bg-gray-200 shadow-lg': currentPage === 'vehicule_page' }"
+                            class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200">
+                            <div class="flex gap-3 items-center">
                                 <i class="fas fa-car"></i>
                                 <span>Vehicles</span>
                             </div>
-                            <i class="fas fa fa-arrow-right"></i>
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                     </li>
-
                     <li>
                         <button @click="showPage('Chauffeurs_page')"
-                        :class="{ 'bg-gray-200 shadow-lg': currentPage === 'Chauffeurs_page' }"
-                            class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200 ">
-                            <div class=" flex gap-3 items-center">
+                            :class="{ 'bg-gray-200 shadow-lg': currentPage === 'Chauffeurs_page' }"
+                            class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200">
+                            <div class="flex gap-3 items-center">
                                 <i class="fa fa-users"></i>
                                 <span>Chauffeurs</span>
                             </div>
-                            <i class="fas fa fa-arrow-right"></i>
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                     </li>
-
                     <li>
                         <button @click="showPage('Services_page')"
-                        :class="{ 'bg-gray-200 shadow-lg': currentPage === 'Services_page' }"
-                            class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200 ">
-                            <div class=" flex gap-3 items-center">
+                            :class="{ 'bg-gray-200 shadow-lg': currentPage === 'Services_page' }"
+                            class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200">
+                            <div class="flex gap-3 items-center">
                                 <i class="fas fa-cogs"></i>
                                 <span>Services</span>
                             </div>
-                            <i class="fas fa fa-arrow-right"></i>
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                     </li>
-
                     <li>
                         <button @click="showPage('Itineraires_page')"
-                        :class="{ 'bg-gray-200 shadow-lg': currentPage === 'Itineraires_page' }"
-                            class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200 ">
-                            <div class=" flex gap-3 items-center">
+                            :class="{ 'bg-gray-200 shadow-lg': currentPage === 'Itineraires_page' }"
+                            class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200">
+                            <div class="flex gap-3 items-center">
                                 <i class="fas fa-chart-line"></i>
                                 <span>Itineraires</span>
                             </div>
-                            <i class="fas fa fa-arrow-right"></i>
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                     </li>
-
                     <li>
                         <button @click="showPage('Maintenances_page')"
-                        :class="{ 'bg-gray-200 shadow-lg': currentPage === 'Maintenances_page' }"
-                            class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200 ">
-                            <div class=" flex gap-3 items-center">
+                            :class="{ 'bg-gray-200 shadow-lg': currentPage === 'Maintenances_page' }"
+                            class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200">
+                            <div class="flex gap-3 items-center">
                                 <i class="fas fa-wrench"></i>
                                 <span>Maintenances</span>
                             </div>
-                            <i class="fas fa fa-arrow-right"></i>
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                     </li>
-
                 </ul>
-            </nav>
-
-            <button class="flex gap-2 items-center hover:text-blue-500 hover:bg-gray-100 p-2 rounded-xl">
+            </div>
+            <button @click="logout"
+                class="flex gap-2 items-center hover:text-blue-500 hover:bg-gray-100 p-2 rounded-xl">
                 <span>Deconexion</span>
                 <i style="color: red;" class="fa fa-power-off"></i>
             </button>
-        </header>
+        </nav>
 
-        <main class="bg-gray-300 w-5/6 rounded-xl p-4 h-full">
+        <!-- Main Content -->
+        <main class="bg-gray-300 w-full md:w-5/6 rounded-xl p-4 h-full">
             <div class="h-full page" v-if="currentPage === 'acceuil_Page'">
                 <acceuil_Page />
             </div>
@@ -128,15 +135,43 @@ export default {
 
     data() {
         return {
-            currentPage: 'Chauffeurs_page'
+            currentPage: 'Chauffeurs_page',
+            menuOpen: false,
         };
     },
     methods: {
+        openMenu() {
+            this.menuOpen = true;
+        },
+        closeMenu() {
+            this.menuOpen = false;
+        },
         showPage(page) {
             this.currentPage = page;
         },
-    }
+        async logout() {
+            this.logoutLoader = true;
+            try {
+                // const token = localStorage.getItem('token');
+                // if (token) {
+                //     await axios.post(`${config.apiBaseUrl}/logout`, {}, {
+                //         headers: {
+                //             'Authorization': `Bearer ${token}`
+                //         }
+                //     });
+                // }
+                localStorage.clear();
+                this.$router.push('/'); // Redirect to login page
+            } catch (error) {
+                console.error('Error logging out:', error);
+                this.logoutLoader = true;
+            }
+        }
+    },
+
 };
 </script>
 
-<style></style>
+<style>
+@import url(https://fonts.googleapis.com/css2?family=Monda:wght@100;200;300;400;500;600;700&display=swap);
+</style>

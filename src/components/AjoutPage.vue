@@ -78,7 +78,7 @@
                   this.resetForm();
               } catch (error) {
                   this.errorMessage = 'Échec de l\'ajout : ' + error.response.data.message;
-                  alert('Echec lors de l\'ajout')
+                  alert("Echec lors de l'ajout")
               }
           },
           resetForm() {
