@@ -7,12 +7,15 @@ import Connexion from './components/ConnexionPage.vue'
 import AjoutPage from './components/AjoutPage.vue'
 import UpdatePage from './components/UpdatePage.vue'
 import MapContainer from './components/MapContainer.vue';
-
+import ChauffeurPage from './components/ChauffeurPage.vue';
 import AttribuerPage from './components/AttribuerPage.vue'
 import AddPage from './components/AddPage.vue'
 import ModifierPage from './components/ModifierPage.vue'
 
 const routes =[
+    {
+        path: '/ChauffeurPage', component: ChauffeurPage
+    },
     {
         path: '/inscription', component: inscription
     },
