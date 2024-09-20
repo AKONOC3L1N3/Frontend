@@ -37,29 +37,33 @@
             </div>
         </div>
 
-        <div class="w-full h-full">
-            <div v-if="isOpportunityFormVisible" class="w-full h-full popup-form fixed inset-0 bg-black/50 z-50">
-                <div class="form-container bg-white">
-                    <div class="flex items-end">
-                        <h3 class="text-2xl text-center">Signaler une Opportunité</h3>
-                        <button @click="closeOpportunityForm" class="close-button text-2xl text-end">
-                            x
-                        </button>
-                    </div>
-                    <form @submit.prevent="submitOpportunity">
-                        <label for="description">Description :</label>
-                        <textarea id="description" v-model="opportunity.description" required></textarea>
-    
-                        <label for="address">Adresse :</label>
-                        <input type="text" id="address" v-model="opportunity.address" required>
-    
-                        <label for="date">Date :</label>
-                        <input type="date" id="date" v-model="opportunity.date" required>
-    
-                        <button type="submit">Soumettre</button>
-                        <button type="button" @click="closeOpportunityForm">Annuler</button>
-                    </form>
+        <div v-if="isOpportunityFormVisible" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div class="bg-white flex flex-col p-8 gap-5 rounded-lg shadow-lg">
+                <div class="flex justify-between">
+                    <h3 class="text-2xl text-center">Signaler une Opportunité</h3>
                 </div>
+
+                <form @submit.prevent="submitOpportunity" class="flex flex-col gap-2">
+                    <div class="flex flex-col gap-2">
+                        <label for="description">Description :</label>
+                        <textarea id="description" v-model="opportunity.description" class="border" required></textarea>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="address">Adresse :</label>
+                        <input type="text" id="address" v-model="opportunity.address" class="border" required>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="date">Date :</label>
+                        <input type="date" id="date" v-model="opportunity.date" class="border" required>
+                    </div>
+
+                    <div class="flex gap-4 justify-center w-full">
+                        <button type="submit" class="p-2 bg-blue-950 hover:bg-green-800 text-white rounded-xl w-full">Soumettre</button>
+                        <button type="button" @click="closeOpportunityForm" class="p-2 bg-blue-950 hover:bg-red-600 text-white rounded-xl w-full" >Annuler</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

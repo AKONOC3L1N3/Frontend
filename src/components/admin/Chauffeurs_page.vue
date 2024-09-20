@@ -20,12 +20,12 @@
                     </thead>
 
                     <tbody class="bg-white divide-y divide-gray-200">
-                        <!-- <tr class="hover:bg-gray-50" v-for="DriverProfils in DriverProfil" :key="DriverProfils.id">
+                        <tr class="hover:bg-gray-50" v-for="DriverProfil in DriverProfils" :key="DriverProfil.id">
                             <td class="px-6 py-4 whitespace-nowrap">{{ DriverProfil.DrivingLicense }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ DriverProfil.name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ DriverProfil.email }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ new
-                                Date(DriverProfils.DateOfBirth).toLocaleDateString() }}</td>
+                                Date(DriverProfil.DateOfBirth).toLocaleDateString() }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ DriverProfil.vehicleId }}</td>
                             <td class="px-6 py-4 whitespace-nowrap flex gap-2">
                                 <button class="w-9 h-9">
@@ -37,7 +37,7 @@
                                         class="icon delete-icon w-full h-full hover:w-11 hover:h-11">
                                 </button>
                             </td>
-                        </tr> -->
+                        </tr>
 
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 whitespace-nowrap">asdad</td>
@@ -87,8 +87,8 @@
                             <input type="date" id="DateOfBirth" v-model="DateOfBirth" required />
                         </div>
                         <div class="form-grou">
-                            <label for="DrivingLicenseRestoUrl">Driving License Recto</label>
-                            <input type="text" id="DrivingLicenseRestoUrl" v-model="DrivingLicenseRestoUrl" required />
+                            <label for="DrivingLicenseRectoUrl">Driving License Recto</label>
+                            <input type="text" id="DrivingLicenseRectoUrl" v-model="DrivingLicenseRectoUrl" required />
                         </div>
                         <div class="form-grou">
                             <label for="DrivingLicenseVersoUrl">Driving License Verso</label>
@@ -106,46 +106,27 @@
                 <div class="form-contain">
                     <h2 class="text-2xl font-semibold text-center">Modifier le Profil</h2>
                     <form @submit.prevent="updateDriverProfil">
-                        <!-- <label for="drivingLicense">Driving License:</label>
-                        <input type="text" v-model="editForm.DrivingLicense" required />
-
-                        <label for="name">Nom:</label>
-                        <input type="text" v-model="editForm.name" required />
-
-                        <label for="email">Email:</label>
-                        <input type="email" v-model="editForm.email" required />
-
-                        <label for="dateOfBirth">Date de Naissance:</label>
-                        <input type="date" v-model="editForm.DateOfBirth" required />
-
-                        <label for="vehicleId">Véhicule:</label>
-                        <input type="text" v-model="editForm.vehicleId" required />
-
-                        <div class="btns">
-                            <button type="submit" class="button btn1">Sauvegarder</button>
-                            <button @click="closeModifyDriver" class="button btn2">Annule</button>
-                        </div> -->
-
                         <label for="drivingLicense">Driving License:</label>
-                        <input type="text" required />
+                        <input type="text" v-model="DrivingLicense" required />
 
                         <label for="name">Nom:</label>
-                        <input type="text" required />
+                        <input type="text" v-model="name" required />
 
                         <label for="email">Email:</label>
-                        <input type="email" required />
+                        <input type="email" v-model="email" required />
 
                         <label for="dateOfBirth">Date de Naissance:</label>
-                        <input type="date" required />
+                        <input type="date" v-model="DateOfBirth" required />
 
                         <label for="vehicleId">Véhicule:</label>
-                        <input type="text" required />
-
+                        <input type="text" v-model="vehicleId" required />
 
                         <div class="btns">
                             <button type="submit" class="button btn1">Sauvegarder</button>
                             <button @click="closeModifyDriver" class="button btn2">Annule</button>
                         </div>
+
+                        
                     </form>
                 </div>
             </div>
@@ -172,15 +153,24 @@ export default {
 
             ajouteChaufeurModal: false,
             modifyChaufeurModal: false,
-            DriverProfil: [],
+            DriverProfils: [],
         };
     },
 
     mounted() {
-
+        if (this.isConnected()) {
+            this.userId = localStorage.getItem('userId');
+            this.fetchDriverProfil();
+        } else {
+            this.errorMessage = 'Utilisateur non connecté';
+            this.$router.push('/'); // Rediriger vers la page de connexion
+        }
     },
 
     methods: {
+        isConnected() {
+            return localStorage.getItem('token') !== null;
+        },
         openAjoute() {
             this.ajouteChaufeurModal = true;
         },
@@ -199,27 +189,35 @@ export default {
 
         async createAccount() {
             try {
+                const token = localStorage.getItem('token');
+                const userId = this.userId; 
+
                 const chauffeurData = {
                     name: this.name,
                     email: this.email,
+                    UserId: userId,
                     password: this.password,
                     DrivingLicense: this.DrivingLicense,
                     DateOfBirth: new Date(this.DateOfBirth),
-                    DrivingLicenseRectoUrl: this.DrivingLicenseRestoUrl,
+                    DrivingLicenseRectoUrl: this.DrivingLicenseRectoUrl, // Corrected typo
                     DrivingLicenseVersoUrl: this.DrivingLicenseVersoUrl,
                 };
 
                 console.log("chauffeurData being sent to backend:", chauffeurData);
 
-                const response = await axios.post(`${config.apiBaseUrl}/driverprofil`, chauffeurData);
+                const response = await axios.post(`${config.apiBaseUrl}/driverprofil/newDriver`, chauffeurData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
                 this.successMessage = response.data.message;
                 console.log("Chauffeur ajouté avec succès", response.data);
                 alert('Chauffeur ajouté avec succès');
-                window.location.reload();
                 this.resetForm();
             } catch (error) {
-                this.errorMessage = 'Échec de l\'ajout : ' + error.response.data.message;
-                alert('Échec lors de l\'ajout');
+                this.errorMessage = 'Échec de l\'ajout : ' + (error.response?.data?.message || error.message);
+                alert("Échec lors de l'ajout du chauffeur");
             }
         },
 
@@ -238,13 +236,13 @@ export default {
         async fetchDriverProfil() {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get(`${config.apiBaseUrl}/driverprofil`, {
+                const response = await axios.get(`${config.apiBaseUrl}/driverprofil/allDriverByUserId/${this.userId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                this.DriverProfil = response.data;
-                console.log("Voici la liste des chauffeurs");
+                this.DriverProfils = response.data;
+                console.log("Voici la liste des chauffeurs",response.data);
                 console.log(this.DriverProfil);
             } catch (error) {
                 this.errorMessage = 'Erreur lors de la récupération des chauffeurs : ' + (error.response ? error.response.data.message : error.message);
@@ -253,17 +251,22 @@ export default {
 
         async updateDriverProfil() {
             const editForm = {
-                DrivingLicense: this.editForm.DrivingLicense,
-                name: this.editForm.name,
-                email: this.editForm.email,
-                DateOfBirth: this.editForm.DateOfBirth,
-                vehicleId: this.editForm.vehicleId
+                DrivingLicense: this.DrivingLicense,
+                name: this.name,
+                email: this.email,
+                DateOfBirth: this.DateOfBirth,
+                vehicleId: this.vehicleId
             };
 
             try {
                 console.log('Updating driver profile with:', editForm);
+                const token = localStorage.getItem('token');
 
-                const response = await axios.post('/api/updateDriverProfile', editForm);
+                const response = await axios.post(`${config.apiBaseUrl}/driverprofil/updateDriverProfilByUserId/userId/driverProfilId`, editForm, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
                 console.log('Profile updated successfully:', response.data);
             } catch (error) {
                 console.error('Error updating profile:', error);

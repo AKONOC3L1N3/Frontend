@@ -21,37 +21,19 @@
                 </thead>
 
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <!-- <tr class="hover:bg-gray-50" v-for="vehicle in vehicules" :key="vehicle.vehicleId">
-                        <td class="px-6 py-4 whitespace-nowrap">{{vehicules.name}}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{vehicules.type}}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{vehicules.tonnage}}c</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{vehicules.model}}e</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{vehicules.state}}</td>
+                    <tr class="hover:bg-gray-50" v-for="vehicule in vehicules" :key="vehicule.vehicleId">
+                        <td class="px-6 py-4 whitespace-nowrap">{{ vehicule.name }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ vehicule.type }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ vehicule.tonnage }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ vehicule.model }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ vehicule.state }}</td>
                         <td class="px-6 py-4 whitespace-nowrap flex gap-2">
                             <button class="w-9 h-9">
                                 <img src="@/assets/edit-icon.png" alt="Modifier" @click="modifyVehicule"
                                     class="icon edit-icon w-full h-full hover:w-11 hover:h-11">
                             </button>
                             <button class="w-9 h-9 ">
-                                <img src="@/assets/delete-icon.png" alt="Supprimer" @click="deleteVehicule"
-                                    class="icon delete-icon w-full h-full hover:w-11 hover:h-11">
-                            </button>
-                        </td>
-                    </tr> -->
-
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 whitespace-nowrap">asdad</td>
-                        <td class="px-6 py-4 whitespace-nowrap">asdad</td>
-                        <td class="px-6 py-4 whitespace-nowrap">asdad</td>
-                        <td class="px-6 py-4 whitespace-nowrap">asdad</td>
-                        <td class="px-6 py-4 whitespace-nowrap">asdad</td>
-                        <td class="px-6 py-4 whitespace-nowrap flex gap-2">
-                            <button class="w-9 h-9">
-                                <img src="@/assets/edit-icon.png" alt="Modifier" @click="modifyVehicule"
-                                    class="icon edit-icon w-full h-full hover:w-11 hover:h-11">
-                            </button>
-                            <button class="w-9 h-9 ">
-                                <img src="@/assets/delete-icon.png" alt="Supprimer" @click="deleteVehicule"
+                                <img src="@/assets/delete-icon.png" alt="Supprimer" @click="deleteVehicule(vehicule.id)"
                                     class="icon delete-icon w-full h-full hover:w-11 hover:h-11">
                             </button>
                         </td>
@@ -94,7 +76,7 @@
                         <input type="date" id=" firstYearTakeoff" v-model="firstYearTakeoff" required />
                     </div>
 
-                    <div class="btns">
+                    <div class="btns pt-2">
                         <button @click="createAccount" class="button btn1">Ajouter</button>
                         <button @click="closeAjouteModal" class="button btn2">Annule</button>
                     </div>
@@ -104,74 +86,37 @@
 
         <div v-if="modifyVoitureModal" class="contain">
             <div class="form-contain">
-                <h2 class="text-2xl font-semibold text-center">Modifier le Profil</h2>
-                <form @submit.prevent="updateDriverProfil" class="flex flex-col gap-4">
-                    <!-- <div class="flex flex-col gap-2">
-                       <div>
-                           <label for="name">Nom</label>
-                            <input type="text" v-model="editForm.name" required />
-                       </div> 
-    
-                       <div>
-                           <label for="type">Type</label>
-                            <input type="text" v-model="editForm.type" required />
-                       </div> 
-    
-                       <div>
-                           <label for="state">État</label>
-                            <input type="email" v-model="editForm.state" required />
-                       </div> 
-    
-                       <div>
-                           <label for="model">Modèle</label>
-                            <input type="text" v-model="editForm.model" required />
-                       </div> 
-    
-                       <div>
-                           <label for="tonnage">Tonnage</label>
-                            <input type="number" v-model="editForm.tonnage" required />
-                       </div> 
-    
-                       <div>
-                           <label for=" firstYearTakeoff">Date </label>
-                            <input type="text" v-model="editForm.firstYearTakeoff" required />
-                       </div> 
-                    </div>
-
-                    <div class="btns">
-                        <button type="submit" class="button btn1">Sauvegarder</button>
-                        <button @click="closeModifyVehicle" class="button btn2">Annule</button>
-                    </div> -->
-
+                <h2 class="text-2xl font-semibold text-center">Modifier le Vehicule</h2>
+                <form @submit.prevent="updateVehicleProfile" class="flex flex-col gap-4">
                     <div class="flex flex-col gap-2">
                         <div>
                             <label for="name">Nom</label>
-                            <input type="text" required />
+                            <input type="text" v-model="name" required />
                         </div>
 
                         <div>
                             <label for="type">Type</label>
-                            <input type="text" required />
+                            <input type="text" v-model="type" required />
                         </div>
 
                         <div>
                             <label for="state">État</label>
-                            <input type="email" required />
+                            <input type="text" v-model="state" required />
                         </div>
 
                         <div>
                             <label for="model">Modèle</label>
-                            <input type="text" required />
+                            <input type="text" v-model="model" required />
                         </div>
 
                         <div>
                             <label for="tonnage">Tonnage</label>
-                            <input type="number" required />
+                            <input type="number" v-model="tonnage" required />
                         </div>
 
                         <div>
                             <label for=" firstYearTakeoff">Date </label>
-                            <input type="text" required />
+                            <input type="date" v-model="firstYearTakeoff" required />
                         </div>
                     </div>
 
@@ -208,10 +153,20 @@ export default {
     },
 
     mounted() {
-
+        if (this.isConnected()) {
+            this.userId = localStorage.getItem('userId');
+            this.selectedVehiculeId = localStorage.getItem('selectedVehiculeId');
+            this.fetchVehicles();
+        } else {
+            this.errorMessage = 'Utilisateur non connecté';
+            this.$router.push('/'); // Rediriger vers la page de connexion
+        }
     },
 
     methods: {
+        isConnected() {
+            return localStorage.getItem('token') !== null;
+        },
         ajouterVoiture() {
             this.ajouteVoitureModal = true;
         },
@@ -221,6 +176,7 @@ export default {
         },
 
         modifyVehicule() {
+            this.name = this.vehicules.name;
             this.modifyVoitureModal = true;
         },
         closeModifyVehicle() {
@@ -229,26 +185,36 @@ export default {
 
         async createAccount() {
             try {
+                const token = localStorage.getItem('token');
+                const userId = this.userId;
+
                 const vehiclesData = {
                     name: this.name,
                     type: this.type,
                     state: this.state,
                     model: this.model,
                     tonnage: this.tonnage,
-                    firstYearTakeoff: new Date(this.firstYearTakeoff)
+                    firstYearTakeoff: new Date(this.firstYearTakeoff),
+                    UserId: userId // Added userId to the data being sent
                 };
 
                 console.log("vehiclesData being sent to backend:", vehiclesData);
 
-                const response = await axios.post(`${config.apiBaseUrl}/vehicles`, vehiclesData);
+                const response = await axios.post(`${config.apiBaseUrl}/vehicles`, vehiclesData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
                 this.successMessage = response.data.message;
                 console.log("véhicule ajouté avec succès", response.data);
+                this.fetchVehicles();
                 alert('véhicule ajouté avec succès');
-                window.location.reload();
                 this.resetForm();
+                this.closeAjouteModal();
             } catch (error) {
-                this.errorMessage = 'Échec de l\'ajout : ' + error.response.data.message;
-                alert('Echec lors de l\'ajout')
+                this.errorMessage = 'Échec de l\'ajout : ' + (error.response?.data?.message || error.message);
+                alert("Échec lors de l'ajout du vehicule");
             }
         },
         resetForm() {
@@ -265,27 +231,31 @@ export default {
         async fetchVehicles() {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get(`${config.apiBaseUrl}/vehicles`, {
+                const response = await axios.get(`${config.apiBaseUrl}/vehicles/allDriverByUserId/${this.userId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
                 this.vehicules = response.data;
-                console.log("Voici la liste des vehicles");
+                console.log("Voici la liste des vehicles", response.data);
                 // console.log(this.vehicles);
             } catch (error) {
                 this.errorMessage = 'Erreur lors de la récupération des véhicules : ' + (error.response ? error.response.data.message : error.message);
             }
         },
 
-        async updateDriverProfil() {
+        selectedVehicule(vehiculeId) {
+            localStorage.setItem('selectedVehiculeId', vehiculeId);
+        },
+
+        async updateVehicleProfile() {
             const editForm = {
-                name: this.editForm.name,
-                type: this.editForm.type,
-                state: this.editForm.state,
-                model: this.editForm.model,
-                tonnage: this.editForm.tonnage,
-                firstYearTakeoff: this.editForm.firstYearTakeoff
+                name: this.name,
+                type: this.type,
+                state: this.state,
+                model: this.model,
+                tonnage: this.tonnage,
+                firstYearTakeoff: this.firstYearTakeoff
             };
 
             try {
@@ -298,16 +268,25 @@ export default {
             }
         },
 
-        async deleteVehicle(vehicleId) {
+        async deleteVehicule() {
+
             // Demander confirmation avant de supprimer le véhicule
             if (confirm("Êtes-vous sûr de vouloir supprimer ce véhicule?")) {
+                this.selectedVehicule();
+                // const selectedVehiculeId = localStorage.getItem('selectedVehiculeId');
+                this.selectedVehiculeId = localStorage.getItem('selectedVehiculeId');
+                const token = localStorage.getItem('token');
                 try {
                     // Envoie la requête de suppression au backend
-                    await axios.delete(`${config.apiBaseUrl}/vehicles/${vehicleId}`);
+                    await axios.patch(`${config.apiBaseUrl}/vehicles/deleteVehiculeByUserId/${this.userId}/${this.selectedVehiculeId}`, {
+                        isDelete: true,
+                    }, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        },
+                    });
 
-                    // Met à jour la liste des véhicules après suppression
-                    this.vehicles = this.vehicles.filter(vehicle => vehicle.vehicleId !== vehicleId);
-
+                    this.fetchVehicles();
                     // Affiche un message de succès
                     this.successMessage = 'Véhicule supprimé avec succès !';
                     alert(this.successMessage);

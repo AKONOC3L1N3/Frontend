@@ -3,17 +3,17 @@
         <!-- Top Section -->
         <div class="flex justify-between space-x-4 h-1/6">
             <div class="flex rounded-xl items-center bg-white p-4 w-1/3">
-                <img src="/src/assets/icvoiture.png" alt="">
-                <span class="ml-2">24 véhicules disponibles actuellement</span>
+                <img src="../../assets/icvoiture.png" alt="">
+                <span class="ml-2">{{ vehiculeCount }} véhicule(s) disponibles actuellement</span>
             </div>
 
             <div class="flex rounded-xl items-center bg-white p-4 w-1/3">
-                <img src="/src//admin/chaur.png" alt="">
-                <span class="ml-2">20 chauffeurs disponibles</span>
+                <img src="../../assets/chaur.png" alt="">
+                <span class="ml-2">{{ Chauffeurcount }} chauffeurs disponibles</span>
             </div>
 
             <div class="flex rounded-xl items-center bg-white p-4 w-1/3">
-                <img src="/src/admin/maintenance.png" alt="">
+                <img src="../../assets/maintenance.png" alt="">
                 <span class="ml-2">service de maintenance disponible</span>
             </div>
         </div>
@@ -81,6 +81,64 @@
 </template>
 
 <script>
-// import axios from 'axios';
-// import config from "../../config";
+import axios from 'axios';
+import config from "../../config";
+
+export default {
+    data() {
+        return {
+            vehiculeCount: 0,
+            Chauffeurcount: 0,
+        };
+    },
+    mounted() {
+        if (this.isConnected()) {
+            this.userId = localStorage.getItem('userId');
+            this.fetchVehiculeCount();
+            this.fetchChauffeurCount();
+        } else {
+            this.errorMessage = 'Utilisateur non connecté';
+            this.$router.push('/'); // Rediriger vers la page de connexion
+        }
+    },
+
+    methods:{
+        isConnected() {
+            return localStorage.getItem('token') !== null;
+        },
+        async fetchVehiculeCount() {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`${config.apiBaseUrl}/vehicles/countVehiculeByUserId/${this.userId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                this.vehiculeCount = response.data;
+                console.log(this.vehiculeCount);
+                
+                
+            } catch (error) {
+                console.error('Erreur lors de la récupération du nombre de vehicule :', error);
+            }
+        },
+
+        async fetchChauffeurCount() {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`${config.apiBaseUrl}/driverprofil/countAllDriverProfilByUserId/${this.userId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                this.Chauffeurcount = response.data;
+                console.log(this.chauffeurCount);
+                
+                
+            } catch (error) {
+                console.error('Erreur lors de la récupération du nombre de vehicule :', error);
+            }
+        },
+    }
+}
 </script>
