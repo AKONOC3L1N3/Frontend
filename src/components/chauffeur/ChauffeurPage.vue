@@ -75,7 +75,7 @@
         localStorage.removeItem('userId');
         localStorage.removeItem('token');
         localStorage.removeItem('userType');
-        this.$router.push('/login');
+        this.$router.push('/Connexion');
       }
     },
     created() {

@@ -471,22 +471,14 @@
 </template>
 
 <script>
-import formVehicule from './AjoutPage.vue'
-import forVehicule from './UpdatePage.vue'
 import attrivehicle from './AttribuerPage.vue'
-import formDriver from './AddPage.vue'
-import forDriver from './ModifierPage.vue'
 import axios from 'axios'
 import config from "../config";
 
 export default {
 
   components: {
-    formVehicule,
-    forVehicule,
     attrivehicle,
-    formDriver,
-    forDriver,
   },
   data() {
     return {

@@ -2,64 +2,52 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './index.css'
 import { createRouter, createWebHistory } from 'vue-router';
-import inscription from './components/InscrirePage.vue'
-import pageAccueil from './components/pageAccueil.vue'
-import Connexion from './components/ConnexionPage.vue'
-import AjoutPage from './components/AjoutPage.vue'
-import UpdatePage from './components/UpdatePage.vue'
-import MapContainer from './components/MapContainer.vue';
-import ChauffeurPage from './components/ChauffeurPage.vue';
-import AttribuerPage from './components/AttribuerPage.vue'
-import AddPage from './components/AddPage.vue'
-import ModifierPage from './components/ModifierPage.vue'
 
-import homePage from "./components/homePage.vue";
-import acceuil_Page from "./components/acceuil_Page.vue";
-import Chauffeurs_page from "./components/Chauffeurs_page.vue";
-import Services_page from "./components/Services_page.vue";
-import Itineraires_page from "./components/Itineraires_page.vue";
-import Maintenances_page from "./components/Maintenances_page.vue";
+import pageAccueil from './components/pageAccueil.vue'
+import AttribuerPage from './components/AttribuerPage.vue'
+
+
+import inscription from './components/InscrirePage.vue'
+import Connexion from './components/ConnexionPage.vue'
+import homePage from "./components/admin/homePage.vue";
+import acceuil_Page from "./components/admin/acceuil_Page.vue";
+import vehicule_Page from "./components/admin/vehicule_Page.vue";
+import Chauffeurs_page from "./components/admin/Chauffeurs_page.vue";
+import Services_page from "./components/admin/Services_page.vue";
+import Itineraires_page from "./components/admin/Itineraires_page.vue";
+import Maintenances_page from "./components/admin/Maintenances_page.vue";
+import MapContainer from "./components/map/MapContainer.vue";
+
+
+import ChauffeurPage from './components/chauffeur/ChauffeurPage.vue';
 
 const routes =[
-    {
-        path: '/ChauffeurPage', component: ChauffeurPage
-    },
-    {
-        path: '/inscription', component: inscription
-    },
-    {
-        path: '/MapContainer', component: MapContainer
-    },
-    {
-        path: '/ModifierPage', component: ModifierPage
-    },
-    {
-        path: '/ AddPage ', component: AddPage 
-    },
-    {
-        path: '/AjoutPage',
-        component: AjoutPage
-    },
     {
         path: '/AttribuerPage',
         component: AttribuerPage
     },
-   
     {
-        path: '/UpdatePage',
-        component: UpdatePage
+        path: '/acceuil_Page', component: acceuil_Page
     },
     {
         path: '/pageAccueil', component: pageAccueil
     },
+
+
+    // authentication
     {
         path: '/', component: Connexion
     },
     {
+        path: '/inscription', component: inscription
+    },
+
+    // Admin
+    {
         path: '/homePage', component: homePage
     },
     {
-        path: '/acceuil_Page', component: acceuil_Page
+        path: '/vehicule_Page', component: vehicule_Page
     },
     {
         path: '/Chauffeurs_page', component: Chauffeurs_page
@@ -74,6 +62,16 @@ const routes =[
         path: '/Maintenances_page', component: Maintenances_page
     },
 
+    // chauffeur
+    {
+        path: '/ChauffeurPage', component: ChauffeurPage
+    },
+    
+
+    // Map
+    {
+        path: '/map', component: MapContainer
+    },
 ]
 
 
