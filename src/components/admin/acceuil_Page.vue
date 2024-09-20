@@ -3,17 +3,17 @@
         <!-- Top Section -->
         <div class="flex justify-between space-x-4 h-1/6">
             <div class="flex rounded-xl items-center bg-white p-4 w-1/3">
-                <img src="..//assets/icvoiture.png" alt="">
+                <img src="/src/assets/icvoiture.png" alt="">
                 <span class="ml-2">24 véhicules disponibles actuellement</span>
             </div>
 
             <div class="flex rounded-xl items-center bg-white p-4 w-1/3">
-                <img src="..//assets/chaur.png" alt="">
+                <img src="/src//admin/chaur.png" alt="">
                 <span class="ml-2">20 chauffeurs disponibles</span>
             </div>
 
             <div class="flex rounded-xl items-center bg-white p-4 w-1/3">
-                <img src="..//assets/maintenance.png" alt="">
+                <img src="/src/admin/maintenance.png" alt="">
                 <span class="ml-2">service de maintenance disponible</span>
             </div>
         </div>
@@ -79,3 +79,8 @@
         </div>
     </div>
 </template>
+
+<script>
+// import axios from 'axios';
+// import config from "../../config";
+</script>

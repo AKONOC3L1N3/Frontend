@@ -68,6 +68,7 @@ export default {
                 this.successMessage = 'Inscription réussie !';
                 alert('Compte crée avec Success');
                 this.resetForm();
+                this.$router.push('/');
             } catch (error) {
                 this.errorMessage = "Échec de l'inscription :"  + error.response.data.message;
                 alert('Echec lors de la création du compte')
