@@ -72,7 +72,6 @@ export default {
     handleSubmit() {
       // Logique pour soumettre le formulaire
       console.log('Form submitted:', this.form);
-      // Rediriger ou effectuer une action après la soumission
 
     },
   },

@@ -28,8 +28,8 @@
                         </button>
                     </li>
                     <li>
-                        <button @click="showPage('vehicule_page')"
-                            :class="{ 'bg-gray-200 shadow-lg': currentPage === 'vehicule_page' }"
+                        <button @click="showPage('vehicule_Page')"
+                            :class="{ 'bg-gray-200 shadow-lg': currentPage === 'vehicule_Page' }"
                             class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200">
                             <div class="flex gap-3 items-center">
                                 <i class="fas fa-car"></i>
@@ -96,7 +96,7 @@
             <div class="h-full page" v-if="currentPage === 'acceuil_Page'">
                 <acceuil_Page />
             </div>
-            <div class="h-full page" v-if="currentPage === 'vehicule_page'">
+            <div class="h-full page" v-if="currentPage === 'vehicule_Page'">
                 <vehicule_Page />
             </div>
             <div class="h-full page" v-if="currentPage === 'Chauffeurs_page'">
@@ -137,7 +137,7 @@ export default {
 
     data() {
         return {
-            currentPage: 'Chauffeurs_page',
+            currentPage: 'acceuil_Page',
             menuOpen: false,
         };
     },

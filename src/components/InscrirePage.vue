@@ -13,12 +13,12 @@
         <input type="text" id="prenom" v-model="surname" required>
       </div>
       <div class="input_field">
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" v-model="password" required>
-      </div>
-      <div class="input_field">
         <label for="email">Email :</label>
         <input type="email" id="email" v-model="email">
+      </div>
+      <div class="input_field">
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" v-model="password" required>
       </div>
       <div class="input_field">
         <label for="type">Type :</label>
