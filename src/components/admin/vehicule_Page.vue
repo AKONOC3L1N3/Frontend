@@ -31,10 +31,8 @@
                             <button class="w-9 h-9" @click="openEditForm(vehicule)">
               <img src="@/assets/edit-icon.png" alt="Modifier" class="icon edit-icon w-full h-full hover:w-11 hover:h-11">
             </button>
-            <button class="w-9 h-9 ">
-                <img 
-        src="@/assets/delete-icon.png" 
-        alt="Supprimer" @click="deleteVehicle(vehicle.id)" class="icon delete-icon w-full h-full hover:w-11 hover:h-11">
+            <button class="w-9 h-9" @click="confirmDelete(vehicule.id)">
+  <img src="@/assets/delete-icon.png" alt="Supprimer" class="icon delete-icon w-full h-full hover:w-11 hover:h-11">
 </button>
                         </td>
                     </tr>
@@ -130,6 +128,8 @@ export default {
             model: '',
             vehicle: '',
             userId: '',
+            isConfirmingDelete: false, // Variable pour afficher la boîte de confirmation
+            vehicleId: '',
             successMessage: '',
             errorMessage: '',
             vehicleToDelete: '',
@@ -147,6 +147,7 @@ export default {
         name: "",
         model: "",
         UserId: "", // ID de l'utilisateur associé au véhicule
+       
       },
       },
             ajouteVoitureModal: false,
@@ -249,8 +250,8 @@ export default {
       this.showEditForm = false;
     },
 
-    
 
+   
         async createAccount() {
             try {
                 const token = localStorage.getItem('token');
@@ -287,27 +288,6 @@ export default {
         },
 
 
-        async deleteVehicle(vehicleId) {
-    console.log("Tentative de suppression du véhicule avec ID:", vehicleId);
-    
-    if (!vehicleId) {
-      console.error("ID du véhicule indéfini");
-      return;
-    }
-    
-    try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`${config.apiBaseUrl}/vehicles/${vehicleId}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-      this.vehicles = this.vehicles.filter(vehicle => vehicle.id !== vehicleId);
-      console.log(`Véhicule avec ID ${vehicleId} supprimé`);
-    } catch (error) {
-      this.errorMessage = 'Erreur lors de la suppression du véhicule : ' + (error.response ? error.response.data.message : error.message);
-    }
-  },
         resetForm() {
             this.name = '';
             this.type = '';
@@ -336,6 +316,41 @@ export default {
            
         },
 
+      
+        async confirmDelete(vehicleId) {
+  try {
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token'); // Assurez-vous que le token est correctement récupéré
+
+    console.log('userId:', userId);
+    console.log('vehicleId:', vehicleId);
+
+    if (!userId || !token) {
+      alert("L'ID de l'utilisateur ou le token est manquant.");
+      return;
+    }
+
+    if (confirm("Êtes-vous sûr de vouloir supprimer ce véhicule ?")) {
+      const response = await axios.patch(`${config.apiBaseUrl}/vehicles/deleteVehiculeByUserId/${userId}/${vehicleId}`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}` // Ajouter le token dans les en-têtes
+        }
+      });
+
+      console.log('Réponse après suppression :', response.data);
+
+      if (response.status === 200) {
+        alert("Le véhicule a été supprimé avec succès.");
+        this.vehicles = this.vehicles.filter(vehicle => vehicle.id !== vehicleId);
+      } else {
+        alert("Erreur lors de la suppression du véhicule.");
+      }
+    }
+  } catch (error) {
+    console.error("Erreur lors de la suppression :", error.response ? error.response.data : error.message);
+    alert("Impossible de supprimer le véhicule. Veuillez réessayer plus tard.");
+  }
+},
 
 
         

@@ -1,4 +1,4 @@
-<template>
+    <template>
     <div class="contain">
         <div class="form-contain">
             <h2>Se connecter</h2>

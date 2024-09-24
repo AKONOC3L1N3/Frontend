@@ -142,3 +142,58 @@ export default {
     }
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+async confirmDelete(vehicleId) {
+    try {
+      this.userId = localStorage.getItem('userId');
+      this.vehicleId =localStorage.getItem('vehicleId');
+      
+  
+      // Logs pour vérifier les valeurs
+      console.log('userId:', this.userId);
+      console.log('vehicleId:', this.vehicleId);
+  
+      // Vérification de la validité des IDs
+      if (!this.userId || !this.vehicleId) {
+        alert("L'ID de l'utilisateur ou du véhicule est manquant.");
+        return;
+      }
+  
+      // Utiliser la méthode `confirm` pour demander confirmation avant de supprimer
+      if (confirm("Êtes-vous sûr de vouloir supprimer ce véhicule ?")) {
+  
+      //   console.log('Suppression du véhicule avec les informations suivantes :', { userId, vehicleId });
+  
+        // Appel API pour marquer le véhicule comme supprimé (isDelete: true)
+        const response = await axios.patch(`${config.apiBaseUrl}/vehicles/deleteVehiculeByUserId/${this.userId}/${this.vehicleId}`);
+  
+        console.log('Réponse après suppression :', response.data);
+  
+        // Vérifier si la suppression s'est bien déroulée
+        if (response.status === 200) {
+          alert("Le véhicule a été supprimé avec succès.");
+  
+          // Mettre à jour la liste des véhicules en filtrant celui supprimé
+          this.vehicles = this.vehicles.filter(vehicle => vehicle.id !== vehicleId);
+        } else {
+          alert("Erreur lors de la suppression du véhicule.");
+        }
+      }
+    } catch (error) {
+      // Gérer les erreurs possibles lors de la requête
+      console.error("Erreur lors de la suppression :", error.response ? error.response.data : error.message);
+      alert("Impossible de supprimer le véhicule. Veuillez réessayer plus tard.");
+    }
+  },
