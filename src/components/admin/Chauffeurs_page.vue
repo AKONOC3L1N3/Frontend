@@ -28,26 +28,17 @@
                                 Date(DriverProfil.DateOfBirth).toLocaleDateString() }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ DriverProfil.vehicleId }}</td>
                             <td class="px-6 py-4 whitespace-nowrap flex gap-2">
-            
-                            </td>
-                        </tr>
-
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 whitespace-nowrap">asdad</td>
-                            <td class="px-6 py-4 whitespace-nowrap">asdad</td>
-                            <td class="px-6 py-4 whitespace-nowrap">asdad</td>
-                            <td class="px-6 py-4 whitespace-nowrap">asdad</td>
-                            <td class="px-6 py-4 whitespace-nowrap">asdad</td>
-                            <td class="px-6 py-4 whitespace-nowrap flex gap-2">
-                                <button class="w-9 h-9">
-                                    <img src="@/assets/edit-icon.png" alt="Modifier" @click="modifierDriver()" class="icon edit-icon w-full h-full hover:w-11 hover:h-11">
-                                </button>
+                                <button class="w-9 h-9" @click="openEditDriverForm(driverProfil)">
+              <img src="@/assets/edit-icon.png" alt="Modifier" class="icon edit-icon w-full h-full hover:w-11 hover:h-11">
+            </button>
                                 <button class="w-9 h-9 ">
                                     <img src="@/assets/delete-icon.png" alt="Supprimer" @click="deleteDriver"
                                         class="icon delete-icon w-full h-full hover:w-11 hover:h-11">
                                 </button>
                             </td>
                         </tr>
+
+                     
                     </tbody>
                 </table>
             </div>
@@ -148,19 +139,20 @@ export default {
             email: '',
             password: '',
             type:'',
+            driverProfil:'',
             successMessage: '',
             errorMessage: '',
             userId: localStorage.getItem('userId'),
             ajouteChaufeurModal: false,
             modifyChaufeurModal: false,
-            driverProfiles: [], // Tableau des chauffeurs
+            DriverProfils: [], // Tableau des chauffeurs
       showEditForm: false, // État d'affichage du formulaire de modification
       editForm: { // Données du formulaire de modification
         DrivingLicense: '',
         name: '',
         email: '',
         DateOfBirth: '',
-        vehicleid: '',
+        vehicleId: '',
         id: '',
         UserId: ''
       },
@@ -190,31 +182,7 @@ export default {
         },
 
         
-    modifierDriver(DriverProfil) {
-        console.log("yoooooooooooooooooooooooooooooo");
-        
-      this.editDriver = { ...DriverProfil }; // Préremplir le formulaire avec les informations
-      this.isEditing = true; // Afficher le formulaire de modification
-    },
-    async submitModification() {
-      const userId = 'userId'; // Remplace par l'ID de l'utilisateur connecté
-      const DPId = this.editDriver.id; // ID du conducteur à modifier
-
-      await fetch(`http://localhost:3001/driverprofil/${userId}/${DPId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(this.editDriver),
-      });
-
-      this.isEditing = false; // Cacher le formulaire après la modification
-      this.fetchDrivers(); // Récupérer la liste mise à jour des conducteurs
-    },
-    cancelEdit() {
-      this.isEditing = false; // Cacher le formulaire sans modifier
-    },
-  
+    
     async fetchDrivers() {
       // Fonction pour récupérer les chauffeurs depuis l'API
       const token = localStorage.getItem('token');
@@ -226,19 +194,21 @@ export default {
       this.driverProfiles = response.data;
     },
     
-    openEditDriverForm(driverProfil) {
-      // Vérifier que le chauffeur a un ID
-      if (!driverProfil.id) {
-        console.error("Erreur: ID du chauffeur manquant.");
-        return;
-      }
-      
-      // Pré-remplir le formulaire avec les données du chauffeur
-      this.editForm = { ...driverProfil };
-      this.editForm.UserId = this.userId; // Récupérer l'ID utilisateur
-      this.showEditForm = true; // Afficher le formulaire de modification
-    },
+  
 
+    openEditDriverForm(driverProfil) {
+  // Vérifier que le chauffeur a un ID
+  if (!driverProfil.id) {
+    console.error("Erreur: ID du chauffeur manquant.");
+    alert("Erreur: ID du chauffeur manquant."); // Afficher une alerte pour l'utilisateur
+    return;
+  }
+
+  // Pré-remplir le formulaire avec les données du chauffeur
+  this.editForm = { ...driverProfil };
+  this.editForm.UserId = this.userId; // Récupérer l'ID utilisateur
+  this.showEditForm = true; // Afficher le formulaire de modification
+},
     async submitUpdateDriver() {
       try {
         const driverId = this.editForm.id;
@@ -262,6 +232,7 @@ export default {
         // Requête PUT pour mettre à jour le chauffeur
         const token = localStorage.getItem('token');
         const response = await axios.put(
+            
           `${config.apiBaseUrl}/driverprofil/updateDriverProfilByUserId/${this.userId}/${driverId}`,
           updateData,
           {
@@ -284,7 +255,6 @@ export default {
     closeEditDriverForm() {
       this.showEditForm = false; // Masquer le formulaire de modification
     },
-  
         
         
         async createAccount() {
