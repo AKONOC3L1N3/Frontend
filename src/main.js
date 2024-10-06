@@ -16,7 +16,7 @@ import Chauffeurs_page from "./components/admin/Chauffeurs_page.vue";
 import Services_page from "./components/admin/Services_page.vue";
 import Itineraires_page from "./components/admin/Itineraires_page.vue";
 import Maintenances_page from "./components/admin/Maintenances_page.vue";
-import MapContainer from "./components/map/MapContainer.vue";
+import MapContainer from "./components/map/MapComponent.vue";
 
 
 import ChauffeurPage from './components/chauffeur/ChauffeurPage.vue';

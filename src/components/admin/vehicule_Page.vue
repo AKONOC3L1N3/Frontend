@@ -29,11 +29,13 @@
                         <td class="px-6 py-4 whitespace-nowrap">{{ vehicule.state }}</td>
                         <td class="px-6 py-4 whitespace-nowrap flex gap-2">
                             <button class="w-9 h-9" @click="openEditForm(vehicule)">
-              <img src="@/assets/edit-icon.png" alt="Modifier" class="icon edit-icon w-full h-full hover:w-11 hover:h-11">
-            </button>
-            <button class="w-9 h-9" @click="confirmDelete(vehicule.id)">
-  <img src="@/assets/delete-icon.png" alt="Supprimer" class="icon delete-icon w-full h-full hover:w-11 hover:h-11">
-</button>
+                                <img src="@/assets/edit-icon.png" alt="Modifier"
+                                    class="icon edit-icon w-full h-full hover:w-11 hover:h-11">
+                            </button>
+                            <button class="w-9 h-9" @click="confirmDelete(vehicule.id)">
+                                <img src="@/assets/delete-icon.png" alt="Supprimer"
+                                    class="icon delete-icon w-full h-full hover:w-11 hover:h-11">
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -82,33 +84,33 @@
             </div>
         </div>
         <div class="contain" v-if="showEditForm">
-            <div class="form-contain">  
-      <form @submit.prevent="submitUpdate">
-        <label for="name">Nom</label>
-        <input type="text" id="name" v-model="editForm.name" required />
+            <div class="form-contain">
+                <form @submit.prevent="submitUpdate">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" v-model="editForm.name" required />
 
-        <label for="type">Type</label>
-        <input type="text" id="type" v-model="editForm.type" required />
+                    <label for="type">Type</label>
+                    <input type="text" id="type" v-model="editForm.type" required />
 
-        <label for="state">État</label>
-        <input type="text" id="state" v-model="editForm.state" required />
+                    <label for="state">État</label>
+                    <input type="text" id="state" v-model="editForm.state" required />
 
-        <label for="model">Modèle</label>
-        <input type="text" id="model" v-model="editForm.model" required />
+                    <label for="model">Modèle</label>
+                    <input type="text" id="model" v-model="editForm.model" required />
 
-        <label for="tonnage">Tonnage</label>
-        <input type="number" id="tonnage" v-model="editForm.tonnage" required />
+                    <label for="tonnage">Tonnage</label>
+                    <input type="number" id="tonnage" v-model="editForm.tonnage" required />
 
-        <label for="firstYearTakeoff">Année de première mise en circulation</label>
-        <input type="date" id="firstYearTakeoff" v-model="editForm.firstYearTakeoff" />
-        <div class="btns pt-2">
-            <button type="submit" class="button btn1">Mettre à jour</button>
-            <button type="button" @click="closeEditForm" class="button btn2">Annuler</button> 
+                    <label for="firstYearTakeoff">Année de première mise en circulation</label>
+                    <input type="date" id="firstYearTakeoff" v-model="editForm.firstYearTakeoff" />
+                    <div class="btns pt-2">
+                        <button type="submit" class="button btn1">Mettre à jour</button>
+                        <button type="button" @click="closeEditForm" class="button btn2">Annuler</button>
                     </div>
-        
-      </form>
-    </div>
-</div>
+
+                </form>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -119,7 +121,7 @@ import config from "../../config";
 export default {
     data() {
         return {
-            
+
             name: '',
             type: '',
             tonnage: '',
@@ -134,22 +136,22 @@ export default {
             errorMessage: '',
             vehicleToDelete: '',
             vehicles: [], // Liste des véhicules à afficher dans le tableau
-      showEditForm: false, // État du formulaire de modification
-      editForm: {
-        name: "",
-        type: "",
-        state: "",
-        model: "",
-        tonnage: '',
-        firstYearTakeoff: '',
-        editForm: {
-        id: "",
-        name: "",
-        model: "",
-        UserId: "", // ID de l'utilisateur associé au véhicule
-       
-      },
-      },
+            showEditForm: false, // État du formulaire de modification
+            editForm: {
+                name: "",
+                type: "",
+                state: "",
+                model: "",
+                tonnage: '',
+                firstYearTakeoff: '',
+                editForm: {
+                    id: "",
+                    name: "",
+                    model: "",
+                    UserId: "", // ID de l'utilisateur associé au véhicule
+
+                },
+            },
             ajouteVoitureModal: false,
             modifyVoitureModal: false,
             vehicules: [],
@@ -179,79 +181,79 @@ export default {
             this.resetForm();
         },
 
-        
-  
-        
+
+
+
 
         openEditForm(vehicule) {
-      // Vérifier que le véhicule a un ID
-      if (!vehicule.id) {
-        console.error("Erreur: ID du véhicule manquant.");
-        return;
-      }
-      
-      this.editForm = { ...vehicule };
-      this.editForm.UserId = localStorage.getItem('userId'); // Assurez-vous que l'ID utilisateur est bien récupéré
-      this.showEditForm = true;
-    },
+            // Vérifier que le véhicule a un ID
+            if (!vehicule.id) {
+                console.error("Erreur: ID du véhicule manquant.");
+                return;
+            }
 
-    // Soumettre la mise à jour
-    async submitUpdate() {
-  try {
-    const vehicleId = this.editForm.id;
-    const userId = this.userId; // Assurez-vous que cet ID est défini quelque part
+            this.editForm = { ...vehicule };
+            this.editForm.UserId = localStorage.getItem('userId'); // Assurez-vous que l'ID utilisateur est bien récupéré
+            this.showEditForm = true;
+        },
 
-    // Ajout de logs pour voir les valeurs avant l'envoi
-    console.log("ID du véhicule:", vehicleId);
-    console.log("ID de l'utilisateur:", userId);
+        // Soumettre la mise à jour
+        async submitUpdate() {
+            try {
+                const vehicleId = this.editForm.id;
+                const userId = this.userId; // Assurez-vous que cet ID est défini quelque part
 
-    // Vérifiez si les IDs sont valides
-    if (!vehicleId || !userId) {
-      console.error("Erreur: l'ID du véhicule ou de l'utilisateur est manquant.");
-      alert("Erreur: l'ID du véhicule ou de l'utilisateur est manquant.");
-      return;
-    }
+                // Ajout de logs pour voir les valeurs avant l'envoi
+                console.log("ID du véhicule:", vehicleId);
+                console.log("ID de l'utilisateur:", userId);
 
-    // Préparer les données pour la mise à jour
-    const updateData = {
-      name: this.editForm.name,
-      type: this.editForm.type,
-      state: this.editForm.state,
-      model: this.editForm.model,
-      tonnage: this.editForm.tonnage,
-      firstYearTakeoff: new Date(this.editForm.firstYearTakeoff),
-      UserId: userId // Assurez-vous que l'ID de l'utilisateur est inclus
-    };
+                // Vérifiez si les IDs sont valides
+                if (!vehicleId || !userId) {
+                    console.error("Erreur: l'ID du véhicule ou de l'utilisateur est manquant.");
+                    alert("Erreur: l'ID du véhicule ou de l'utilisateur est manquant.");
+                    return;
+                }
 
-    console.log("Données à envoyer pour la mise à jour:", updateData);
+                // Préparer les données pour la mise à jour
+                const updateData = {
+                    name: this.editForm.name,
+                    type: this.editForm.type,
+                    state: this.editForm.state,
+                    model: this.editForm.model,
+                    tonnage: this.editForm.tonnage,
+                    firstYearTakeoff: new Date(this.editForm.firstYearTakeoff),
+                    UserId: userId // Assurez-vous que l'ID de l'utilisateur est inclus
+                };
 
-    // Requête PATCH
-    const token = localStorage.getItem('token');
-    const response = await axios.patch(
-      `${config.apiBaseUrl}/vehicles/UpdateVehiculesByUserId/${userId}/${vehicleId}`,
-      updateData,
-      {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      }
-    );
+                console.log("Données à envoyer pour la mise à jour:", updateData);
 
-    console.log("Véhicule mis à jour:", response.data);
-    alert('Véhicule mis à jour avec succès');
-    this.showEditForm = false;
-    this.fetchVehicles(); // Appeler pour rafraîchir la liste des véhicules
-  } catch (error) {
-    console.error("Erreur lors de la mise à jour:", error);
-    alert("Échec lors de la mise à jour du véhicule: " + (error.response?.data?.message || error.message));
-  }
-},
-    closeEditForm() {
-      this.showEditForm = false;
-    },
+                // Requête PATCH
+                const token = localStorage.getItem('token');
+                const response = await axios.patch(
+                    `${config.apiBaseUrl}/vehicles/UpdateVehiculesByUserId/${userId}/${vehicleId}`,
+                    updateData,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    }
+                );
+
+                console.log("Véhicule mis à jour:", response.data);
+                alert('Véhicule mis à jour avec succès');
+                this.showEditForm = false;
+                this.fetchVehicles(); // Appeler pour rafraîchir la liste des véhicules
+            } catch (error) {
+                console.error("Erreur lors de la mise à jour:", error);
+                alert("Échec lors de la mise à jour du véhicule: " + (error.response?.data?.message || error.message));
+            }
+        },
+        closeEditForm() {
+            this.showEditForm = false;
+        },
 
 
-   
+
         async createAccount() {
             try {
                 const token = localStorage.getItem('token');
@@ -313,47 +315,47 @@ export default {
             } catch (error) {
                 this.errorMessage = 'Erreur lors de la récupération des véhicules : ' + (error.response ? error.response.data.message : error.message);
             }
-           
+
         },
 
-      
+
         async confirmDelete(vehicleId) {
-  try {
-    const userId = localStorage.getItem('userId');
-    const token = localStorage.getItem('token'); // Assurez-vous que le token est correctement récupéré
+            try {
+                const userId = localStorage.getItem('userId');
+                const token = localStorage.getItem('token'); // Assurez-vous que le token est correctement récupéré
 
-    console.log('userId:', userId);
-    console.log('vehicleId:', vehicleId);
+                console.log('userId:', userId);
+                console.log('vehicleId:', vehicleId);
 
-    if (!userId || !token) {
-      alert("L'ID de l'utilisateur ou le token est manquant.");
-      return;
-    }
+                if (!userId || !token) {
+                    alert("L'ID de l'utilisateur ou le token est manquant.");
+                    return;
+                }
 
-    if (confirm("Êtes-vous sûr de vouloir supprimer ce véhicule ?")) {
-      const response = await axios.patch(`${config.apiBaseUrl}/vehicles/deleteVehiculeByUserId/${userId}/${vehicleId}`, {}, {
-        headers: {
-          Authorization: `Bearer ${token}` // Ajouter le token dans les en-têtes
-        }
-      });
+                if (confirm("Êtes-vous sûr de vouloir supprimer ce véhicule ?")) {
+                    const response = await axios.patch(`${config.apiBaseUrl}/vehicles/deleteVehiculeByUserId/${userId}/${vehicleId}`, {}, {
+                        headers: {
+                            Authorization: `Bearer ${token}` // Ajouter le token dans les en-têtes
+                        }
+                    });
 
-      console.log('Réponse après suppression :', response.data);
+                    console.log('Réponse après suppression :', response.data);
 
-      if (response.status === 200) {
-        alert("Le véhicule a été supprimé avec succès.");
-        this.vehicles = this.vehicles.filter(vehicle => vehicle.id !== vehicleId);
-      } else {
-        alert("Erreur lors de la suppression du véhicule.");
-      }
-    }
-  } catch (error) {
-    console.error("Erreur lors de la suppression :", error.response ? error.response.data : error.message);
-    alert("Impossible de supprimer le véhicule. Veuillez réessayer plus tard.");
-  }
-},
+                    if (response.status === 200) {
+                        alert("Le véhicule a été supprimé avec succès.");
+                        this.vehicles = this.vehicles.filter(vehicle => vehicle.id !== vehicleId);
+                    } else {
+                        alert("Erreur lors de la suppression du véhicule.");
+                    }
+                }
+            } catch (error) {
+                console.error("Erreur lors de la suppression :", error.response ? error.response.data : error.message);
+                alert("Impossible de supprimer le véhicule. Veuillez réessayer plus tard.");
+            }
+        },
 
 
-        
+
 
         selectedVehicule(vehiculeId) {
             localStorage.setItem('selectedVehiculeId', vehiculeId);
@@ -379,7 +381,7 @@ export default {
             }
         },
 
-       
+
     }
 }
 </script>
@@ -480,5 +482,4 @@ input:focus {
         font-size: 16px;
     }
 }
-
 </style>

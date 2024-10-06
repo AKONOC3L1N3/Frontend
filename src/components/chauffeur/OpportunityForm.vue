@@ -1,16 +1,21 @@
 <template>
   <div class="form-popup">
     <div class="form-content">
-      <h2>Signaler une Opportunité</h2>
+      <h2 class="font-semibold text-xl">Signaler une Opportunité</h2>
       <form @submit.prevent="submitOpportunity">
-        <label for="description">Description:</label>
-        <textarea id="description" v-model="description" required></textarea>
+        <div class="text-left">
+          <label for="depart">Point de depart:</label>
+          <input id="depart" type="text" v-model="depart" required />
 
-        <label for="date">Date:</label>
-        <input id="date" type="date" v-model="date" required />
+          <label for="arrive">Point d'arrive:</label>
+          <input id="arrive" type="text" v-model="arrive" required />
 
-        <label for="address">Adresse:</label>
-        <input id="address" type="text" v-model="address" required />
+          <label for="description">Description:</label>
+          <textarea id="description" v-model="description" required></textarea>
+
+          <label for="date">Date:</label>
+          <input id="date" type="date" v-model="date" required />
+        </div>
 
         <div class="button-group">
           <button type="submit" class="submit-btn">Soumettre</button>
@@ -22,26 +27,73 @@
 </template>
 
 <script>
+import axios from "axios";
+import config from "@/config";
+
 export default {
   data() {
     return {
+      depart: '',
+      arrive: '',
       description: '',
       date: '',
-      address: ''
     };
   },
   methods: {
-    submitOpportunity() {
-      console.log({
-        description: this.description,
-        date: this.date,
-        address: this.address
-      });
-      this.description = '';
-      this.date = '';
-      this.address = '';
-      this.$emit('close');
-    }
+    async submitOpportunity() {
+      try {
+        const token = localStorage.getItem('token');
+        // const userId = this.userId;
+
+        const oportunityData = {
+          depart: this.arrive,
+          arrive: this.arrive,
+          description: this.description,
+          date: this.date
+        };
+
+        console.log("voici les info de l'opportunite", oportunityData);
+
+        const response = await axios.post(`${config.apiBaseUrl}/##########`, oportunityData, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        this.successMessage = response.data.message;
+        console.log("l'opportunite ajouté avec succès", response.data);
+        this.resetForm();
+        this.$emit('close');
+      } catch (error) {
+        this.errorMessage = 'Échec de l\'ajout : ' + (error.response?.data?.message || error.message);
+        alert("Échec lors de l'ajout du l'opportunite");
+      }
+    },
+
+
+    resetForm() {
+      this.name = '';
+      this.type = '';
+      this.state = '';
+      this.model = '';
+      this.tonnage = '';
+      this.firstYearTakeoff = '';
+      this.successMessage = '';
+      this.errorMessage = '';
+    },
+    // submitOpportunity() {
+    //   console.log({
+    //     depart: this.arrive,
+    //     arrive: this.arrive,
+    //     description: this.description,
+    //     date: this.date
+    //   });
+    //   this.depart = '';
+    //   this.arrive = '';
+    //   this.description = '';
+    //   this.date = '';
+    //   this.$emit('close');
+    // }
   }
 };
 </script>
@@ -78,7 +130,8 @@ label {
   font-weight: bold;
 }
 
-textarea, input {
+textarea,
+input {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
@@ -92,7 +145,8 @@ textarea, input {
   justify-content: space-around;
 }
 
-.submit-btn, .cancel-btn {
+.submit-btn,
+.cancel-btn {
   background-color: #001f3f;
   color: white;
   border: none;
