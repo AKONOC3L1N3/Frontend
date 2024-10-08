@@ -28,17 +28,19 @@
                                 Date(DriverProfil.DateOfBirth).toLocaleDateString() }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ DriverProfil.vehicleId }}</td>
                             <td class="px-6 py-4 whitespace-nowrap flex gap-2">
-                                <button class="w-9 h-9" @click="openEditDriverForm(driverProfil)">
-              <img src="@/assets/edit-icon.png" alt="Modifier" class="icon edit-icon w-full h-full hover:w-11 hover:h-11">
-            </button>
+                                <button class="w-9 h-9" @click="openEditDriverForm(DriverProfil)">
+                                    <img src="@/assets/edit-icon.png" alt="Modifier"
+                                        class="icon edit-icon w-full h-full hover:w-11 hover:h-11">
+                                </button>
                                 <button class="w-9 h-9 ">
-                                    <img src="@/assets/delete-icon.png" alt="Supprimer" @click="deleteDriver"
+                                    <img src="@/assets/delete-icon.png" alt="Supprimer"
+                                        @click="deleteDriver(DriverProfil.id)"
                                         class="icon delete-icon w-full h-full hover:w-11 hover:h-11">
                                 </button>
                             </td>
                         </tr>
 
-                     
+
                     </tbody>
                 </table>
             </div>
@@ -57,10 +59,10 @@
                             <label for="email">E-mail</label>
                             <input type="email" id="email" v-model="email" required />
                         </div>
-                        <div class="form-grou">
+                        <!-- <div class="form-grou">
                             <label for="password">Password</label>
                             <input type="password" id="password" v-model="password" required />
-                        </div>
+                        </div> -->
                         <div class="form-grou">
                             <label for="DrivingLicense">Driving License</label>
                             <input type="text" id="DrivingLicense" v-model="DrivingLicense" required />
@@ -77,14 +79,12 @@
                             <label for="DrivingLicenseVersoUrl">Driving License Verso</label>
                             <input type="text" id="DrivingLicenseVersoUrl" v-model="DrivingLicenseVersoUrl" required />
                         </div>
-                        <div class="input_field">
-        <label for="type">Type :</label>
-        <select id="type" v-model="type" required>
-         
-          <option value="CHAUFFEUR">CHAUFFEUR</option>
-          
-        </select>
-      </div>
+                        <div class="input_field flex gap-2">
+                            <label for="type">Type :</label>
+                            <select id="type" v-model="type" class="border" required>
+                                <option value="CHAUFFEUR">CHAUFFEUR</option>
+                            </select>
+                        </div>
                         <div class="btns">
                             <button @click="createAccount" class="button btn1">Ajouter</button>
                             <button @click="closeAjouteModal" class="button btn2">Annule</button>
@@ -92,34 +92,34 @@
                     </form>
                 </div>
             </div>
-            
+
             <div v-if="showEditForm" class="modal">
-      <h2>Modifier le Chauffeur</h2>
-      <form @submit.prevent="submitUpdateDriver">
-        <div>
-          <label for="DrivingLicense">Permis de conduire</label>
-          <input type="text" v-model="editForm.DrivingLicense" required>
-        </div>
-        <div>
-          <label for="name">Nom</label>
-          <input type="text" v-model="editForm.name" required>
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input type="email" v-model="editForm.email" required>
-        </div>
-        <div>
-          <label for="DateOfBirth">Date de naissance</label>
-          <input type="date" v-model="editForm.DateOfBirth" required>
-        </div>
-        <div>
-          <label for="vehicleid">Véhicule ID</label>
-          <input type="text" v-model="editForm.vehicleid">
-        </div>
-        <button type="submit">Modifier</button>
-        <button type="button" @click="closeEditDriverForm">Annuler</button>
-      </form>
-    </div>
+                <h2>Modifier le Chauffeur</h2>
+                <form @submit.prevent="submitUpdateDriver">
+                    <div>
+                        <label for="DrivingLicense">Permis de conduire</label>
+                        <input type="text" v-model="editForm.DrivingLicense" required>
+                    </div>
+                    <div>
+                        <label for="name">Nom</label>
+                        <input type="text" v-model="editForm.name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" v-model="editForm.email" required>
+                    </div>
+                    <div>
+                        <label for="DateOfBirth">Date de naissance</label>
+                        <input type="date" v-model="editForm.DateOfBirth" required>
+                    </div>
+                    <div>
+                        <label for="vehicleid">Véhicule ID</label>
+                        <input type="text" v-model="editForm.vehicleid">
+                    </div>
+                    <button type="submit">Modifier</button>
+                    <button type="button" @click="closeEditDriverForm">Annuler</button>
+                </form>
+            </div>
         </div>
     </div>
 </template>
@@ -137,25 +137,25 @@ export default {
             DrivingLicenseVersoUrl: '',
             name: '',
             email: '',
-            password: '',
-            type:'',
-            driverProfil:'',
+            // password: '',
+            type: '',
+            driverProfil: '',
             successMessage: '',
             errorMessage: '',
             userId: localStorage.getItem('userId'),
             ajouteChaufeurModal: false,
             modifyChaufeurModal: false,
             DriverProfils: [], // Tableau des chauffeurs
-      showEditForm: false, // État d'affichage du formulaire de modification
-      editForm: { // Données du formulaire de modification
-        DrivingLicense: '',
-        name: '',
-        email: '',
-        DateOfBirth: '',
-        vehicleId: '',
-        id: '',
-        UserId: ''
-      },
+            showEditForm: false, // État d'affichage du formulaire de modification
+            editForm: { // Données du formulaire de modification
+                DrivingLicense: '',
+                name: '',
+                email: '',
+                DateOfBirth: '',
+                vehicleId: '',
+                id: '',
+                UserId: ''
+            },
         };
     },
 
@@ -181,95 +181,99 @@ export default {
             this.resetForm();
         },
 
-        
-    
-    async fetchDrivers() {
-      // Fonction pour récupérer les chauffeurs depuis l'API
-      const token = localStorage.getItem('token');
-      const response = await axios.get(`${config.apiBaseUrl}/driverprofil`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      this.driverProfiles = response.data;
-    },
-    
-  
 
-    openEditDriverForm(driverProfil) {
-  // Vérifier que le chauffeur a un ID
-  if (!driverProfil.id) {
-    console.error("Erreur: ID du chauffeur manquant.");
-    alert("Erreur: ID du chauffeur manquant."); // Afficher une alerte pour l'utilisateur
-    return;
-  }
 
-  // Pré-remplir le formulaire avec les données du chauffeur
-  this.editForm = { ...driverProfil };
-  this.editForm.UserId = this.userId; // Récupérer l'ID utilisateur
-  this.showEditForm = true; // Afficher le formulaire de modification
-},
-    async submitUpdateDriver() {
-      try {
-        const driverId = this.editForm.id;
+        async fetchDrivers() {
+            // Fonction pour récupérer les chauffeurs depuis l'API
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`${config.apiBaseUrl}/driverprofil`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            this.driverProfiles = response.data;
+        },
 
-        // Vérifiez si l'ID est valide
-        if (!driverId) {
-          console.error("Erreur: l'ID du chauffeur est manquant.");
-          alert("Erreur: l'ID du chauffeur est manquant.");
-          return;
-        }
 
-        // Préparer les données pour la mise à jour
-        const updateData = {
-          DrivingLicense: this.editForm.DrivingLicense,
-          name: this.editForm.name,
-          email: this.editForm.email,
-          DateOfBirth: this.editForm.DateOfBirth,
-          vehicleid: this.editForm.vehicleid, // Si vous souhaitez également modifier le véhicule
-        };
 
-        // Requête PUT pour mettre à jour le chauffeur
-        const token = localStorage.getItem('token');
-        const response = await axios.put(
-            
-          `${config.apiBaseUrl}/driverprofil/updateDriverProfilByUserId/${this.userId}/${driverId}`,
-          updateData,
-          {
-            headers: {
-              'Authorization': `Bearer ${token}`
+        openEditDriverForm(DriverProfil) {
+            // Vérifier que le chauffeur a un ID
+            if (!DriverProfil.id) {
+                console.error("Erreur: ID du chauffeur manquant.");
+                alert("Erreur: ID du chauffeur manquant."); // Afficher une alerte pour l'utilisateur
+                return;
             }
-          }
-        );
 
-        console.log("Chauffeur mis à jour:", response.data);
-        alert('Chauffeur mis à jour avec succès');
-        this.showEditForm = false; // Masquer le formulaire après la mise à jour
-        this.fetchDrivers(); // Appeler pour rafraîchir la liste des chauffeurs
-      } catch (error) {
-        console.error("Erreur lors de la mise à jour du chauffeur:", error);
-        alert("Échec lors de la mise à jour du chauffeur: " + (error.response?.data?.message || error.message));
-      }
-    },
+            // console.log("blueeeeee", DriverProfil.id);
+            const userId = DriverProfil.id;
 
-    closeEditDriverForm() {
-      this.showEditForm = false; // Masquer le formulaire de modification
-    },
-        
-        
+            // Pré-remplir le formulaire avec les données du chauffeur
+            this.editForm = { ...DriverProfil };
+            this.editForm.UserId = userId; // Récupérer l'ID utilisateur
+            this.showEditForm = true; // Afficher le formulaire de modification
+        },
+        async submitUpdateDriver() {
+            try {
+                const driverId = this.editForm.id;
+
+                // Vérifiez si l'ID est valide
+                if (!driverId) {
+                    console.error("Erreur: l'ID du chauffeur est manquant.");
+                    alert("Erreur: l'ID du chauffeur est manquant.");
+                    return;
+                }
+
+                // Préparer les données pour la mise à jour
+                const updateData = {
+                    DrivingLicense: this.editForm.DrivingLicense,
+                    name: this.editForm.name,
+                    email: this.editForm.email,
+                    DateOfBirth: this.editForm.DateOfBirth,
+                    vehicleid: this.editForm.vehicleid, // Si vous souhaitez également modifier le véhicule
+                };
+
+                // Requête PUT pour mettre à jour le chauffeur
+                const token = localStorage.getItem('token');
+                const response = await axios.put(
+
+                    `${config.apiBaseUrl}/driverprofil/updateDriverProfilByUserId/${this.userId}/${driverId}`,
+                    updateData,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    }
+                );
+
+                console.log("Chauffeur mis à jour:", response.data);
+                alert('Chauffeur mis à jour avec succès');
+                this.showEditForm = false; // Masquer le formulaire après la mise à jour
+                this.fetchDrivers(); // Appeler pour rafraîchir la liste des chauffeurs
+            } catch (error) {
+                console.error("Erreur lors de la mise à jour du chauffeur:", error);
+                alert("Échec lors de la mise à jour du chauffeur: " + (error.response?.data?.message || error.message));
+            }
+        },
+
+        closeEditDriverForm() {
+            this.showEditForm = false; // Masquer le formulaire de modification
+        },
+
+
         async createAccount() {
             try {
                 const token = localStorage.getItem('token');
-                const userId = this.userId; 
+                const userId = this.userId;
 
                 const chauffeurData = {
-                    name: this.name,
-                    email: this.email,
                     UserId: userId,
-                    password: this.password,
+                    name: this.name,
+                    // surname: this.surname,
+                    email: this.email,
+                    password: "1234",
                     DrivingLicense: this.DrivingLicense,
                     DateOfBirth: new Date(this.DateOfBirth),
-                    DrivingLicenseRectoUrl: this.DrivingLicenseRectoUrl, // Corrected typo
+                    DrivingLicenseRectoUrl: this.DrivingLicenseRectoUrl,
                     DrivingLicenseVersoUrl: this.DrivingLicenseVersoUrl,
                     type: this.type
                 };
@@ -283,12 +287,14 @@ export default {
                 });
 
                 this.successMessage = response.data.message;
+                this.fetchDrivers();
                 console.log("Chauffeur ajouté avec succès", response.data);
                 alert('Chauffeur ajouté avec succès');
                 this.resetForm();
             } catch (error) {
                 this.errorMessage = 'Échec de l\'ajout : ' + (error.response?.data?.message || error.message);
-                alert("Échec lors de l'ajout du chauffeur");
+                this.closeAjouteModal();
+                this.fetchDrivers(); 
             }
         },
 
@@ -302,7 +308,7 @@ export default {
             this.DrivingLicenseVersoUrl = '';
             this.successMessage = '';
             this.errorMessage = '';
-            this.type=''
+            this.type = ''
         },
 
         async fetchDriverProfil() {
@@ -314,8 +320,8 @@ export default {
                     }
                 });
                 this.DriverProfils = response.data;
-                console.log("Voici la liste des chauffeurs",response.data);
-                console.log(this.DriverProfil);
+                console.log("Voici la liste des chauffeurs", response.data);
+                console.log(this.DriverProfils);
             } catch (error) {
                 this.errorMessage = 'Erreur lors de la récupération des chauffeurs : ' + (error.response ? error.response.data.message : error.message);
             }
@@ -346,18 +352,23 @@ export default {
         },
 
         async deleteDriver(id) {
+            
             if (confirm("Êtes-vous sûr de vouloir supprimer ce chauffeur?")) {
                 try {
-                    const response = await fetch(`${config.apiBaseUrl}/driverprofil/${id}`, {
-                        method: "DELETE",
+                    const token = localStorage.getItem('token');
+                    const deleted = {
+                        isDelete: true
+                    };
+
+                    const response = await  axios.patch(`${config.apiBaseUrl}/driverprofil/${id}`, deleted, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
                     });
-                    if (response.ok) {
-                        // Filtrer le chauffeur supprimé de la liste
-                        this.DriverProfil = this.DriverProfil.filter(driver => driver.id !== id);
-                        alert("Le chauffeur a été supprimé avec succès.");
-                    } else {
-                        alert("Une erreur s'est produite lors de la suppression du chauffeur.");
-                    }
+                    console.log('Réponse après suppression :', response.data);
+                    this.fetchDriverProfil();
+                    this.alert("Le chauffeur a été supprimé avec succès.");
+                    
                 } catch (error) {
                     console.error("Erreur lors de la suppression du chauffeur :", error);
                 }
@@ -433,6 +444,7 @@ input:focus {
 }
 
 .btns {
+    padding-top: 1rem;
     display: flex;
     justify-content: space-between;
     gap: 1rem;

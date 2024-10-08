@@ -21,7 +21,7 @@
                 </thead>
 
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <tr class="hover:bg-gray-50" v-for="vehicule in vehicules" :key="vehicule.vehicleId">
+                    <tr class="hover:bg-gray-50" v-for="vehicule in vehicules" :key="vehicule.id">
                         <td class="px-6 py-4 whitespace-nowrap">{{ vehicule.name }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">{{ vehicule.type }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">{{ vehicule.tonnage }}</td>
@@ -39,6 +39,7 @@
                         </td>
                     </tr>
                 </tbody>
+
             </table>
         </div>
 
@@ -304,7 +305,7 @@ export default {
         async fetchVehicles() {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get(`${config.apiBaseUrl}/vehicles/allDriverByUserId/${this.userId}`, {
+                const response = await axios.get(`${config.apiBaseUrl}/vehicles/allVehiculeByUserId/${this.userId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -322,10 +323,13 @@ export default {
         async confirmDelete(vehicleId) {
             try {
                 const userId = localStorage.getItem('userId');
-                const token = localStorage.getItem('token'); // Assurez-vous que le token est correctement récupéré
+                const token = localStorage.getItem('token');
 
                 console.log('userId:', userId);
                 console.log('vehicleId:', vehicleId);
+                const deleted = {
+                    isDelete: true
+                };
 
                 if (!userId || !token) {
                     alert("L'ID de l'utilisateur ou le token est manquant.");
@@ -333,9 +337,10 @@ export default {
                 }
 
                 if (confirm("Êtes-vous sûr de vouloir supprimer ce véhicule ?")) {
-                    const response = await axios.patch(`${config.apiBaseUrl}/vehicles/deleteVehiculeByUserId/${userId}/${vehicleId}`, {}, {
+
+                    const response = await axios.patch(`${config.apiBaseUrl}/vehicles/deleteVehiculeByUserId/${userId}/${vehicleId}`, deleted , {
                         headers: {
-                            Authorization: `Bearer ${token}` // Ajouter le token dans les en-têtes
+                            Authorization: `Bearer ${token}`
                         }
                     });
 
@@ -343,6 +348,7 @@ export default {
 
                     if (response.status === 200) {
                         alert("Le véhicule a été supprimé avec succès.");
+                        this.fetchVehicles();
                         this.vehicles = this.vehicles.filter(vehicle => vehicle.id !== vehicleId);
                     } else {
                         alert("Erreur lors de la suppression du véhicule.");
@@ -353,9 +359,6 @@ export default {
                 alert("Impossible de supprimer le véhicule. Veuillez réessayer plus tard.");
             }
         },
-
-
-
 
         selectedVehicule(vehiculeId) {
             localStorage.setItem('selectedVehiculeId', vehiculeId);

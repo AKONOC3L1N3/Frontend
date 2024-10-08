@@ -61,9 +61,7 @@ export default {
                     surname: this.surname,
                     email: this.email,
                     password: this.password,
-                    type: this.type,
-                   
-                    
+                    type: this.type,   
                 });
                 this.successMessage = 'Inscription réussie !';
                 alert('Compte crée avec Success');

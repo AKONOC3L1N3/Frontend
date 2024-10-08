@@ -54,8 +54,9 @@
                             :class="{ 'bg-gray-200 shadow-lg': currentPage === 'Services_page' }"
                             class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200">
                             <div class="flex gap-3 items-center">
-                                <i class="fas fa-cogs"></i>
-                                <span>Services</span>
+                                <!-- <i class="fas fa-cogs"></i> -->
+                                <i class="fas fa-chart-line"></i>
+                                <span>Itineraires</span>
                             </div>
                             <i class="fas fa-arrow-right"></i>
                         </button>
@@ -65,8 +66,9 @@
                             :class="{ 'bg-gray-200 shadow-lg': currentPage === 'Itineraires_page' }"
                             class="flex w-full gap-2 justify-between items-center rounded p-5 hover:bg-gray-200">
                             <div class="flex gap-3 items-center">
-                                <i class="fas fa-chart-line"></i>
-                                <span>Itineraires</span>
+                                <!-- <i class="fa-solid fa-map-location-dot"></i> -->
+                                <MapPinned />
+                                <span>Map</span>
                             </div>
                             <i class="fas fa-arrow-right"></i>
                         </button>
@@ -118,6 +120,7 @@
 <script>
 // import axios from "axios";
 // import config from "../ ../config";
+
 import acceuil_Page from "./acceuil_Page.vue";
 import vehicule_Page from "./vehicule_Page.vue";
 import Chauffeurs_page from "./Chauffeurs_page";
@@ -137,7 +140,7 @@ export default {
 
     data() {
         return {
-            currentPage: 'acceuil_Page',
+            currentPage: 'Services_page',
             menuOpen: false,
         };
     },

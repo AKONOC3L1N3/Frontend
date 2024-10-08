@@ -38,6 +38,8 @@ export default {
     });
 
     leafletMap.on("click", function (e) {
+      console.log("bluuuuuuuuu", e);
+      
       if (!this.start) {
         this.start = [e.latlng.lat, e.latlng.lng];
       } else if (!this.end) {

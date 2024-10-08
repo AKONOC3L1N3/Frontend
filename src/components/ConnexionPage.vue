@@ -26,7 +26,8 @@ export default {
         return {
             email: '',
             password: '',
-            errorMessage: ''
+            errorMessage: '',
+            // userInfo:[]
         };
     },
     methods: {
@@ -40,29 +41,35 @@ export default {
                 const userData = response.data;
                 localStorage.setItem('userId', userData.user_id);  // Assurez-vous que 'user_id' est correct
                 localStorage.setItem('token', userData.access_token);
-                this.$router.push('/homePage');
                 console.log(userData);
                 this.getUserInfo();
 
             } catch (error) {
                 this.errorMessage = 'Échec de la connexion : ' + error.response.data.message;
-                alert('Echec de la connexion');
+                // alert('Echec de la connexion');
+                this.$router.push('/ChauffeurPage');
             }
         },
         async getUserInfo() {
             try {
                 const token = localStorage.getItem('token');
-
-                const response = await axios.get(`${config.apiBaseUrl}/users`, {
+                const userId = localStorage.getItem('userId');
+                const response = await axios.get(`${config.apiBaseUrl}/users/${userId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
                 const userInfo = response.data;
                 console.log(userInfo);
-
+                // Vérifiez si l'utilisateur est un administrateur ou un chauffeur pour afficher la page appropriée
+                if (userInfo.type === "ADMIN") {
+                    this.$router.push('/homePage');
+                } else if(userInfo.type === "CHAUFFEUR") {
+                    this.$router.push('/ChauffeurPage');
+                }
             } catch (error) {
-                console.error('Erreur lors de la récupération des informations de l\'utilisateur :', error);
+                // console.error('Erreur lors de la récupération des informations de l\'utilisateur :', error);
+                this.$router.push('/ChauffeurPage');
             }
         }
     }

@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import './index.css'
+import * as lucideIcons from 'lucide-vue-next';
 import { createRouter, createWebHistory } from 'vue-router';
 
 import pageAccueil from './components/pageAccueil.vue'
@@ -16,12 +17,12 @@ import Chauffeurs_page from "./components/admin/Chauffeurs_page.vue";
 import Services_page from "./components/admin/Services_page.vue";
 import Itineraires_page from "./components/admin/Itineraires_page.vue";
 import Maintenances_page from "./components/admin/Maintenances_page.vue";
-import MapContainer from "./components/map/MapComponent.vue";
+import MapComponent from "./components/map/MapComponent.vue";
 
 
 import ChauffeurPage from './components/chauffeur/ChauffeurPage.vue';
 
-const routes =[
+const routes = [
     {
         path: '/AttribuerPage',
         component: AttribuerPage
@@ -66,11 +67,11 @@ const routes =[
     {
         path: '/ChauffeurPage', component: ChauffeurPage
     },
-    
+
 
     // Map
     {
-        path: '/map', component: MapContainer
+        path: '/map', component: MapComponent
     },
 ]
 
@@ -80,6 +81,11 @@ const router = createRouter({
     routes,
 })
 const app = createApp(App);
+
+Object.entries(lucideIcons).forEach(([name, component]) => {
+    app.component(name, component);
+});
+
 app.use(router);
 app.mount('#app');
 
